@@ -642,7 +642,7 @@
                                             <button>Xem nhanh</button>
                                         </div>
                                     </a>
-                                    <div class="product-sale"><span>-12%</span></div>
+                                    <!-- <div class="product-sale"><span>-12%</span></div> -->
                                     <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
                                         data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
                                 </div>
