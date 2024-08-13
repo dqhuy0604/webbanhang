@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <style type="text/css">
+    <style>
         *{
             font-family: 'Quicksand', sans-serif !important;
             margin:0;
@@ -28,11 +28,14 @@
             margin: 0 auto;
             box-sizing: border-box;
         }
+        a{
+            text-decoration: none;
+        }
         ul.products{
             list-style: none;
             display: flex;
-            padding-left: 100px;
-            padding-right: 100px;
+            padding-left: 200px;
+            padding-right: 200px;
         }
         ul.products li{
             padding-left: 15px;
@@ -61,6 +64,7 @@
             color: #888888;
         }
         .product-item .product-infor .pro-name a{
+            text-decoration: none;
             font-size: 16px;
             font-weight: 500;
             color: #000000;
@@ -69,7 +73,6 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            text-decoration: none;
         }
         ul.products li .product-top{
             position: relative;
@@ -112,7 +115,7 @@
             height: 40px;
             background-color: #000000;
             color: white;
-            z-index: 9;
+            z-index: 9;     
         }
         .dt-width-100{
             width:100%;
@@ -186,7 +189,7 @@
             
         }
         .nav-logo{
-            margin-left: 100px ;
+            margin-left: 30px ;
         }
         .container ul{
             width:100%;
@@ -197,8 +200,7 @@
         }
         .nav-logo{
             display: block;
-            padding-top: 20px;
-            height: auto;
+            height : 60%;
         }
         .carousel-inner .img-banner{
             margin-top: 40px;
@@ -258,22 +260,114 @@
         footer .col-md-4{
             width: 25%;
         }
-</style>
+
+        /* product-item-collection */ 
+
+        /* ul.products{
+            list-style: none;
+            display: flex;
+            padding-left: 100px;
+            padding-right: 100px;
+        } */
+        /* ul.products li{
+            padding-left: 15px;
+            padding-right: 15px;
+            box-sizing: border-box;
+        } */
+        /* .product-item-collection .product-info{
+            display: block;
+
+        }
+        .product-item-collection .product-top{
+            position: relative;
+            overflow: hidden;
+
+        }
+        .product-item-collection .product-top .product-thumb{
+            display: block;
+        }
+        .product-item-collection .product-top .product-thumb > a img{
+            left: 20;
+            top: 0;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+            z-index: 8;
+        }
+        .product-item-collection .product-top .buy-now{
+            background-color: white;
+            color: white;
+            font-size: 13px;
+            padding: 10px auto;
+            bottom: -50px;
+            width: 100%;
+            position: absolute;
+        }
+        .product-item-collection:hover .buy-now{
+            bottom: 0px;
+            z-index: 9;
+        }
+        .product-item-collection .product-top .buy-now div{
+            display: inline;
+            
+        }
+        .product-item-collection .product-top .buy-now button{
+            text-align: center;
+            width: 45%;
+            margin: 10px auto;
+            height: 40px;
+            background-color: #000000;
+            color: white;
+            z-index: 9;     
+        } */
+        /* .product-item-collection .product-top:hover .dt-width-100.img-hover {
+            display: inline;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+            z-index: 8;
+        }
+
+        .product-item-collection .product-top .product-wishlist {
+            position: absolute;
+            z-index: 9;
+            top: 0px;
+            right: 0px;
+        }
+        .product-item-collection .product-top .product-wishlist button {
+            font-size: 0;
+            outline: none;
+            border: none;
+            background: none;
+            width: 35px;
+            height: 35px;
+        } */
+        .box-img .img-bottom{
+            display :inline;
+            width: 20px;
+        }
+    </style>
+
 </head>
 <body>
     <!-- -- MENU-- -->
     <div id="header">
         <nav class="container">
             <a class="nav-logo">
-                    <img src="https://file.hstatic.net/200000037626/file/r_black-01_37f16e8e03f146b8b777fd04e114c6cf.png"
-                    style ="height:60px; width:40px;">
+                    <img src="../assets/images/HUDO.png"
+                    style ="height:100px; width:250px;">
             </a>
             <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item logo">
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Brands</a>
+                    <a class="nav-link" href="danhsachsanpham.php">Brands</a>
                     <div class="sub-menu1">
                     <ul class="sub-menu">
                         <li><a href="">menu 21</a></li>
@@ -315,13 +409,15 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="gioithieu.php">About Us</a>
                 </li>
                 <li class="nav-item">
                     <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/searcg-icon.svg?v=147" alt="Tìm kiếm">
                 </li>
                 <li class="nav-item">
-                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản">
+                    <a href="../admin/authen/register.php">
+                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản" >
+                    </a>
                 </li>
                 <li class="nav-item">
                     <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Danh sách yêu thích">
@@ -334,29 +430,4 @@
     </div>
     <!-- --menu_stop-- -->
 
-    <!-- --BANNER-- -->
-
-    <div id="demo" class="carousel slide" data-ride="carousel">
-        <ul class="carousel-indicators">
-            <li data-target="#demo" data-slide-to="0" class="active"></li>
-            <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
-        </ul>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-            <img class="img-banner" src="https://file.hstatic.net/200000037626/file/1banner-trang-chu_1920x890_master.png" alt="">
-            </div>
-            <div class="carousel-item">
-            <img  class="img-banner" src="https://file.hstatic.net/200000037626/file/banner-san-pham_1440x400.png" alt="">
-            </div>
-            <div class="carousel-item">
-            <img class="img-banner" src="https://file.hstatic.net/200000037626/file/2banner-trang-chu_1920x890.png" alt=" ">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
-    </div>
+  

@@ -1,12 +1,37 @@
 <?php
     require_once('../layout/header.php');
 ?>
+  <!-- --BANNER-- -->
+
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img class="img-banner" src="https://file.hstatic.net/200000037626/file/2banner-trang-chu_1920x890.png" alt="">
+            </div>
+            <div class="carousel-item">
+            <img  class="img-banner" src="https://file.hstatic.net/200000037626/file/banner-san-pham_1440x400.png" alt="">
+            </div>
+            <div class="carousel-item">
+            <img class="img-banner" src="../assets/images/banner-1.png" alt=" ">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
      <!-- -- BANER_STOP -- -->
 		<div class="top-title">
 			<h2 class="title-section">
 				<span>HOT DEAL &amp; SALE</span>
 			</h2>
-            <!-- <h2>----////----</h2> -->
             <p></p>
 		</div>
 
@@ -118,13 +143,13 @@
                                     <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
                                         data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
 
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a  href="" class="product-name">KEVIN DURANT PHOENIX SUNS CITY EDITION 2023/24 JERSEY</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>500,000₫</span><del class="compare-price">700,000₫</del></p></div>
-                                </div>
+                                    </div>
+                                    <div class="product-infor">
+                                        <h3 class="pro-name">
+                                            <a  href="" class="product-name">KEVIN DURANT PHOENIX SUNS CITY EDITION 2023/24 JERSEY</a>
+                                        </h3>
+                                        <div class="product-price"><p class="pro-price"> <span>500,000₫</span><del class="compare-price">700,000₫</del></p></div>
+                                    </div>
                             </div>
                         </li>
                         <!-- SP5 -->
@@ -908,6 +933,32 @@
                         
                     </ul>
         </div>
- 
+<section id="section-instagram" class="pd-top-30" data-include="section-instagram">
+	<div class="top-title-instar">
+		<h2 class="title-section d-flex-center js-center d-flex">
+			<span>FOLLOW US ON INSTAGRAM @hudoshop.vn</span>
+		</h2>
+	</div>
+    <div class="box-img">
+        <div class="img-bottom">
+            <img src="../assets/images/bongro-1.png" width="300px" height="300px" >
+        </div>
+        <div class="img-bottom">
+            <img src="../assets/images/bongro-2.png" width="300px" height="300px">
+        </div>
+        <div class="img-bottom">
+            <img src="../assets/images/bongro-3.png" width="300px" height="300px">
+        </div>
+        <div class="img-bottom">
+            <img src="../assets/images/bongro-4.png" width="300px" height="300px">
+        </div>
+        <div class="img-bottom">
+            <img src="../assets/images/bongro-7.png" width="300px" height="300px">
+        </div> 
+    </div>
+</section>
+    <?php
+        require_once('../layout/footer.php');
+    ?>
 </body>
 </html>
