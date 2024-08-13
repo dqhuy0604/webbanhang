@@ -157,6 +157,7 @@
             max-width: 1500px;
             padding-top: 15px;
             display: flex;
+            flex-direction: row;
             list-style: none;
             height: 120px;
             background-color: white;
@@ -165,6 +166,8 @@
         #header{
             box-shadow: 0px 0px 3px 0px #ccc;
             background-color: white;
+            display: flex;
+            flex-direction: row;
         }
         .nav .nav-item{
             text-transform: uppercase;
@@ -174,11 +177,18 @@
             position: relative;
 
         }
+        .nav {
+            display: flex;
+            flex-wrap: Nowrap ;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
         .container ul li a{
             font-size: 16px;
             font-weight: 500;
             color: black;
-            display: block;
+            display: inline;
             text-decoration: none;
             margin-left: -20px;
             margin-right: 5px;
@@ -260,96 +270,12 @@
         footer .col-md-4{
             width: 25%;
         }
-
-        /* product-item-collection */ 
-
-        /* ul.products{
-            list-style: none;
+        .box-img{
             display: flex;
-            padding-left: 100px;
-            padding-right: 100px;
-        } */
-        /* ul.products li{
-            padding-left: 15px;
-            padding-right: 15px;
-            box-sizing: border-box;
-        } */
-        /* .product-item-collection .product-info{
-            display: block;
-
+            flex-direction: row;
         }
-        .product-item-collection .product-top{
-            position: relative;
-            overflow: hidden;
-
-        }
-        .product-item-collection .product-top .product-thumb{
-            display: block;
-        }
-        .product-item-collection .product-top .product-thumb > a img{
-            left: 20;
-            top: 0;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-            display: block;
-            z-index: 8;
-        }
-        .product-item-collection .product-top .buy-now{
-            background-color: white;
-            color: white;
-            font-size: 13px;
-            padding: 10px auto;
-            bottom: -50px;
-            width: 100%;
-            position: absolute;
-        }
-        .product-item-collection:hover .buy-now{
-            bottom: 0px;
-            z-index: 9;
-        }
-        .product-item-collection .product-top .buy-now div{
-            display: inline;
-            
-        }
-        .product-item-collection .product-top .buy-now button{
-            text-align: center;
-            width: 45%;
-            margin: 10px auto;
-            height: 40px;
-            background-color: #000000;
-            color: white;
-            z-index: 9;     
-        } */
-        /* .product-item-collection .product-top:hover .dt-width-100.img-hover {
-            display: inline;
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-            display: block;
-            z-index: 8;
-        }
-
-        .product-item-collection .product-top .product-wishlist {
-            position: absolute;
-            z-index: 9;
-            top: 0px;
-            right: 0px;
-        }
-        .product-item-collection .product-top .product-wishlist button {
-            font-size: 0;
-            outline: none;
-            border: none;
-            background: none;
-            width: 35px;
-            height: 35px;
-        } */
         .box-img .img-bottom{
             display :inline;
-            width: 20px;
         }
     </style>
 
@@ -364,10 +290,10 @@
             </a>
             <ul class="nav">
                 <li class="nav-item logo">
-                    <a class="nav-link" href="index.php">Home</a>
+                    <a class="nav-link" href="index.php">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="danhsachsanpham.php">Brands</a>
+                    <a class="nav-link" href="danhsachsanpham.php">Thương hiệu</a>
                     <div class="sub-menu1">
                     <ul class="sub-menu">
                         <li><a href="">menu 21</a></li>
@@ -380,7 +306,7 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Footwear</a>
+                    <a class="nav-link" href="#">Giày</a>
                     <div class="sub-menu1">
                         <ul class="sub-menu">
                             <li><a href="">menu 21</a></li>
@@ -391,7 +317,7 @@
                         </div> 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Accessories</a>
+                    <a class="nav-link" href="#">Phụ kiện</a>
                     <div class="sub-menu1">
                         <ul class="sub-menu">
                             <li><a href="">menu 21</a></li>
@@ -402,14 +328,14 @@
                         </div> 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Shoes Care</a>
+                    <a class="nav-link" href="#">Chăm sóc</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Blog</a>
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="gioithieu.php">About Us</a>
+                    <a class="nav-link" href="gioithieu.php">Giới thiệu</a>
                 </li>
                 <li class="nav-item">
                     <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/searcg-icon.svg?v=147" alt="Tìm kiếm">

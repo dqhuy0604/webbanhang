@@ -647,13 +647,13 @@
 	    </div>
 
         <!-- --New Arrival-- -->
-    <div class="product-new-arrival">
+    <div class="    ">
         <!-- SP1 -->
         <ul class="products">
                         <li>
                             <div class="product-item">
                                 <div class="product-top">
-                                    <a href="" class="product-thumb">
+                                    <a href="../utils/chitietsanpham.php" class="product-thumb">
                                         <img class="dt-width-100" src="../assets/images/Balo/Balo-BALO JORDAN MONOGRAM-01.webp" atl="" width="260" height="260">
                                         <img class="dt-width-100 img-hover" src="../assets/images/Balo/Balo-BALO JORDAN MONOGRAM-04.webp" atl="" width="260" height="260">
                                     </a>
