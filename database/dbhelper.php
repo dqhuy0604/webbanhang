@@ -9,7 +9,6 @@ function execute($sql){
         echo "Error: " . mysqli_error($conn);
     }
     mysqli_set_charset($conn,'utf8');
-    mysqli_query($conn,$sql);
     mysqli_close($conn);
 }
 

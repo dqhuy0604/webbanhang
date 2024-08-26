@@ -1,3 +1,7 @@
+<?php
+    $sql ="select * from Category";
+    $menuItems =executeResult($sql);
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,7 +119,7 @@
             height: 40px;
             background-color: #000000;
             color: white;
-            z-index: 9;     
+            z-index: 9;
         }
         .dt-width-100{
             width:100%;
@@ -289,51 +293,16 @@
                     style ="height:100px; width:250px;">
             </a>
             <ul class="nav">
-                <li class="nav-item logo">
+                <li class="nav-item">
                     <a class="nav-link" href="index.php">Trang chủ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="danhsachsanpham.php">Thương hiệu</a>
-                    <div class="sub-menu1">
-                    <ul class="sub-menu">
-                        <li><a href="">menu 21</a></li>
-                        <li><a href="">menu 22</a></li>
-                        <li><a href="">menu 23</a></li>
-                        <li><a href="">menu 24</a></li>
-                    </ul>  
-                    </div> 
-
-                </li>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Giày</a>
-                    <div class="sub-menu1">
-                        <ul class="sub-menu">
-                            <li><a href="">menu 21</a></li>
-                            <li><a href="">menu 22</a></li>
-                            <li><a href="">menu 23</a></li>
-                            <li><a href="">menu 24</a></li>
-                        </ul>  
-                        </div> 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Phụ kiện</a>
-                    <div class="sub-menu1">
-                        <ul class="sub-menu">
-                            <li><a href="">menu 21</a></li>
-                            <li><a href="">menu 22</a></li>
-                            <li><a href="">menu 23</a></li>
-                            <li><a href="">menu 24</a></li>
-                        </ul>  
-                        </div> 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Chăm sóc</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
-                </li>
-                </li>
+              <?php 
+              foreach($menuItems as $item){
+                echo'<li class="nav-item ">
+                        <a class="nav-link" href="category.php?id='.$item['id'].'">'.$item['name'].'</a>
+                    </li>';
+              }
+              ?>
                 <li class="nav-item">
                     <a class="nav-link" href="gioithieu.php">Giới thiệu</a>
                 </li>

@@ -63,7 +63,7 @@ CREATE TABLE `Orders` (
   `total_money` int
 );
 
-CREATE TABLE `Order_detail` (
+CREATE TABLE `Order_Details` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `order_id` int,
   `product_id` int,
@@ -72,14 +72,21 @@ CREATE TABLE `Order_detail` (
   `total_money` int
 );
 
+CREATE TABLE tokens (
+  user_id int REFERENCES User(id),
+  token varchar(32) not NULL,
+  created_at datetime,
+  PRIMARY KEY (user_id,token)
+);
+
 ALTER TABLE `User` ADD FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`);
 
 ALTER TABLE `Product` ADD FOREIGN KEY (`category_id`) REFERENCES `Category` (`id`);
 
-ALTER TABLE `Order_detail` ADD FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
+ALTER TABLE `Order_Details` ADD FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
 
 ALTER TABLE `Galery` ADD FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
 
-ALTER TABLE `Order_detail` ADD FOREIGN KEY (`order_id`) REFERENCES `Orders` (`id`);
+ALTER TABLE `Order_Details` ADD FOREIGN KEY (`order_id`) REFERENCES `Orders` (`id`);
 
 ALTER TABLE `Orders` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);

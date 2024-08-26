@@ -1,5 +1,12 @@
 <?php
+    session_start();
+    require_once('utility.php');
+    require_once('../database/dbhelper.php');
     require_once('../layout/header.php');
+    $sql ="select Product.*, Category.name as category_name from
+            Product left join Category on Product.category_id = Category.id WHERE Product.deleted = 0
+            order by Product.updated_at ASC limit 5 ";
+    $lastestItems =executeResult($sql);
 ?>
   <!-- --BANNER-- -->
 
@@ -39,7 +46,38 @@
         <div id="wrapper">
             <ul class="products">
                 <!-- SP1 -->
-                        <li>
+                 <?php
+                    foreach($lastestItems as $item){    
+                        echo' <li>
+                            <div class="product-item">
+                                <div class="product-top">
+                                    <a href="" class="product-thumb">
+                                        <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
+                                        <img class="dt-width-100 img-hover" src="../assets/images/Adidas/Adidas-ADIDAS ADIZERO SELECT-02.webp" atl="" width="260" height="260">
+                                    </a>
+                                    <a class="buy-now">
+                                        <div class="product-icon-add">
+                                            <button>Thêm vào giỏ</button>
+                                        </div>                                                                  
+                                        <div class="product-icon-watch">
+                                            <button>Xem nhanh</button>
+                                        </div>
+                                    </a>
+                                    <div class="product-sale"><span>-40%</span></div>
+                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" 
+                                        data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
+                                </div>
+                                <div class="product-infor">
+                                    <h3 class="pro-name">
+                                        <a href=""class="product-name">'.$item['title'].'</a>
+                                    </h3>
+                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'</span><del class="compare-price">'.$item['price'].'</del></p></div>
+                                </div>
+                            </div>
+                        </li>';
+                    }   
+                    ?>
+                        <!-- <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
@@ -65,9 +103,9 @@
                                     <div class="product-price"><p class="pro-price"> <span>2,272,000₫</span><del class="compare-price">3,590,000₫</del></p></div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- SP2 -->
-                        <li>
+                        <!-- <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
@@ -93,9 +131,9 @@
                                     <div class="product-price"><p class="pro-price"> <span>599,000₫</span><del class="compare-price">639,000₫</del></p></div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- SP3 -->
-                        <li>
+                        <!-- <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
@@ -122,9 +160,9 @@
                                     <div class="product-price"><p class="pro-price"> <span>350,000₫</span><del class="compare-price">399,000₫</del></p></div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- SP4 -->
-                        <li>
+                        <!-- <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
@@ -151,9 +189,9 @@
                                         <div class="product-price"><p class="pro-price"> <span>500,000₫</span><del class="compare-price">700,000₫</del></p></div>
                                     </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- SP5 -->
-                        <li>
+                        <!-- <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
@@ -182,9 +220,9 @@
                             </div>
                         </li>
                         
-                    </ul>
+                    </ul> -->
                     <!-- SP6 -->
-                    <ul class="products">
+                    <!-- <ul class="products">
                         <li>
                             <div class="product-item">
                                 <div class="product-top">
@@ -212,9 +250,9 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
+                        <li> -->
                             <!-- SP7 -->
-                            <div class="product-item">
+                            <!-- <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
                                         <img class="dt-width-100" src="../assets/images/Jordan/Jordan-JORDAN LUKA 2 QUAI54-01.webp" atl="" width="260" height="260">
@@ -239,9 +277,9 @@
                                     <div class="product-price"><p class="pro-price"> <span>5,990,000₫</span><del class="compare-price">6,390,000₫</del></p></div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- SP8 -->
-                        <li>
+                        <!-- <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
@@ -268,9 +306,9 @@
                                     <div class="product-price"><p class="pro-price"> <span>90,000₫</span><del class="compare-price">99,000₫</del></p></div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- SP9 -->
-                        <li>
+                        <!-- <li>
             
                             <div class="product-item">
                                 <div class="product-top">
@@ -298,9 +336,9 @@
                                     <div class="product-price"><p class="pro-price"> <span>2,950,000₫</span><del class="compare-price">3,690,000₫</del></p></div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- SP10 -->
-                        <li>
+                        <!-- <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
@@ -327,7 +365,7 @@
                                     <div class="product-price"><p class="pro-price"> <span>5,500,000₫</span><del class="compare-price">6,590,000₫</del></p></div>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         
                     </ul>
             </div>

@@ -1,7 +1,15 @@
 <?php
+	session_start();
 	require_once('../../database/dbhelper.php');
 	require_once('process_form_register.php');
 	require_once('../../utils/utility.php');
+
+	$user = getUserToken();
+	if($user != null){
+		header('Location:../');
+        die();
+
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,9 +24,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<?php
-		// require_once('../../layout/header.php');
-	?>
 	<div class="container">	
 		<div class="panel panel-primary" style="width:480px;margin:0px auto; font-family:'Quicksand', sans-serif !important; " >
 			<div class="panel-heading">
@@ -59,8 +64,5 @@
 		}
 
 	</script>
-	<?php
-		// require_once('../layout/footer.php');
-	?>
 </body>
 </html>
