@@ -53,7 +53,7 @@
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
                                         <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Adidas/Adidas-ADIDAS ADIZERO SELECT-02.webp" atl="" width="260" height="260">
+                                        <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" atl="" width="260" height="260">
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
@@ -77,17 +77,21 @@
                         </li>';
                     }   
                     ?>
-                        <!-- <li>
+                    </ul>
+                    <ul class="products">
+                 <?php
+                    foreach($lastestItems as $item){    
+                        echo' <li>
                             <div class="product-item">
                                 <div class="product-top">
                                     <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Adidas/Adidas-ADIDAS ADIZERO SELECT-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Adidas/Adidas-ADIDAS ADIZERO SELECT-02.webp" atl="" width="260" height="260">
+                                        <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
+                                        <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" atl="" width="260" height="260">
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
                                             <button>Thêm vào giỏ</button>
-                                        </div>
+                                        </div>                                                                  
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
                                         </div>
@@ -98,275 +102,14 @@
                                 </div>
                                 <div class="product-infor">
                                     <h3 class="pro-name">
-                                        <a href=""class="product-name">ADIDAS ADIZERO SELECT</a>
+                                        <a href=""class="product-name">'.$item['title'].'</a>
                                     </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>2,272,000₫</span><del class="compare-price">3,590,000₫</del></p></div>
+                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'</span><del class="compare-price">'.$item['price'].'</del></p></div>
                                 </div>
                             </div>
-                        </li> -->
-                        <!-- SP2 -->
-                        <!-- <li>
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Balo/Balo-BALO NIKE AIR ELITE-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Balo/Balo-BALO NIKE AIR ELITE-04.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-12%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a href="" class="product-name">BALO NIKE AIR ELITE</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>599,000₫</span><del class="compare-price">639,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li> -->
-                        <!-- SP3 -->
-                        <!-- <li>
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Aobongro/Ao-ANTHONY EDWARDS MINNESOTA TIMBERWOLVES CITY EDITION JERSEY-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Aobongro/Ao-ANTHONY EDWARDS MINNESOTA TIMBERWOLVES CITY EDITION JERSEY-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-5%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a  href="" class="product-name">ANTHONY EDWARDS MINNESOTA TIMBERWOLVES CITY EDITION JERSEY</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>350,000₫</span><del class="compare-price">399,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li> -->
-                        <!-- SP4 -->
-                        <!-- <li>
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Aobongro/Ao-KEVIN DURANT PHOENIX SUNS CITY EDITION 2023-24 JERSEY-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Aobongro/Ao-KEVIN DURANT PHOENIX SUNS CITY EDITION 2023-24 JERSEY-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-25%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-
-                                    </div>
-                                    <div class="product-infor">
-                                        <h3 class="pro-name">
-                                            <a  href="" class="product-name">KEVIN DURANT PHOENIX SUNS CITY EDITION 2023/24 JERSEY</a>
-                                        </h3>
-                                        <div class="product-price"><p class="pro-price"> <span>500,000₫</span><del class="compare-price">700,000₫</del></p></div>
-                                    </div>
-                            </div>
-                        </li> -->
-                        <!-- SP5 -->
-                        <!-- <li>
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Banh/Banh-BANH AKPRO AB9008-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Banh/Banh-BANH AKPRO AB9008-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-20%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a  href="" class="product-name">BANH AKPRO AB9008</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>490,000₫</span><del class="compare-price">590,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li>
-                        
-                    </ul> -->
-                    <!-- SP6 -->
-                    <!-- <ul class="products">
-                        <li>
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Banh/Banh-BANH TARMAK BT500 CONTROL-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Banh/Banh-BANH TARMAK BT500 CONTROL-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-20%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" 
-                                        data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a href=""class="product-name">BANH TARMAK BT500 CONTROL</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>1,272,000₫</span><del class="compare-price">1,590,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li>
-                        <li> -->
-                            <!-- SP7 -->
-                            <!-- <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Jordan/Jordan-JORDAN LUKA 2 QUAI54-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Jordan/Jordan-JORDAN LUKA 2 QUAI54-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-12%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a href="" class="product-name">JORDAN LUKA 2 QUAI54</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>5,990,000₫</span><del class="compare-price">6,390,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li> -->
-                        <!-- SP8 -->
-                        <!-- <li>
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Sock/Sock-PACK VỚ NIKE EVERYDAY (VNXK)-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Sock/Sock-PACK VỚ NIKE EVERYDAY (VNXK)-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-5%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a  href="" class="product-name">PACK VỚ NIKE EVERYDAY (VNXK)</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>90,000₫</span><del class="compare-price">99,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li> -->
-                        <!-- SP9 -->
-                        <!-- <li>
-            
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Li-ning/Lining-LI-NING WADE FLASH CRACKS-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Li-ning/Lining-LI-NING WADE FLASH CRACKS-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-35%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a  href="" class="product-name">LI-NING WADE FLASH CRACKS</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>2,950,000₫</span><del class="compare-price">3,690,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li> -->
-                        <!-- SP10 -->
-                        <!-- <li>
-                            <div class="product-item">
-                                <div class="product-top">
-                                    <a href="" class="product-thumb">
-                                        <img class="dt-width-100" src="../assets/images/Adidas/Adidas-ADIDAS D.O.N ISSUE 5-01.webp" atl="" width="260" height="260">
-                                        <img class="dt-width-100 img-hover" src="../assets/images/Adidas/Adidas-ADIDAS D.O.N ISSUE 5-02.webp" atl="" width="260" height="260">
-                                    </a>
-                                    <a class="buy-now">
-                                        <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
-                                        </div>
-                                        <div class="product-icon-watch">
-                                            <button>Xem nhanh</button>
-                                        </div>
-                                    </a>
-                                    <div class="product-sale"><span>-30%</span></div>
-                                    <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" 
-                                        data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
-
-                                </div>
-                                <div class="product-infor">
-                                    <h3 class="pro-name">
-                                        <a  href="" class="product-name">NIKE LEBRON NXXT</a>
-                                    </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>5,500,000₫</span><del class="compare-price">6,590,000₫</del></p></div>
-                                </div>
-                            </div>
-                        </li> -->
-                        
+                        </li>';
+                    }   
+                    ?>
                     </ul>
             </div>
     <!-- --STOP danh muc san pham-- -->

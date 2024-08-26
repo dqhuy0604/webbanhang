@@ -4,7 +4,7 @@
     require_once('../layouts/header.php');
 
     $orderId= getGet('id');
-    $sql = "select Order_Details.*, Product.title, Product.thumbnail from Order_Details left 
+    $sql = "select Order_Details.*, Product.title, Product.thumbnail , Product.thumbnail_2 from Order_Details left 
             join Product on Product.id =  Order_Details.Product_id where Order_Details.order_id =$orderId ";
     $data = executeResult($sql); 
     $sql = "select * from Orders where id = $orderId ";
@@ -20,7 +20,8 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Thumbnailk</th>
+                        <th>Thumbnail</th>
+                        <th>Thumbnail_2</th>
                         <th>Tên Sản Phẩm</th>
                         <th>Giá</th>
                         <th>Số Lượng</th>
@@ -34,6 +35,7 @@
             echo'  <tr>
                         <th>'.(++$index).'</th>
                         <td><img src="'.fixUrl($item['thumbnail']).'" style ="height :120px;"></td>
+                        <td><img src="'.fixUrl($item['thumbnail_2']).'" style ="height :120px;"></td>
                         <td>'.$item['title'].'</td>
                         <td>'.$item['price'].'</td>
                         <td>'.$item['num'].'</td>

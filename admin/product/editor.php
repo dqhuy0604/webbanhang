@@ -2,7 +2,7 @@
     $title ='Thêm/Sửa Sản Phẩm';
     $baseUrl='../';
     require_once('../layouts/header.php');
-	$id = $thumbnail = $title = $price = $discount = $category_id = $description ='';
+	$id = $thumbnail=$thumbnail_2= $title = $price = $discount = $category_id = $description ='';
     require_once('form_save.php');
 
 	$id = getGet('id');
@@ -11,6 +11,7 @@
 		$userItem = executeResult ($sql,true);
 		if($userItem != null){
 			$thumbnail = $userItem['thumbnail'];
+			$thumbnail_2 = $userItem['thumbnail_2'];
 			$title = $userItem['title'];
 			$price = $userItem['price'];
 			$discount = $userItem['discount'];
@@ -55,6 +56,11 @@
 								name="thumbnail" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                     <img id="thumbnail_img" src="<?=fixUrl($thumbnail)?>" style="max-height :160px; margin-top:10px; margin-bottom:15px;">            
 					</div>
+					<div class="form-group">
+					<input required="true" type="file" class="form-control" id="thumbnail_2" placeholder="Thumbnail_2" 
+								name="thumbnail_2" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                    <img id="thumbnail_2_img" src="<?=fixUrl($thumbnail_2)?>" style="max-height :160px; margin-top:10px; margin-bottom:15px;">            
+					</div>
                     <div class="form-group">
 					<input required="true" type="number" class="form-control" id="price" placeholder="Giá" name="price" value="<?=$price?>">
 					</div>
@@ -73,6 +79,7 @@
 <script type = "text/javascript">
     function updateThumbnail(){
         $('#thumbnail_img').attr('src',$('#thumbnail').val())
+		$('#thumbnail_2_img').attr('src',$('#thumbnail_2').val())
     }
 </script>
 
