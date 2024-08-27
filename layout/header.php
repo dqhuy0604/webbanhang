@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">      
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=fallback" as="style" type="text/css" rel="preload stylesheet">
@@ -296,12 +296,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php">Trang chủ</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product.php">SẢN PHẨM</a>
+                </li>
               <?php 
               foreach($menuItems as $item){
-                echo'<li class="nav-item ">
-                        <a class="nav-link" href="category.php?id='.$item['id'].'">'.$item['name'].'</a>
+                echo'<li class="nav-item "> 
+                        <a class="nav-link" href="../utils/category.php?id='.$item['id'].'">'.$item['name'].'</a>
                     </li>';
-              }
+              }         
               ?>
                 <li class="nav-item">
                     <a class="nav-link" href="gioithieu.php">Giới thiệu</a>

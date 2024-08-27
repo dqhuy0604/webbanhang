@@ -22,8 +22,12 @@ function executeResult($sql, $isSingle = false){
         echo "Error: " . mysqli_error($conn);
     }
     mysqli_set_charset($conn, 'utf8');
-
     $resultset=mysqli_query($conn, $sql);
+
+    if (!$resultset) {
+        echo "Error: " . mysqli_error($conn);
+        return $data;
+    }
     if($isSingle){
         $data=mysqli_fetch_array($resultset,1);
     }else{

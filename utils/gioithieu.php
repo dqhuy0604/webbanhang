@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  require_once('utility.php');
+  require_once('../database/dbhelper.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
