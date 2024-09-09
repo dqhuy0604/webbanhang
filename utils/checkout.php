@@ -181,7 +181,7 @@
             <div class="customer-title">
                 <h2>Thông tin khách hàng</h2>
             </div>
-            <form  method="POST" onsubmit="return completeCheckout();">
+            <form  method="POST" onsubmit="return completeCheckout();">     
                 <input type="text" placeholder="Họ và Tên" id="name" name="fullname_tt" required >
                 <input type="email" placeholder="Email" id="email_tt" name="email_tt" required>
                 <input type="text" placeholder="Số điện thoại" id="phone_number" name="phone_number" required>
@@ -274,7 +274,7 @@
             'address': $('[name=address]').val(),
             'note': $('[name=note]').val(),
         }, function(data) {
-            window.open('complete.php', '_self');
+            window.open('history_checkout.php', '_self');
         });
         return false;
     }

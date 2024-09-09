@@ -2,19 +2,21 @@
     session_start();
     require_once('../database/dbhelper.php');
     require_once('../layout/header.php');
-
     $user = getUserToken();
-    $userId = $user ? $user['id'] : null; 
-    $phoneNumber = getPost('phone_number');
+    $userId = $user ? $user['id'] : null;
+    $phoneNumber = '';
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !$userId) {
+        $phoneNumber = getPost('phone_number');
+    }
+    $orders = [];
 
     if ($userId) {
-        $sql = "SELECT * FROM Orders WHERE user_id = '$userId' ORDER BY order_date DESC";
-    } else {
-        $sql = "SELECT * FROM Orders WHERE phone_number = '$phoneNumber' ORDER BY order_date DESC";
+        $sql = "select * FROM Orders WHERE user_id = '$userId' ORDER BY order_date DESC";
+        $orders = executeResult($sql);
+    } elseif ($phoneNumber) {
+        $sql = "select * FROM Orders WHERE phone_number = '$phoneNumber' ORDER BY order_date DESC";
+        $orders = executeResult($sql);
     }
-    $orders = executeResult($sql);
-    echo "User ID: " . $userId . "<br>";
-    echo "Phone Number: " . $phoneNumber . "<br>";
 ?>
 
 <!DOCTYPE html>
@@ -203,7 +205,7 @@
 
         .product-details {
             display: none;
-        }
+        }   
     </style>
 </head>
 <body>
@@ -212,72 +214,85 @@
     <div class="main">
         <div class="order-history">
             <div class="order-title">
-                <h2>Lịch sử đơn hàng của bạn</h2>
+                <h2>Lịch sử đơn hàng</h2>
             </div>
 
+            <?php if (!$userId && !$phoneNumber) { ?>
+                <form method="POST" action="">
+                    <label style="font-weight:bold;" for="phone_number">Nhập số điện thoại để kiểm tra lịch sử đơn hàng:</label>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="Nhập số điện thoại" required>
+                    <button class="show-details-button" type="submit">Tìm kiếm</button>
+                </form>
+            <?php } ?>
             <?php
-            if (count($orders) > 0) {
-                foreach ($orders as $order) {
-                    $order_id = $order['id'];
-                    $sql = "SELECT Order_details.*, Product.title, Product.thumbnail 
-                            FROM Order_details 
-                            LEFT JOIN Product ON Order_details.product_id = Product.id 
-                            WHERE Order_details.order_id = $order_id";
-                    $order_details = executeResult($sql);
+            if ($userId || $phoneNumber) {
+                if (count($orders) > 0) {
+                    foreach ($orders as $order) {
+                        $order_id = $order['id'];
+                        $sql = "select Order_details.*, Product.title, Product.thumbnail 
+                                FROM Order_details 
+                                LEFT JOIN Product ON Order_details.product_id = Product.id 
+                                WHERE Order_details.order_id = $order_id";
+                        $order_details = executeResult($sql);
 
-                    // Convert status to descriptive text
-                    $statusText = '';
-                    $statusClass = '';
-                    switch ($order['status']) {
-                        case 0:
-                            $statusText = 'Đang chờ xác nhận';
-                            $statusClass = 'status-waiting';
-                            break;
-                        case 1:
-                            $statusText = 'Xác nhận';
-                            $statusClass = 'status-confirmed';
-                            break;
-                        case 2:
-                            $statusText = 'Đang giao';
-                            $statusClass = 'status-shipping';
-                            break;
-                        case 3:
-                            $statusText = 'Đã giao thành công';
-                            $statusClass = 'status-completed';
-                            break;
-                    }
-
-                    echo '<div class="order-item">';
-                    echo '<h3>Đơn hàng #'.$order['id'].'</h3>';
-                    echo '<p>Họ và tên: '.$order['fullname'].'</p>';
-                    echo '<p>Email: '.$order['email'].'</p>';
-                    echo '<p>Số điện thoại: '.$order['phone_number'].'</p>';
-                    echo '<p>Địa chỉ: '.$order['address'].'</p>';
-                    echo '<p>Nội dung: '.$order['note'].'</p>';
-                    echo '<p>Ngày đặt hàng: '.$order['order_date'].'</p>';
-                    echo '<p>Trạng thái đơn hàng: <a class="'.$statusClass.'"> '.$statusText.'</a></p>';
-                    
-                    echo '<button class="show-details-button" onclick="toggleDetails(\'details-'.$order['id'].'\')">Hiển thị chi tiết sản phẩm</button>';
-                    echo '<div id="details-'.$order['id'].'" class="product-details">';
-                    if (count($order_details) > 0) {
-                        echo '<h4>Chi tiết sản phẩm:</h4>';
-                        foreach ($order_details as $detail) {
-                            echo '<div class="product-item">
-                                    <div class="product-info">
-                                        <div class="product-img"><img src="../'.$detail['thumbnail'].'" alt="'.$detail['title'].'"></div>
-                                        <div class="product-name">'.$detail['title'].'</div>
-                                    </div>
-                                    <div class="product-qty">Số lượng : '.$detail['num'].'</div>
-                                    <div class="product-price">'.number_format($detail['price']).'₫</div>
-                                  </div>';
+                        $statusText = '';
+                        $statusClass = '';
+                        switch ($order['status']) {
+                            case 0:
+                                $statusText = 'Đang chờ xác nhận';
+                                $statusClass = 'status-waiting';
+                                break;
+                            case 1:
+                                $statusText = 'Xác nhận';
+                                $statusClass = 'status-confirmed';
+                                break;
+                            case 2:
+                                $statusText = 'Đang giao';
+                                $statusClass = 'status-shipping';
+                                break;
+                            case 3:
+                                $statusText = 'Đã giao thành công';
+                                $statusClass = 'status-completed';
+                                break;
                         }
+
+                        echo '<div class="order-item">';
+                        echo '<h3>Đơn hàng #'.$order['id'].'</h3>';
+                        echo '<div>Họ và tên:<a style="font-weight:bold;"> '.$order['fullname'].'</a></div>';
+                        echo '<div>Email:<a style="font-weight:bold;"> '.$order['email'].'</a></div>';
+                        echo '<div>Số điện thoại:<a style="font-weight:bold;"> '.$order['phone_number'].'</a></div>';
+                        echo '<div>Địa chỉ:<a style="font-weight:bold;"> '.$order['address'].'</a></div>';
+                        echo '<div>Nội dung:<a style="font-weight:bold;"> '.$order['note'].'</a></div>';
+                        echo '<div>Ngày đặt hàng:<a style="font-weight:bold;"> '.$order['order_date'].'</a></div>';
+                        echo '<p  style="font-weight:bold;">Trạng thái đơn hàng:<a style="font-weight:bold;"> <a class="'.$statusClass.'"> '.$statusText.'</a></p>';
+
+                        echo '<button class="show-details-button" onclick="toggleDetails(\'details-'.$order['id'].'\')">Hiển thị chi tiết sản phẩm</button>';
+                        echo '<div id="details-'.$order['id'].'" class="product-details">';
+                        if (count($order_details) > 0) {
+                            echo '<h4>Chi tiết sản phẩm:</h4>';
+                            foreach ($order_details as $detail) {
+                                echo '<div class="product-item">
+                                        <div class="product-info">
+                                            <div class="product-img"><img src="../'.$detail['thumbnail'].'" alt="'.$detail['title'].'"></div>
+                                            <div class="product-name">'.$detail['title'].'</div>
+                                        </div>
+                                        <div class="product-qty">Số lượng : '.$detail['num'].'</div>
+                                        <div class="product-price">'.number_format($detail['price']).'₫</div>
+                                      </div>';
+                            }
+                        }
+                        echo '</div>'; 
+                        echo '<p class="order-total">Tổng cộng: '.number_format($order['total_money']).'₫</p>';
+                        echo '</div>';
                     }
-                    echo '</div>'; // End of product-details div
-                    echo '<p class="order-total">Tổng cộng: '.number_format($order['total_money']).'₫</p>';
-                    echo '</div>'; // End of order-item div
+                } else {
+                    echo '<p style="font-weight:bold;">Không tìm thấy đơn hàng nào với số điện thoại: ' . $phoneNumber . '</p>';
+                    echo '<form method="POST" action="">
+                            <label for="phone_number">Nhập lại số điện thoại:</label>
+                            <input type="text" id="phone_number" name="phone_number" placeholder="Nhập số điện thoại mới" required>
+                            <button class="show-details-button" type="submit">Tìm kiếm</button>
+                          </form>';
                 }
-            } else {
-                echo '<p>Bạn chưa có đơn hàng nào.</p>';
             }
             ?>
         </div>
@@ -297,4 +312,6 @@
     </script>
 </body>
 </html>
+
+
 

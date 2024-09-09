@@ -162,11 +162,11 @@
         }
 
         .checkout-btn{
+            text-decoration: none;
             background-color: #000;
             color: #fff;
             padding: 15px 30px;
-            text-decoration: none;
-            font-size: 18px;
+            font-size: 18px;    
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
@@ -240,8 +240,8 @@
              </div>
             <div class="full-price">
                 <span class="total-price">Tổng cộng: <span class="money" style="font-weight:bold;"><?php echo number_format($totalPrice); ?>₫</span></span>
-                <a href="history_checkout.php" class="checkout-btn">Lịch sử đặt hàng</a>  
-                <a href="checkout.php" class="checkout-btn">Thanh toán</a>
+                <a href="history_checkout.php" class="checkout-btn" style="text-decoration: none;">Lịch sử đặt hàng</a>  
+                <a href="checkout.php" class="checkout-btn" style="text-decoration: none;">Thanh toán</a>
                 
             </div>  
         </div>
