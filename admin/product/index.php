@@ -9,7 +9,7 @@
 
 <div class= "row" style="margin-top :20px;">
     <div class="col-md-12">
-            <h3>Quản Lý Sản Phẩm </h3>
+            <h3 style="margin-top:50px;font-weight:bold;">Quản Lý Sản Phẩm </h3>
             
            <a href="editor.php"> <button class="btn btn-success">Thêm Sản Phẩm</button></a>
             <table class="table table-bordered table-hover " style="margin-top :20px;">
@@ -17,6 +17,7 @@
                     <tr>
                         <th>STT</th>
                         <th>Thumbnail</th>
+                        <th>Thumbnail_2</th>
                         <th>Tên Sản Phẩm</th>
                         <th>Giá</th>
                         <th>Danh Mục</th>
@@ -31,6 +32,7 @@
             echo'  <tr>
                         <th>'.(++$index).'</th>
                         <td><img src="'.fixUrl($item['thumbnail']).'" style ="height :100px"></td>
+                        <td><img src="'.fixUrl($item['thumbnail_2']).'" style ="height :100px"></td>
                         <td>'.$item['title'].'</td>
                         <td>'.$item['discount'].'</td>
                         <td>'.$item['category_name'].'</td>

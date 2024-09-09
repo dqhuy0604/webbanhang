@@ -159,7 +159,8 @@
                                 <span class="price-compare"><del>'.$product['price'].'đ </del></span>
                                 <div class="available-pro"><span class="title"> Tình trạng: </span><span class="status">Còn hàng</span></div>
                             </div>
-                    </div>
+                    </div>' 
+                    ?>
                     <div class="bg-countdown-product">
                     <div class="count-down-index d-flex d-flex-center">
                         <span>Kết thúc trong: </span>
@@ -203,19 +204,21 @@
                     <div class="row">
                     <div class="col-xs-12 selector-actions d-flex d-flex-center pd-top-10">
                         <div class="quantity-area">
-                            <input type="button" value="–" onclick="Wanda.minusQuantity($(this))" class="qty-btn qtyminus">
-                            <input type="text" id="quantity" name="quantity" value="1" min="1" class="quantity-selector">
-                            <input type="button" value="+" onclick="Wanda.plusQuantity($(this))" class="qty-btn qtyplus">
+                            <input type="button" value="-" onclick="addMoreCart(-1)" class="qty-btn qtyminus">
+                            <input type="number" id="quantity" name="num" step="1" value="1" min="1" class="quantity-selector" onchange="fixCartNum()">
+                            <input type="button" value="+" onclick="addMoreCart(1)" class="qty-btn qtyplus">
                         </div>
-                        <div class="wrap-addcart">						
+                        <div class="wrap-addcart">						    
                             <div class="row-flex">
-                                <button type="button" id="add-to-cart" class="button button_detail" name="add"><span>Thêm vào giỏ</span></button>
+                            <button type="button" onclick="addCart(<?php echo $product['id']; ?>, $('[name=num]').val())" id="add-to-cart" class="button button_detail" name="add"><span>Thêm vào giỏ</span></button>
                                 <button type="button" id="buy-now" class="button button_detail" name="add"> 
                                     <span>Mua ngay</span>
                                 </button>
                             </div>
                         </div>	 
-                    </div>
+                    </div> 
+                    <?php
+                    echo'
                     <div class="col-xs-12 location-store pd-top-10" style="display: none;"></div>
                             </div>
                         </form>
@@ -239,8 +242,8 @@
                                 <strong>'.$product['title'].'</strong><ul><li>'.$product['description'].'</li><img data-src="//file.hstatic.net/200000037626/file/nike-mens__2__fce53d17930e447e9ada5a03812678c9_grande.png" class="dt-width-auto lazyloaded" width="600" height="600" src="//file.hstatic.net/200000037626/file/nike-mens__2__fce53d17930e447e9ada5a03812678c9_grande.png"></p></div>
                             </div>
                         </div>
-                            </div>
-                    '
+                            </div>';
+    
                     ?>    
             </div>
         </div>
@@ -265,7 +268,7 @@
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
+                                            <button onclick="addCart('.$item['id'].',1)" >Thêm vào giỏ</button>
                                         </div>
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
@@ -307,7 +310,7 @@
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
+                                            <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                         </div>
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
@@ -333,6 +336,18 @@
 <?php
      require_once('../layout/footer.php');
      ?>
-</body>
+    <script type="text/javascript">
+        function addMoreCart(delta) {
+        num = parseInt($('[name=num]').val())
+        num += delta
+        if(num <1) num= 1;
+        $('[name=num]').val(num)
+        }
+        function fixCartNum( ) {
+        $('[name=num]').val(Math.abs($('[name=num]').val()))
 
+        }
+        
+    </script>
+</body>
 </html>

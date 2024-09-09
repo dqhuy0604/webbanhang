@@ -11,6 +11,7 @@ if(!empty($_POST)){
         $msg = 'Đăng nhập không thành công, vui lòng kiểm tra email hoặc mật khẩu';
 
     }else{
+     
         $token=  getSecurityMD5($userExist['email'].time());
         setcookie('token', $token, time() + (7 * 24 * 60 *60) ,'/');
         $created_at= date('Y-m-d H:i:s');
@@ -21,7 +22,14 @@ if(!empty($_POST)){
         $sql ="insert into Tokens (user_id, token , created_at) 
             values('$userId','$token','$created_at')";
         execute($sql);
-        header('Location:../');
-        die();
+        $role_id= $userExist['role_id'];
+        if($role_id == 1){
+            header('Location:../order/index.php');
+            die();
+        }else{
+            header('Location: ../../utils/index.php');
+            die();
         }
-}
+        
+        }
+}   

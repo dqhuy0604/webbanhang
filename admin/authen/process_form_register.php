@@ -1,10 +1,10 @@
 <?php
-require_once('../../utils/utility.php');
+require_once('../utils/utility.php');
 $fullname = $email = $msg ='';  
 if(!empty($_POST)){ 
     $fullname = getPost('fullname');
-    $email = getPost('email');
-    $pwd = getPost('password');
+    $email = getPost('email_register');
+    $pwd = getPost('pwd_register');
 
     if(empty($fullname)|| empty($email) ||empty($pwd)|| strlen($pwd)<6){
 
@@ -26,4 +26,5 @@ if(!empty($_POST)){
     }
 
 }
+
 ?>

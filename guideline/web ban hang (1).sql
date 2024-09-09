@@ -39,6 +39,7 @@ CREATE TABLE `Galery` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `product_id` int,
   `thumbnail` varchar(500) NOT NULL
+  `thumbnail_2` varchar(500),
 );
 
 CREATE TABLE `FeedBack` (

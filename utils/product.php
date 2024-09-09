@@ -88,19 +88,18 @@
                                             </a>
                                             <a class="buy-now">
                                                 <div class="product-icon-add">
-                                                    <button>Thêm vào giỏ</button>
+                                                    <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                                 </div>
                                                 <div class="product-icon-watch">
                                                     <button>Xem nhanh</button>
                                                 </div>
                                             </a>
-                                            <div class="product-sale"><span>-40%</span></div>
                                             <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" 
                                                 data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
                                         </div>
                                         <div class="product-infor">
                                                 <a href=""class="product-name-collection">'.$item['title'].'</a>
-                                            <div class="product-price"><p class="pro-price"> <span>'.$item['discount'].'</span><del class="compare-price">'.$item['price'].'</del></p></div>
+                                            <div class="product-price"><p class="pro-price"> <span>'.$item['discount'].'đ</span><del class="compare-price">'.$item['price'].'đ</del></p></div>
                                         </div>
                             </div>
                         </div>';

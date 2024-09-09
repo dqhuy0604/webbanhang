@@ -4,7 +4,7 @@ if(!empty($_POST)){
     $name =getPost("name");
 
     if($id>0){
-        $sql = "update Category set name ='$name' where id=$id";
+        $sql = "update Category set name ='$name' where id=$id ";
         execute($sql);
     }else{
         $sql = "insert into Category(name) values ('$name')";

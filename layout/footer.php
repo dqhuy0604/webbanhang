@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-4">
                     <ul>
-                        <img src="../assets/images/HUDO (1).png" style="width:300px"  >
+                        <img src="../assets/images/HUDO.png" style="width:300px"  >
                     </ul>
                 </div>
             </div>

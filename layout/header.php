@@ -1,3 +1,4 @@
+
 <?php
     $sql ="select * from Category";
     $menuItems =executeResult($sql);
@@ -11,16 +12,124 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=fallback" as="style" type="text/css" rel="preload stylesheet">
     <link href="//theme.hstatic.net/200000037626/1000890916/14/plugin-style.css?v=147" rel="preload stylesheet" as="style" type="text/css">
     <link href="//theme.hstatic.net/200000037626/1000890916/14/styles-new.scss.css?v=147" rel="preload stylesheet" as="style" type="text/css">
-    <link rel="preload" as="image" href="//theme.hstatic.net/200000037626/1000890916/14/logo.png?v=147">
+    <!-- <link rel="preload" as="image" href="//theme.hstatic.net/200000037626/1000890916/14/logo.png?v=147"> -->
     <link href="//theme.hstatic.net/200000037626/1000890916/14/styles-index.scss.css?v=147" rel="preload stylesheet" as="style" type="text/css"><link rel="preload" as="image" href="//theme.hstatic.net/200000037626/1000890916/14/slideshow_1_mob_large.jpg?v=147" media="(max-width: 480px)">
-    <link href="//theme.hstatic.net/200000037626/1000890916/14/jquery-script.js?v=147" rel="preload" as="script" type="text/javascript">
-    <link href="//theme.hstatic.net/200000037626/1000890916/14/main-scripts.js?v=147" rel="preload" as="script" type="text/javascript">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"> -->
+    <!-- <link href="//theme.hstatic.net/200000037626/1000890916/14/jquery-script.js?v=147" rel="preload" as="script" type="text/javascript"> -->
+    <!-- <link href="//theme.hstatic.net/200000037626/1000890916/14/main-scripts.js?v=147" rel="preload" as="script" type="text/javascript"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
+        .modal {
+            display: none;
+            position: fixed; 
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #f9f9f9;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px; 
+            border-radius: 8px;
+            font-family: 'Quicksand', sans-serif !important;
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            color: #000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #f00;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .close-register {
+            color: #000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-register:hover,
+        .close-register:focus {
+            color: #f00;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn-register {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            }
+
+        .btn-register:hover {
+            background-color: #333;
+        }
+
+        .login-link {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            color: pink;
+        }
+
+        .btn-login {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        .btn-login:hover {
+            background-color: #333;
+        }
+
+        .register-link {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            color: pink;
+        }
+
         *{
             font-family: 'Quicksand', sans-serif !important;
             margin:0;
@@ -273,14 +382,66 @@
         }
         footer .col-md-4{
             width: 25%;
-        }
-        .box-img{
+        }   
+        .box-img{   
             display: flex;
             flex-direction: row;
+            position: relative;
+            height: 100%;
+            min-height: 1px;
         }
         .box-img .img-bottom{
             display :inline;
         }
+        .cart-item {
+            position: absolute; 
+            left: 0; 
+            background-color: #000; 
+            color: #fff; 
+            padding: 1px 3px; 
+            border-radius: 50%; 
+            font-size: 12px;
+            font-weight: bold; 
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            width: 18px; 
+            height: 18px;
+            text-align: center; 
+        }
+    .status-waiting {
+    background-color: #000;
+    color: #fff;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+    .status-confirmed {
+        background-color: green;
+        color: white;
+        padding: 4px 15px;
+        text-decoration: none;
+        font-size: 18px;    
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .status-shipping {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .status-completed {
+        background-color: #d1ecf1;
+        color: #0c5460;
+    }
     </style>
 
 </head>
@@ -288,7 +449,7 @@
     <!-- -- MENU-- -->
     <div id="header">
         <nav class="container">
-            <a class="nav-logo">
+            <a class="nav-logo" href="index.php">
                     <img src="../assets/images/HUDO.png"
                     style ="height:100px; width:250px;">
             </a>
@@ -309,23 +470,145 @@
                 <li class="nav-item">
                     <a class="nav-link" href="gioithieu.php">Giới thiệu</a>
                 </li>
+                <?php
+                    if(!isset($_SESSION['cart'])){
+                        $_SESSION['cart']=[];
+                    }
+                    $count = 0;
+                    foreach($_SESSION['cart'] as $item){
+                        $count += $item['num'];
+                    }
+                ?>
                 <li class="nav-item">
+                    <a href="../admin/order/index.php">
                     <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/searcg-icon.svg?v=147" alt="Tìm kiếm">
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a href="../admin/authen/register.php">
-                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản" >
+                <li class="nav-item" id="loginNavItem">
+                    <a href="#">
+                        <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản">
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="../admin/authen/logout.php">
                     <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Danh sách yêu thích">
+                    </a>
                 </li>
                 <li class="nav-item">
+                    <a href= "../utils/cart.php">
                     <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/shopping-cart.svg?v=147" alt="Giỏ hàng">
+                    <span class="cart-item"><?=$count?></span>
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
+    <script>
+        function addCart(productId, num) {
+                    $.post('../api/ajax_request.php',{
+                        'action': 'cart',
+                        'id': productId,
+                        'num': num
+                    }, function(data){
+                        location.reload();
+
+                    })
+                }   
+            </script>
+
+
     <!-- --menu_stop-- -->
+    <div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 class="modal-title">Đăng nhập</h2>
+        <form method="post" action="../admin/authen/login.php">
+            <div class="form-group">
+                <input required type="email" class="form-control" id="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input required type="password" class="form-control" id="pwd" name="password" placeholder="Mật khẩu">
+            </div>
+            <a href="register.php" class="register-link"  id="registerNavItem">Đăng ký</a>
+            <button type="submit" class="btn-login">Đăng nhập</button>
+        </form>
+    </div>
+</div>
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close-register">&times;</span>
+        <h2 class="modal-title">Đăng ký tài khoản</h2>
+        <form method="post" action="../utils/index.php" onsubmit="return validateForm()">
+            <div class="form-group">
+                <input required type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ Tên">
+            </div>
+            <div class="form-group">
+                <input required type="email" class="form-control" id="email_register" name="email_register" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input required type="password" class="form-control" id="pwd_register" name="pwd_register" placeholder="Mật Khẩu" minlength="6">
+            </div>
+            <div class="form-group">
+                <input required type="password" class="form-control" id="confirmation_pwd" placeholder="Xác minh mật khẩu">
+            </div>
+            <p>
+                <a href="" class="login-link">Đã có tài khoản</a>
+            </p>
+            <button type="submit" class="btn-register">Đăng kí</button>
+        </form>
+    </div>
+</div>
+
+<?php
+require_once('../admin/authen/process_form_register.php')
+?>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('loginModal');
+    const closeSpan = document.querySelector('.close');
+    const navItem = document.getElementById('loginNavItem');
+    navItem.addEventListener('click', (event) => {
+        event.preventDefault();
+        modal.style.display = 'block';
+    });
+    closeSpan.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+
+    function openRegisterModal() {
+        document.getElementById('registerModal').style.display = 'block';
+    }
+    function closeRegisterModal() {
+        document.getElementById('registerModal').style.display = 'none';
+    }
+    document.querySelector('.close-register').addEventListener('click', closeRegisterModal);
+    document.querySelector('.login-link').addEventListener('click', closeRegisterModal);
+    window.addEventListener('click', function(event) {
+        if (event.target === document.getElementById('registerModal')) {
+            closeRegisterModal();
+        }
+    });
+
+    document.querySelector('a.register-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        openRegisterModal();
+    });
+    function validateForm() {
+        var pwd = document.getElementById('pwd_register').value;
+        var confirmPwd = document.getElementById('confirmation_pwd').value;
+        if (pwd != confirmPwd) {
+            alert("Mật khẩu không khớp, vui lòng nhập lại");
+            return false;
+        }
+        return true;
+    }
+</script>
+
 
   

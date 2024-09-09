@@ -61,60 +61,58 @@
                         echo' <li>
                             <div class="product-item">
                                 <div class="product-top">
-                                    <a href="" class="product-thumb">
+                                    <a href="detail.php?id='.$item['id'].'" class="product-thumb">
                                         <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
                                         <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" atl="" width="260" height="260">
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
+                                            <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                         </div>                                                                  
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
                                         </div>
                                     </a>
-                                    <div class="product-sale"><span>-40%</span></div>
                                     <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" 
                                         data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
                                 </div>
                                 <div class="product-infor">
                                     <h3 class="pro-name">
-                                        <a href=""class="product-name">'.$item['title'].'</a>
+                                        <a href="detail.php?id='.$item['id'].'"class="product-name">'.$item['title'].'</a>
                                     </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'</span><del class="compare-price">'.$item['price'].'</del></p></div>
+                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'đ</span><del class="compare-price">'.$item['price'].'đ</del></p></div>
                                 </div>
-                            </div>
+                                </div>
                         </li>';
                     }   
                     ?>
                     </ul>
                     <ul class="products">
                  <?php
-                    foreach($hotdealItems_1 as $item){    
+                    foreach($hotdealItems_1 as $item){          
                         echo' <li>
-                            <div class="product-item">
+                            <div class="product-item">      
                                 <div class="product-top">
-                                    <a href="" class="product-thumb">
+                                    <a href="detail.php?id='.$item['id'].'" class="product-thumb">
                                         <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
                                         <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" atl="" width="260" height="260">
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
+                                            <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                         </div>                                                                  
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
                                         </div>
                                     </a>
-                                    <div class="product-sale"><span>-40%</span></div>
                                     <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" 
                                         data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
                                 </div>
                                 <div class="product-infor">
                                     <h3 class="pro-name">
-                                        <a href=""class="product-name">'.$item['title'].'</a>
+                                        <a href="detail.php?id='.$item['id'].'"class="product-name">'.$item['title'].'</a>
                                     </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'</span><del class="compare-price">'.$item['price'].'</del></p></div>
+                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'đ</span><del class="compare-price">'.$item['price'].'đ</del></p></div>
                                 </div>
                             </div>
                         </li>';
@@ -156,19 +154,18 @@
                         echo '<li>
                                 <div class="product-item">
                                     <div class="product-top">
-                                        <a href="" class="product-thumb">
+                                        <a href="detail.php?id='.$item['id'].'" class="product-thumb">
                                             <img class="dt-width-100" src="../'.$item['thumbnail'].'" alt="" width="260" height="260">
                                             <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" alt="" width="260" height="260">
                                         </a>
                                         <a class="buy-now">
                                             <div class="product-icon-add">
-                                                <button>Thêm vào giỏ</button>
+                                                <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                             </div>                                                                  
                                             <div class="product-icon-watch">
                                                 <button>Xem nhanh</button>
                                             </div>
                                         </a>
-                                        <div class="product-sale"><span>-40%</span></div>
                                         <div class="product-wishlist"> 
                                             <button data-original-title="Yêu thích" class="wishlist-loop" 
                                                 data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0"> 
@@ -179,12 +176,12 @@
                                     </div>
                                     <div class="product-infor">
                                         <h3 class="pro-name">
-                                            <a href="" class="product-name">'.$item['title'].'</a>
+                                            <a href="detail.php?id='.$item['id'].'" class="product-name">'.$item['title'].'</a>
                                         </h3>
                                         <div class="product-price">
                                             <p class="pro-price"> 
-                                                <span>'.number_format($item['discount']).'</span>
-                                                <del class="compare-price">'.$item['price'].'</del>
+                                                <span>'.number_format($item['discount']).'đ</span>
+                                                <del class="compare-price">'.$item['price'].'đ</del>
                                             </p>
                                         </div>
                                     </div>
@@ -199,27 +196,26 @@
                         echo' <li>
                             <div class="product-item">
                                 <div class="product-top">
-                                    <a href="" class="product-thumb">
+                                    <a href="detail.php?id='.$item['id'].'" class="product-thumb">
                                         <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
                                         <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" atl="" width="260" height="260">
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
+                                            <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                         </div>                                                                  
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
                                         </div>
                                     </a>
-                                    <div class="product-sale"><span>-40%</span></div>
                                     <div class="product-wishlist"> <button data-original-title="Yêu thích" class="wishlist-loop" 
                                         data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0"> <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích </button></div>
                                 </div>
                                 <div class="product-infor">
                                     <h3 class="pro-name">
-                                        <a href=""class="product-name">'.$item['title'].'</a>
+                                        <a href="detail.php?id='.$item['id'].'"class="product-name">'.$item['title'].'</a>
                                     </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'</span><del class="compare-price">'.$item['price'].'</del></p></div>
+                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'đ</span><del class="compare-price">'.$item['price'].'đ</del></p></div>
                                 </div>
                             </div>
                         </li>';
@@ -239,6 +235,16 @@
             Product left join Category on Product.category_id = Category.id WHERE Product.deleted = 0
             order by Product.updated_at ASC limit 5 ";
     $lastestItems =executeResult($sql); 
+    $sql = "select * FROM (
+        SELECT Product.*, Category.name as category_name 
+        FROM Product 
+        LEFT JOIN Category ON Product.category_id = Category.id 
+        WHERE Product.deleted = 0 
+        ORDER BY Product.updated_at DESC 
+        LIMIT 5 OFFSET 5
+        ) AS subquery 
+        ORDER BY updated_at ASC ";
+    $lastestItems_2 =executeResult($sql); 
 ?>
         <!-- --New Arrival-- -->
         <div id="wrapper">
@@ -249,13 +255,13 @@
                         echo' <li>
                             <div class="product-item">
                                 <div class="product-top">
-                                    <a href="" class="product-thumb">
+                                    <a href="detail.php?id='.$item['id'].'" class="product-thumb">
                                         <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
                                         <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" atl="" width="260" height="260">
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
+                                            <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                         </div>                                                                  
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
@@ -267,9 +273,9 @@
                                 </div>
                                 <div class="product-infor">
                                     <h3 class="pro-name">
-                                        <a href=""class="product-name">'.$item['title'].'</a>
+                                        <a href="detail.php?id='.$item['id'].'"class="product-name">'.$item['title'].'</a>
                                     </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'</span><del class="compare-price">'.$item['price'].'</del></p></div>
+                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'đ</span><del class="compare-price">'.$item['price'].'đ</del></p></div>
                                 </div>
                             </div>
                         </li>';
@@ -278,17 +284,17 @@
                     </ul>
                     <ul class="products">
                  <?php
-                    foreach($lastestItems as $item){    
+                    foreach($lastestItems_2 as $item){    
                         echo' <li>
                             <div class="product-item">
                                 <div class="product-top">
-                                    <a href="" class="product-thumb">
+                                    <a href="detail.php?id='.$item['id'].'" class="product-thumb">
                                         <img class="dt-width-100" src="../'.$item['thumbnail'].'" atl="" width="260" height="260">
                                         <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" atl="" width="260" height="260">
                                     </a>
                                     <a class="buy-now">
                                         <div class="product-icon-add">
-                                            <button>Thêm vào giỏ</button>
+                                            <button onclick="addCart('.$item['id'].',1)">Thêm vào giỏ</button>
                                         </div>                                                                  
                                         <div class="product-icon-watch">
                                             <button>Xem nhanh</button>
@@ -300,9 +306,9 @@
                                 </div>
                                 <div class="product-infor">
                                     <h3 class="pro-name">
-                                        <a href=""class="product-name">'.$item['title'].'</a>
+                                        <a href="detail.php?id='.$item['id'].'"class="product-name">'.$item['title'].'</a>
                                     </h3>
-                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'</span><del class="compare-price">'.$item['price'].'</del></p></div>
+                                    <div class="product-price"><p class="pro-price"> <span>'.number_format($item['discount']).'đ</span><del class="compare-price">'.$item['price'].'đ</del></p></div>
                                 </div>
                             </div>
                         </li>';
@@ -316,7 +322,10 @@
 			<span>FOLLOW US ON INSTAGRAM @hudoshop.vn</span>
 		</h2>
 	</div>
-    <div class="box-img">
+    <div class="box-img">   
+        <div class="img-bottom">
+            <img src="../assets/images/bongro-4.png" width="300px" height="300px">
+        </div>
         <div class="img-bottom">
             <img src="../assets/images/bongro-1.png" width="300px" height="300px" >
         </div>
@@ -324,15 +333,16 @@
             <img src="../assets/images/bongro-2.png" width="300px" height="300px">
         </div>
         <div class="img-bottom">
+            <img src="../assets/images/bongro-1.png" width="300px" height="300px" >
+        </div>  
+        <div class="img-bottom">
             <img src="../assets/images/bongro-3.png" width="300px" height="300px">
         </div>
         <div class="img-bottom">
             <img src="../assets/images/bongro-4.png" width="300px" height="300px">
         </div>
-        <div class="img-bottom">
-            <img src="../assets/images/bongro-7.png" width="300px" height="300px">
-        </div> 
-    </div>
+        
+        </div>
 </section>
     <?php
         require_once('../layout/footer.php');
