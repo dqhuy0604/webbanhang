@@ -409,39 +409,6 @@
             height: 18px;
             text-align: center; 
         }
-    .status-waiting {
-    background-color: #000;
-    color: #fff;
-    padding: 15px 30px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-    .status-confirmed {
-        background-color: green;
-        color: white;
-        padding: 4px 15px;
-        text-decoration: none;
-        font-size: 18px;    
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-    }
-
-    .status-shipping {
-        background-color: #fff3cd;
-        color: #856404;
-    }
-
-    .status-completed {
-        background-color: #d1ecf1;
-        color: #0c5460;
-    }
     </style>
 
 </head>

@@ -19,7 +19,7 @@
 
 <div class= "row" style="margin-top :20px;">
     <div class ="col-md-12">
-        <h3 style="margin-top:50px;font-weight:bold;">Quản Lý Danh Mục Sản Phẩm</h3>
+        <h3 style="margin-top:50px;font-weight:bold;" >Quản Lý Danh Mục Sản Phẩm</h3>
     </div>
     <div class="col-md-6 " style="margin-top: 20px">
         <form method="post" action="index.php" onsubmit="return validateForm()">

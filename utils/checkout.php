@@ -136,7 +136,6 @@
             background-color: #000;
             color: #fff;
             padding: 15px 30px;
-            text-decoration: none;
             font-size: 18px;
             font-weight: bold;
             border-radius: 5px;
