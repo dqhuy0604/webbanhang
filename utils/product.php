@@ -2,7 +2,7 @@
     session_start();
     require_once('utility.php');
     require_once('../database/dbhelper.php');
-    require_once('../layout/header.php');       
+  
     $category_id=getGet('id');
     $sql = "select Product.*, Category.name AS category_name 
     FROM Product 
