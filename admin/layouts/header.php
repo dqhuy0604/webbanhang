@@ -9,9 +9,9 @@
         die();
 
 	}
-?>
+?>  
 <!DOCTYPE html>
-<html >
+<html>
 <head>
     <title> <?= $title?></title>
     <meta charset="utf-8">
@@ -298,6 +298,12 @@ a{
                                 <a class="nav-link" href="<?=$baseUrl?>category">
                                 <i class="bi bi-folder"></i>
                                     Danh Mục Sản Phẩm
+                                </a>
+                            </li>
+                               <li class="nav-item">
+                                <a class="nav-link" href="<?=$baseUrl?>brand">
+                                <i class="bi bi-folder"></i>
+                                    Brand
                                 </a>
                             </li>
                             <li class="nav-item">

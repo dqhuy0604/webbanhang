@@ -1,5 +1,5 @@
 <?php
-require_once('../utils/utility.php');
+require_once(__DIR__.'/../../utils/utility.php');
 $fullname = $email = $msg ='';  
 if(!empty($_POST)){ 
     $fullname = getPost('fullname');

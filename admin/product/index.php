@@ -2,8 +2,13 @@
       $title ='Quản Lý Người Dùng';
       $baseUrl='../';
       require_once('../layouts/header.php');
-      $sql = "select Product.*, Category.name as category_name from Product left join Category on
-                Product.category_id = Category.id where Product.deleted=0 ";
+      $sql = "SELECT Product.*, 
+                    Category.name AS category_name,
+                    Brand.name AS brand_name
+            FROM Product
+            LEFT JOIN Category ON Product.category_id = Category.id
+            LEFT JOIN Brand ON Product.brand_id = Brand.id
+            WHERE Product.deleted = 0";
       $data = executeResult($sql);
 ?>
 
@@ -12,15 +17,17 @@
             <h3 style="margin-top:50px;font-weight:bold;">Quản Lý Sản Phẩm </h3>
             
            <a href="editor.php"> <button class="btn btn-success">Thêm Sản Phẩm</button></a>
+           <!-- <input type="text" id="searchInput" placeholder="Tìm theo tên sản phẩm..." style="margin-bottom: 20px;" /> -->
             <table class="table table-bordered table-hover " style="margin-top :20px;">
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Thumbnail</th>
-                        <th>Thumbnail_2</th>
                         <th>Tên Sản Phẩm</th>
                         <th>Giá</th>
                         <th>Danh Mục</th>
+                        <th>Brand</th>
+                        <th>Hình 1</th>
+                        <th>Hình 2</th>
                         <th style ="width :50px"></th>
                         <th style ="width :50px"></th>
                     </tr>
@@ -31,11 +38,12 @@
         foreach($data as $item){
             echo'  <tr>
                         <th>'.(++$index).'</th>
+                        <td>'.$item['title'].'</td>
+                        <td>'.$item['price'].'đ</td>
+                        <td>'.$item['category_name'].'</td>
+                        <td>'.$item['brand_name'].'</td>
                         <td><img src="'.fixUrl($item['thumbnail']).'" style ="height :100px"></td>
                         <td><img src="'.fixUrl($item['thumbnail_2']).'" style ="height :100px"></td>
-                        <td>'.$item['title'].'</td>
-                        <td>'.$item['discount'].'</td>
-                        <td>'.$item['category_name'].'</td>
                         <td style ="width :50px">
                             <a href = "editor.php?id='.$item['id'].'">
                                 <button class="btn btn-warning">Sửa</button>
@@ -67,7 +75,20 @@
         }, function(data){
                 location.reload()
         })
+
     }
+    //   document.getElementById('searchInput').addEventListener('keyup', function() {
+    //     let filter = this.value.toLowerCase();
+    //     let rows = document.querySelectorAll('table tbody tr');
+    //     rows.forEach(row => {
+    //         let productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+    //         if(productName.indexOf(filter) > -1){
+    //             row.style.display = '';
+    //         } else {
+    //             row.style.display = 'none';
+    //         }
+    //     });
+    // });
 
 </script>
 

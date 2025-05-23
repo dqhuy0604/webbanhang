@@ -19,13 +19,13 @@ if(!empty($_POST)){
 
 function deleteCategory(){
     $id = getPost('id');
-    // $sql ="select count(*) as total from Product where category_id =$id and deleted = 0";
-    // $data = executeResult($sql,true);
-    // $total = $data['total'];
-    // if($total > 0){
-    //     echo 'Danh mục đang chứ sản phẩm, không được xóa !!!';
-    //     die();
-    // }
-    $sql = "delete from Category where id=$id";
+    $sql = "SELECT count(*) as total FROM Product WHERE category_id = $id AND deleted = 0";
+    $data = executeResult($sql, true);
+    $total = $data['total'];
+    if($total > 0){
+        echo 'Danh mục đang chứa sản phẩm, không được xóa !!!';
+        die(); 
+    }
+    $sql = "DELETE FROM Category WHERE id = $id";
     execute($sql);  
 }

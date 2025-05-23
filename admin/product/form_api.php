@@ -1,4 +1,5 @@
 <?php
+    ob_start();
 	session_start();
 	require_once('../../utils/utility.php');
 	require_once('../../database/dbhelper.php');
@@ -34,3 +35,4 @@ function deleteProduct() {
 
     echo 'Sản phẩm đã được xóa thành công.';
 }
+    ob_end_flush();
