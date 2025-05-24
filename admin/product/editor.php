@@ -18,11 +18,12 @@
 			$category_id = $userItem['category_id'];
 			$brand_id = $userItem['brand_id'];
             $description = $userItem['description'];
+			
 		}else {
 			$id = 0;
 		}
 	}
-
+	
     $sql = "select * from Category";
     $categoryItems = executeResult($sql);
 	$sql_1 = "select * from Brand";

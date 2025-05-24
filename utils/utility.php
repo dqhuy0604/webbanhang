@@ -63,18 +63,27 @@
         }
         return null;
     }
-    function moveFile($key, $rootPath = "../../")   {
-        if(!isset($_FILES[$key]) || !isset($_FILES [$key] ['name']
-                ) || $_FILES [$key] ['name'] == '') {
-                    return '';
-        }
-        $pathTemp = $_FILES[$key] ["tmp_name"];
-        $filename = $_FILES [$key] ['name' ];
-        $newPath="assets/images".$filename;
-        move_uploaded_file($pathTemp, $rootPath.$newPath);
-        return $newPath;
-        }
-       
+   function moveFile($key, $rootPath = "../../") {
+    if (!isset($_FILES[$key]) || !isset($_FILES[$key]['name']) || $_FILES[$key]['name'] == '') {
+        return '';
+    }
+
+    $pathTemp = $_FILES[$key]["tmp_name"];
+    $filename = time() . '-' . basename($_FILES[$key]['name']); 
+    $uploadDir = "assets/images/";
+
+  
+    $newPath = $uploadDir . $filename;
+
+
+    if (!file_exists($rootPath . $uploadDir)) {
+        mkdir($rootPath . $uploadDir, 0777, true);
+    }
+
+    move_uploaded_file($pathTemp, $rootPath . $newPath);
+
+    return $newPath; 
+}       
     function fixUrl($thumbnail, $rootPath = "../../") {
         if(stripos($thumbnail, 'http://') !== false || stripos($thumbnail, 'https://') !== false) {
         } else {
@@ -83,4 +92,22 @@
         return $thumbnail;
 
         }
+   function getDiscountedPrice($productId, $price) {
+    $now = date('Y-m-d H:i:s');
+    $sql = "SELECT * FROM product_discount 
+            WHERE product_id = $productId 
+            AND start_date <= '$now' 
+            AND end_date >= '$now'";
+    $discount = executeResult($sql, true);
+
+    if ($discount != null) {
+        if ($discount['discount_type'] == 'percent') {
+            return round($price * (1 - $discount['value'] / 100), 0);
+        } else {
+            return max(0, $price - $discount['value']);
+        }
+    }
+    return $price;
+}
+
 

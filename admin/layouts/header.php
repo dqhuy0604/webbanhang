@@ -312,6 +312,12 @@ a{
                                     Sản Phẩm
                                 </a>
                             </li>
+                               <li class="nav-item">
+                                <a class="nav-link" href="<?=$baseUrl?>inventory">
+                                <i class="bi bi-file-earmark-text"></i>
+                                    Số lượng và giảm giá
+                                </a>
+                            </li>
                             <li class="nav-item">
                                  <a class="nav-link" href="<?=$baseUrl?>order">
                                 <i class="bi bi-minecart"></i>

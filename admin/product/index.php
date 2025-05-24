@@ -2,13 +2,19 @@
       $title ='Quản Lý Người Dùng';
       $baseUrl='../';
       require_once('../layouts/header.php');
-      $sql = "SELECT Product.*, 
+        $sql = "SELECT Product.*, 
                     Category.name AS category_name,
-                    Brand.name AS brand_name
-            FROM Product
-            LEFT JOIN Category ON Product.category_id = Category.id
-            LEFT JOIN Brand ON Product.brand_id = Brand.id
-            WHERE Product.deleted = 0";
+                    Brand.name AS brand_name,
+                    d.discount_type,
+                    d.value
+                FROM Product
+                LEFT JOIN Category ON Product.category_id = Category.id
+                LEFT JOIN Brand ON Product.brand_id = Brand.id
+                LEFT JOIN (
+                    SELECT * FROM product_discount 
+                    WHERE NOW() BETWEEN start_date AND end_date
+                ) d ON Product.id = d.product_id
+                WHERE Product.deleted = 0";
       $data = executeResult($sql);
 ?>
 
@@ -24,6 +30,7 @@
                         <th>STT</th>
                         <th>Tên Sản Phẩm</th>
                         <th>Giá</th>
+                        <th>Giá sau giảm</th>
                         <th>Danh Mục</th>
                         <th>Brand</th>
                         <th>Hình 1</th>
@@ -36,10 +43,22 @@
 <?php
         $index = 0;
         foreach($data as $item){
+            $originalPrice = $item['price'];
+            $discountedPrice = $originalPrice;
+
+            if (!empty($item['discount_type']) && $item['value'] > 0) {
+                if ($item['discount_type'] == 'percent') {
+                    $discountedPrice = $originalPrice * (1 - $item['value'] / 100);
+                } elseif ($item['discount_type'] == 'amount') {
+                    $discountedPrice = $originalPrice - $item['value'];
+                }
+                if ($discountedPrice < 0) $discountedPrice = 0;
+            }
             echo'  <tr>
                         <th>'.(++$index).'</th>
                         <td>'.$item['title'].'</td>
-                        <td>'.$item['price'].'đ</td>
+                        <td>'.number_format($originalPrice).'đ</td>
+                        <td>'.number_format($discountedPrice).'đ</td>
                         <td>'.$item['category_name'].'</td>
                         <td>'.$item['brand_name'].'</td>
                         <td><img src="'.fixUrl($item['thumbnail']).'" style ="height :100px"></td>
