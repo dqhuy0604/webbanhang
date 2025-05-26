@@ -9,11 +9,11 @@ $sql = "SELECT o.*,
                p.name AS payment_method,
                st.name AS status_name
         FROM orders o
-        LEFT JOIN users u ON o.user_id = u.id
+        LEFT JOIN user u ON o.user_id = u.id
         LEFT JOIN shipping_method s ON o.shipping_method_id = s.id
         LEFT JOIN payment_method p ON o.payment_method_id = p.id
         LEFT JOIN order_status st ON o.status_id = st.id
-        ORDER BY o.created_at DESC";
+        ORDER BY o.order_date DESC";
 
 $data = executeResult($sql);
 ?>
@@ -39,12 +39,13 @@ $data = executeResult($sql);
             <tbody>
                 <?php
                 $index = 0;
+                if (!empty($data)) {
                 foreach ($data as $item) {
                     echo '<tr>
                             <td>' . (++$index) . '</td>
                             <td>#' . $item['id'] . '</td>
                             <td>' . $item['customer_name'] . '</td>
-                            <td>' . date('d/m/Y H:i', strtotime($item['created_at'])) . '</td>
+                            <td>' . date('d/m/Y H:i', strtotime($item['order_date'])) . '</td>
                             <td>' . $item['payment_method'] . '</td>
                             <td>' . $item['shipping_method'] . '</td>
                             <td>' . $item['status_name'] . '</td>
@@ -56,6 +57,10 @@ $data = executeResult($sql);
                             </td>
                         </tr>';
                 }
+                } else {
+                            echo '<tr><td colspan="9" class="text-center text-danger">Chưa có đơn hàng nào.</td></tr>';
+                        }
+
                 ?>
             </tbody>
         </table>
