@@ -18,9 +18,22 @@
     LIMIT 5; ";
     $hotdealItems_1 =executeResult($sql);  
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="../utils/index.css">
+</head>
+<body>
+    
+
+
   <!-- --BANNER-- -->
 
-    <div id="demo" class="carousel slide" data-ride="carousel">
+    <!-- <div id="demo" class="carousel slide" data-ride="carousel">
         <ul class="carousel-indicators">
             <li data-target="#demo" data-slide-to="0" class="active"></li>
             <li data-target="#demo" data-slide-to="1"></li>
@@ -43,8 +56,11 @@
         <a class="carousel-control-next" href="#demo" data-slide="next">
             <span class="carousel-control-next-icon"></span>
         </a>
-    </div>
+    </div> -->
      <!-- -- BANER_STOP -- -->
+      <div class ="content">
+        <img  class="img-banner" src="https://file.hstatic.net/200000037626/file/banner-san-pham_1440x400.png" alt="">
+      </div>
 		<div class="top-title">
 			<h2 class="title-section">
 				<span>HOT DEAL &amp; SALE</span>

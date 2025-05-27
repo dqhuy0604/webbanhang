@@ -309,6 +309,7 @@ $menuItems = executeResult($sql);
         }
 
         #header {
+            position: sticky;
             box-shadow: 0px 0px 3px 0px #ccc;
             background-color: white;
             display: flex;
@@ -1017,8 +1018,6 @@ $menuItems = executeResult($sql);
             </ul>
     </div>
     </div>
-
-
     <!-- --menu_stop-- -->
     <div id="loginModal" class="modal">
         <div class="modal-content">

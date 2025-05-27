@@ -9,9 +9,9 @@
         die();
 
 	}
-?>
+?>  
 <!DOCTYPE html>
-<html >
+<html>
 <head>
     <title> <?= $title?></title>
     <meta charset="utf-8">
@@ -289,7 +289,7 @@ a{
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                 <a class="nav-link active" href="">
+                                  <a class="nav-link" href="<?=$baseUrl?>revenue">
                                  <i class="bi bi-house-fill"></i>
                                     Dashboard
                                 </a>
@@ -300,10 +300,22 @@ a{
                                     Danh Mục Sản Phẩm
                                 </a>
                             </li>
+                               <li class="nav-item">
+                                <a class="nav-link" href="<?=$baseUrl?>brand">
+                                <i class="bi bi-folder"></i>
+                                    Brand
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?=$baseUrl?>product">
                                 <i class="bi bi-file-earmark-text"></i>
                                     Sản Phẩm
+                                </a>
+                            </li>
+                               <li class="nav-item">
+                                <a class="nav-link" href="<?=$baseUrl?>inventory">
+                                <i class="bi bi-file-earmark-text"></i>
+                                    Số lượng và giảm giá
                                 </a>
                             </li>
                             <li class="nav-item">
