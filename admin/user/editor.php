@@ -1,91 +1,72 @@
 <?php 
-    $title ='Thêm/Sửa Tài Khoản Người Dùng';
-    $baseUrl='../';
-    require_once('../layouts/header.php');
-	$id= $msg = $fullname = $email = $phone_number = $address = $role_id ='';
-    require_once('form_save.php');
+$title = 'Thêm / Sửa Tài Khoản';
+$baseUrl = '../';
+require_once('../../utils/utility.php');
+require_once('../../database/dbhelper.php');
 
-	$id = getGet('id');
-	if($id != '' && $id > 0){
-		$sql = "select * from User where id= '$id'";
-		$userItem = executeResult ($sql,true);
-		if($userItem != null){
-			$fullname = $userItem['fullname'];
-			$email = $userItem['email'];
-			$phone_number = $userItem['phone_number'];
-			$address = $userItem['address'];
-			$role_id = $userItem['role_id'];
-		}else {
-			$id = 0;
-		}
-	}
+$id = getGet('id');
+$fullname = $email = $phone_number = $address = $password = $role_id = '';
+$msg = '';
 
-    $sql = "select * from Role";
-    $roleItems = executeResult($sql);
+require_once('form_save.php');
+                    
+if ($id > 0) {
+    $user = executeResult("SELECT * FROM user WHERE id = $id AND deleted = 0", true);
+    if ($user) {
+        $fullname = $user['fullname'];
+        $email = $user['email'];
+        $phone_number = $user['phone_number'];
+        $address = $user['address'];
+        $role_id = $user['role_id'];
+    } else {
+        $id = 0;
+    }
+}
+$roles = executeResult("SELECT * FROM role");
 
-
+require_once('../layouts/header.php');
 ?>
 
-<div class= "row" style="margin-top :20px;">
-    <div class="col-md-12">
-            <h3>Thêm/Sửa Tài Khoản Người Dùng</h3>
-            <div class="panel panel-primary"  >
-			<div class="panel-heading">
-				<h5 style="color:red"  ><?=$msg?></h5>
-			</div>
-			<div class="panel-body">
-				<form method="post" onsubmit="return validateForm()">
-					<div class="form-group">
-					<input required="true" type="text" class="form-control" id="usr" placeholder="Họ Tên" name="fullname" value="<?=$fullname?>">
-					<input type="text" name="id" value =" <?=$id ?>" hidden="true">
-					</div>
-                    <div class="form-group">
-                        <select class="form-control" name="role_id" id="role_id" required="true">
-                            <option> Role </option>
-                            <?php
-                                foreach($roleItems as $role){
-									if($role['id']==$role_id){
-										echo '<option selected value ="'.$role['id'].'">'.$role['name'].'</option>';
-									}else
-                                    	echo '<option value ="'.$role['id'].'">'.$role['name'].'</option>';
-                                }	
-                            ?>  
-                        </select>
-					</div>
-					<div class="form-group">
-					<input required="true" type="email" class="form-control" id="email" placeholder="Email" name="email"  value="<?=$email?>">
-					</div>
-                    <div class="form-group">
-					<input required="true" type="tel" class="form-control" id="phone_number" placeholder="SĐT" name="phone_number" value="<?=$phone_number?>">
-					</div>
-                    <div class="form-group">
-					<input required="true" type="text" class="form-control" id="address" placeholder="Địa Chỉ" name="address"value="<?=$address?>">
-					</div>
-					<div class="form-group">
-					<input <?=($id > 0? '':'required="true"')?> type="password" class="form-control" id="pwd" placeholder="Mật Khẩu" name="password" minlength="6">
-					</div>
-					<div class="form-group">
-					<input <?=($id > 0?'':'required="true"')?> type="password" class="form-control" id="confirmation_pwd" placeholder="Xác minh mật khẩu">
-					</div>
-					<button class="btn btn-success">Đăng kí</button>
-				</form>
-			</div>
-		</div>
+<div class="container" style="margin-top:70px;">
+    <h3><?=$id > 0 ? 'Cập nhật tài khoản' : 'Tạo tài khoản mới'?></h3>
+    <div class="col-md-6">
+        <form method="post">
+            <input type="hidden" name="id" value="<?=$id?>">
+            <div class="form-group">
+                <label>Họ tên:</label>
+                <input type="text" name="fullname" class="form-control" required value="<?=$fullname?>">
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" class="form-control" required value="<?=$email?>">
+            </div>
+            <div class="form-group">
+                <label>Mật khẩu <?=$id > 0 ? '(để trống nếu không đổi)' : ''?>:</label>
+                <input type="password" name="password" class="form-control" <?=($id == 0 ? 'required minlength="6"' : '')?>>
+            </div>
+            <div class="form-group">
+                <label>Số điện thoại:</label>
+                <input type="text" name="phone_number" class="form-control" value="<?=$phone_number?>">
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ:</label>
+                <input type="text" name="address" class="form-control" value="<?=$address?>">
+            </div>
+            <div class="form-group">
+                <label>Vai trò:</label>
+                <select name="role_id" class="form-control" required>
+                    <option value="">-- Chọn vai trò --</option>
+                    <?php foreach ($roles as $r): ?>
+                        <option value="<?=$r['id']?>" <?=($r['id'] == $role_id ? 'selected' : '')?>><?=$r['name']?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="form-group text-danger"><?=$msg?></div>
+            <button class="btn btn-success">Lưu tài khoản</button>
+            <a href="index.php" class="btn btn-secondary">Quay lại</a>
+        </form>
     </div>
 </div>
 
-<script type ="text/javascript">
-		function validateForm(){
-			$pwd = $('#pwd').val();
-			$confirmPwd = $('#confirmation_pwd').val();
-			if($pwd!= $confirmPwd){
-				alert("Mật khẩu không khớp, vui lòng nhập lại");
-				return false;
-			}
-			return true;
-		}
 
-	</script>
-<?php 
-    require_once('../layouts/footer.php')
-?>
+<?php require_once('../layouts/footer.php'); ?>
