@@ -983,6 +983,9 @@ $menuItems = executeResult($sql);
                         ?>
                     </ul>
                 </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="gioithieu.php">Giới thiệu</a>
+                </li>
 
 
         
