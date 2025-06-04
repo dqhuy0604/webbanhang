@@ -315,7 +315,78 @@ $menuItems = executeResult($sql);
             display: flex;
             flex-direction: row;
         }
+        .nav-item  {
+            position: relative;
+          
+        }
+/* Định dạng cho nav-item */
+.nav-item {
+    position: relative;
+}
 
+/* Định dạng submenu */
+.sub-menu-box {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    min-width: 200px;
+    z-index: 1000;
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(10px); 
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+
+.nav-item:hover .sub-menu-box,
+.sub-menu-box:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0.2s; 
+}
+.sub-menu-box::before{
+    content: '';
+    position: absolute;
+    top: -10px; 
+    left: 20px; 
+    border: 5px solid transparent;
+    border-bottom-color: black; 
+}
+
+/* Giữ submenu hiển thị thêm một khoảng thời gian khi rời chuột */
+.nav-item .sub-menu-box {
+    transition-delay: 0s, 0s, 0s, 2s; /* Độ trễ 0.5s khi ẩn */
+}
+
+/* Định dạng các mục trong submenu */
+.sub-menu-box li {
+    list-style: none;
+    margin: 5px 0;
+}
+
+.sub-menu-box li a {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.sub-menu-box li a:hover {
+   
+    background-color: black;
+    border-radius: 5px;
+    
+}
         .nav .nav-item {
             text-transform: uppercase;
             color: black;
@@ -925,6 +996,12 @@ $menuItems = executeResult($sql);
         .search-box.active {
             display: block;
         }
+        .custom-nav-link {
+            margin-left: -10px;
+
+     
+        }
+
     </style>
 
 
@@ -942,9 +1019,7 @@ $menuItems = executeResult($sql);
                 <li class="nav-item">
                     <a class="nav-link" href="index.php">Trang chủ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="product.php">SẢN PHẨM</a>
-                </li>
+            
                 <?php
                 // Note: Khởi tạo session giỏ hàng (giữ nguyên)
                 if (!isset($_SESSION['cart'])) {
@@ -962,9 +1037,12 @@ $menuItems = executeResult($sql);
                 // Note: Danh sách 5 mục cố định
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Thương hiệu</a>
+                    <a class="nav-link" href="#">Thương hiệu
+                        <br>
+                    <i class="fa-chevron-down custom-nav-link " aria-hidden="true"></i>
+                    </a>
                     <!-- Note: Thêm submenu cho thương hiệu, hiển thị danh sách từ bảng brand -->
-                    <ul class="sub-menu" style="margin-top: -3px;">
+                    <ul  class="sub-menu sub-menu-box"  style="margin-top:13px">
                         <?php
                         foreach ($brands as $brand) {
                             echo '<li><a href="../utils/brand.php?id=' . $brand['id'] . '">' . $brand['name'] . '</a></li>';
@@ -972,10 +1050,14 @@ $menuItems = executeResult($sql);
                         ?>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sản phẩm</a>
+                <li class="nav-item">   
+                    
+                    <a class="nav-link" href="#">Sản phẩm
+                            <br>
+                    <i class="fa-chevron-down custom-nav-link " aria-hidden="true"></i>
+                    </a>
                     <!-- Note: Thêm submenu cho sản phẩm, hiển thị danh sách từ bảng Category (menuItems) -->
-                    <ul class="sub-menu" style="margin-top: -3px;">
+                    <ul class="sub-menu sub-menu-box" style="margin-top:13px">
                         <?php
                         foreach ($menuItems as $item) {
                             echo '<li><a href="../utils/category.php?id=' . $item['id'] . '">' . $item['name'] . '</a></li>';
