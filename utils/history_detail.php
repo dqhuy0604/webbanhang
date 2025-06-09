@@ -2,19 +2,14 @@
 session_start();
 require_once('../database/dbhelper.php');
 require_once('../layout/header.php');
-
-// Lấy ID của đơn hàng từ URL
 $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : null;
 
 if ($order_id) {
-    // Truy vấn chi tiết đơn hàng
     $sql = "SELECT Order_details.*, Product.title, Product.thumbnail 
             FROM Order_details 
             LEFT JOIN Product ON Order_details.product_id = Product.id 
             WHERE Order_details.order_id = $order_id";
     $order_details = executeResult($sql);
-
-    // Truy vấn thông tin tổng quan của đơn hàng
     $sql = "SELECT * FROM Orders WHERE id = $order_id";
     $order = executeResult($sql, true);
 } else {
@@ -80,7 +75,7 @@ if ($order_id) {
     </style>
 </head>
 <body>
-    <div class="main">
+    <div class="main" style="padding-top:40px; ">
         <div class="order-container">
             <div class="order-details">
 
@@ -102,15 +97,16 @@ if ($order_id) {
                                 echo '<td><img src="../'.$detail['thumbnail'].'" alt="'.$detail['title'].'" width="50" height="50"></td>';
                                 echo '<td>'.$detail['title'].'</td>';
                                 echo '<td>'.$detail['num'].'</td>';
-                                echo '<td>'.number_format($detail['price']).'₫</td>';
+                                echo '<td style="font-weight:bold">'.number_format($detail['price']).'₫</td>';
                                 echo '</tr>';
-                            }
+                            }   
                         } else {
                             echo '<tr><td colspan="4">Không có sản phẩm nào trong đơn hàng này.</td></tr>';
                         }
                         ?>
                     </tbody>
                 </table>
+                <div style="text-align:right;font-weight:bold;margin-top: 20px;" ><h4 class="total-price">Tổng cộng: <span class="money" style="font-weight:bold;"><?= number_format($order['total_money']) ?>₫</span></h4></div>   
             </div>
 
             <div class="order-summary">
@@ -122,23 +118,25 @@ if ($order_id) {
                 <p><strong>Ngày đặt hàng:</strong> <?php echo $order['order_date']; ?></p>
                 <p><strong>Nội dung:</strong> <?php echo $order['note']; ?></p>
                 <p><strong>Tổng tiền:</strong> <?php echo number_format($order['total_money']); ?>₫</p>
-
                 <h4>Trạng thái đơn hàng:</h4>
                 <?php
                 $statusText = '';
-                switch ($order['status']) {
-                    case 0:
+                switch ($order['status_id']) {
+                    case 1:
                         $statusText = 'Đang chờ xác nhận';
                         break;
-                    case 1:
-                        $statusText = 'Xác nhận';
-                        break;
                     case 2:
-                        $statusText = 'Đang giao';
+                        $statusText = 'Đang chuẩn bị hàng';
                         break;
                     case 3:
+                        $statusText = 'Đang giao';
+                        break;
+                    case 4:
                         $statusText = 'Đã giao thành công';
                         break;
+                    case 5:
+                        $statusText = 'Đã hủy';
+                        break;    
                 }
                 echo '<p style="color:red; font-weight:bold;">'.$statusText.'</p>';
                 ?>

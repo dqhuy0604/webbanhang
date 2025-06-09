@@ -33,17 +33,16 @@ require_once('../layouts/header.php');
 // Lấy thông tin đơn hàng
 $order = executeResult("
     SELECT o.*, 
-           u.fullname AS customer_name, u.email, u.phone_number,
            st.name AS status_name,
            p.name AS payment_name,
            s.name AS shipping_name
     FROM orders o
-    LEFT JOIN user u ON o.user_id = u.id
     LEFT JOIN order_status st ON o.status_id = st.id
     LEFT JOIN payment_method p ON o.payment_method_id = p.id
     LEFT JOIN shipping_method s ON o.shipping_method_id = s.id
     WHERE o.id = $orderId
 ", true);
+
 
 if (!$order) {
     echo '<div class="alert alert-danger">Đơn hàng không tồn tại</div>';
@@ -65,7 +64,7 @@ $statusList = executeResult("SELECT * FROM order_status");
     <h3 class="mb-4" style="margin-top:70px;">Chi tiết đơn hàng #<?= $orderId ?></h3>
 
     <h5>Thông tin khách hàng</h5>
-    <p><strong>Họ tên:</strong> <?= $order['customer_name'] ?></p>
+    <p><strong>Họ tên:</strong> <?= $order['fullname'] ?></p>
     <p><strong>Email:</strong> <?= $order['email'] ?></p>
     <p><strong>SĐT:</strong> <?= $order['phone_number'] ?></p>
 

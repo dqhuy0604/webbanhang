@@ -4,8 +4,9 @@
     require_once('../database/dbhelper.php');
     require_once('../layout/header.php');       
     $category_id=getGet('id');
+    $id = intval(getPost('id'));
     $sql ="select Product.*, Category.name as category_name from Product left join Category on Product.category_id = Category.id
-            where Product.category_id = $category_id and Product.deleted=0 order by Product.updated_at desc  ";
+             and Product.deleted=0 order by Product.updated_at desc  ";
     $categoryItems = executeResult($sql);
 ?>    <!DOCTYPE html> 
 <html lang="en">
@@ -175,21 +176,52 @@
     <?php   
         require_once('../layout/header.php'); 
     ?>
-    <div class="main">
+    <div class="main" style="padding-top: 20px;">
         <div class="customer-info">
             <div class="customer-title">
                 <h2>Thông tin khách hàng</h2>
             </div>
-            <form  method="POST" onsubmit="return completeCheckout();">     
-                <input type="text" placeholder="Họ và Tên" id="name" name="fullname_tt" required >
-                <input type="email" placeholder="Email" id="email_tt" name="email_tt" required>
-                <input type="text" placeholder="Số điện thoại" id="phone_number" name="phone_number" required>
-                <input type="text" placeholder="Địa chỉ" id="address" name="address" required>
-                <label for="note">Nội dung:</label>
-                <textarea id="note" name="note"></textarea>
+            <form method="POST" class="checkout-form" onsubmit="return completeCheckout();">
+                <div class="form-group">
+                    <input type="text" placeholder="Họ và Tên" id="name" name="fullname_tt" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" id="email_tt" name="email_tt" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Số điện thoại" id="phone_number" name="phone_number" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Địa chỉ" id="address" name="address" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="shipping_method">Phương thức vận chuyển:</label>
+                    <select name="shipping_method_id" id="shipping_method" class="form-control" required>
+                        <option value="">-- Chọn phương thức vận chuyển --</option>
+                        <option value="1">Giao hàng tiêu chuẩn</option>
+                        <option value="2">Giao hàng nhanh</option>
+                        <option value="3">Lấy tại cửa hàng</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment_method">Phương thức thanh toán:</label>
+                    <select name="payment_method_id" id="payment_method" class="form-control" required>
+                        <option value="">-- Chọn phương thức thanh toán --</option>
+                        <option value="1">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="2">Chuyển khoản ngân hàng</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Nội dung:</label>
+                    <textarea id="note" name="note" class="form-control" rows="4"></textarea>
+                </div>
 
                 <button type="submit" class="checkout-btn">Thanh toán</button>
             </form>
+
         </div>
         <div class="cart-product">
             <div class="cart-title">
@@ -214,7 +246,8 @@
                                     </a>
                                 </div>
                                 <div class="item-title">
-                                    <a href="#">'.$item['title'].'</a>
+                                    <a >'.$item['title'].'</a>
+                                    <strong>Size:</strong> ' . htmlspecialchars($item['size']) .'<br>
                                     <span class="item-option">
                                         <span class="item-price">
                                             <span class="money">'.number_format($item['discount']).'đ</span>
@@ -257,28 +290,83 @@
     function completeCheckout() {
         var email = $('[name=email_tt]').val();
         var phoneNumber = $('[name=phone_number]').val();
+
         if (!isValidEmail(email)) {
             alert("Email không hợp lệ. Vui lòng nhập lại email đúng định dạng.");
             return false;
         }
         if (!isValidPhoneNumber(phoneNumber)) {
-        alert("Số điện thoại phải bao gồm đúng 10 chữ số.");
-        return false;
+            alert("Số điện thoại phải bao gồm đúng 10 chữ số.");
+            return false;
+        }
+        var shipping_method_id = $('[name=shipping_method_id]').val();
+        var payment_method_id = $('[name=payment_method_id]').val();
+        if (!shipping_method_id || !payment_method_id) {
+            alert("Vui lòng chọn phương thức vận chuyển và thanh toán.");
+            return false;
         }
         $.post('../api/ajax_request.php', {
             'action': 'checkout',
             'fullname': $('[name=fullname_tt]').val(),
             'email': email,
-            'phone_number': $('[name=phone_number]').val(),
+            'phone_number': phoneNumber,
             'address': $('[name=address]').val(),
             'note': $('[name=note]').val(),
+            'shipping_method_id': shipping_method_id,
+            'payment_method_id': payment_method_id
         }, function(data) {
             window.open('history_checkout.php', '_self');
         });
         return false;
     }
-
-
     </script>
+    <style>
+    .checkout-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom:0px;
+    }
+
+    .form-group label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .form-control {
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 3px #007bff55;
+    }
+
+    .checkout-btn {
+        background-color: #000;
+        color: #fff;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+        background-color: #333;
+    }
+
+    </style>
 </body>
 </html>

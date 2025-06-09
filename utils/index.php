@@ -4,403 +4,161 @@ require_once('utility.php');
 require_once('../database/dbhelper.php');
 require_once('../layout/header.php');
 
-// Lấy ngày hiện tại (08:45 PM +07, 02/06/2025)
-$currentDate = date('Y-m-d H:i:s');
-
-// HOT DEAL & SALE
-$sql = "SELECT Product.*, Category.name AS category_name,
-        COALESCE(
-            CASE 
-                WHEN product_discount.discount_type = 'amount' AND '$currentDate' BETWEEN product_discount.start_date AND product_discount.end_date 
-                THEN product_discount.value 
-                ELSE 0 
-            END, 0) AS discount
-        FROM Product 
-        LEFT JOIN Category ON Product.category_id = Category.id 
-        LEFT JOIN product_discount ON Product.id = product_discount.product_id 
-        WHERE Product.deleted = 0 
-        ORDER BY RAND() 
-        LIMIT 10;";
-$hotdealItems = executeResult($sql);
-$hotdealItems_1 = array_slice($hotdealItems, 5, 5);
-$hotdealItems = array_slice($hotdealItems, 0, 5);
-
-// BEST SELLER
-$sql = "SELECT Product.*, Category.name AS category_name,
-        COALESCE(
-            CASE 
-                WHEN product_discount.discount_type = 'amount' AND '$currentDate' BETWEEN product_discount.start_date AND product_discount.end_date 
-                THEN product_discount.value 
-                ELSE 0 
-            END, 0) AS discount
-        FROM Product 
-        LEFT JOIN Category ON Product.category_id = Category.id 
-        LEFT JOIN product_discount ON Product.id = product_discount.product_id 
-        WHERE Product.deleted = 0 
-        ORDER BY RAND() 
-        LIMIT 10;";
-$bestsellerItems = executeResult($sql);
-$bestsellerItems_1 = array_slice($bestsellerItems, 5, 5);
-$bestsellerItems = array_slice($bestsellerItems, 0, 5);
-
-// NEW ARRIVAL
-$sql = "SELECT Product.*, Category.name AS category_name,
-        COALESCE(
-            CASE 
-                WHEN product_discount.discount_type = 'amount' AND '$currentDate' BETWEEN product_discount.start_date AND product_discount.end_date 
-                THEN product_discount.value 
-                ELSE 0 
-            END, 0) AS discount
-        FROM Product 
-        LEFT JOIN Category ON Product.category_id = Category.id 
-        LEFT JOIN product_discount ON Product.id = product_discount.product_id 
-        WHERE Product.deleted = 0 
-        ORDER BY Product.updated_at ASC 
-        LIMIT 10;";
-$lastestItems = executeResult($sql);
-$lastestItems_2 = array_slice($lastestItems, 5, 5);
-$lastestItems = array_slice($lastestItems, 0, 5);
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="../utils/index.css">
-</head>
-<body>
-    <!-- --BANNER-- -->
-    <div id="demo" class="carousel slide" data-ride="carousel">
-        <ul class="carousel-indicators">
-            <li data-target="#demo" data-slide-to="0" class="active"></li>
-            <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
-        </ul>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="img-banner" src="https://file.hstatic.net/200000037626/file/2banner-trang-chu_1920x890.png" alt="">
-            </div>
-            <div class="carousel-item">
-                <img class="img-banner" src="https://file.hstatic.net/200000037626/file/banner-san-pham_1440x400.png" alt="">
-            </div>
-            <div class="carousel-item">
-                <img class="img-banner" src="../assets/images/banner-1.png" alt="">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
-    </div>
-    <!-- --BANER_STOP-- -->
-
-    <!-- --HOT DEAL & SALE-- -->
-    <div class="top-title">
-        <h2 class="title-section"><span>HOT DEAL & SALE</span></h2>
-        <p></p>
-    </div>
-    <div id="wrapper">
-        <ul class="products">
-            <?php foreach ($hotdealItems as $item) { ?>
-                <li>
-                    <div class="product-item">
-                        <div class="product-top">
-                            <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-thumb">
-                                <img class="dt-width-100" src="../<?php echo $item['thumbnail']; ?>" alt="" width="260" height="260">
-                                <img class="dt-width-100 img-hover" src="../<?php echo $item['thumbnail_2']; ?>" alt="" width="260" height="260">
-                            </a>
-                            <a class="buy-now">
-                                <div class="product-icon-add">
-                                    <button onclick="addCart(<?php echo $item['id']; ?>,1)">Thêm vào giỏ</button>
-                                </div>
-                                <div class="product-icon-watch">
-                                    <button>Xem nhanh</button>
-                                </div>
-                            </a>
-                            <div class="product-wishlist">
-                                <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0">
-                                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-infor">
-                            <h3 class="pro-name">
-                                <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-name"><?php echo $item['title']; ?></a>
-                            </h3>
-                            <div class="product-price">
-                                <p class="pro-price">
-                                    <span><?php echo number_format($item['discount']); ?>đ</span>
-                                    <del class="compare-price"><?php echo number_format($item['price']); ?>đ</del>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            <?php } ?>
-        </ul>
-        <ul class="products">
-            <?php foreach ($hotdealItems_1 as $item) { ?>
-                <li>
-                    <div class="product-item">
-                        <div class="product-top">
-                            <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-thumb">
-                                <img class="dt-width-100" src="../<?php echo $item['thumbnail']; ?>" alt="" width="260" height="260">
-                                <img class="dt-width-100 img-hover" src="../<?php echo $item['thumbnail_2']; ?>" alt="" width="260" height="260">
-                            </a>
-                            <a class="buy-now">
-                                <div class="product-icon-add">
-                                    <button onclick="addCart(<?php echo $item['id']; ?>,1)">Thêm vào giỏ</button>
-                                </div>
-                                <div class="product-icon-watch">
-                                    <button>Xem nhanh</button>
-                                </div>
-                            </a>
-                            <div class="product-wishlist">
-                                <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0">
-                                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích
-                                </button>
-                            </div>
-                        </div>
-                        <?php
-$sql = "SELECT * FROM product WHERE discount > 0 ORDER BY discount DESC LIMIT 6";
-$result = mysqli_query($conn, $sql);
-while ($item = mysqli_fetch_array($result)) {
-    // Tính giá sau giảm
-    $finalPrice = max(0, $item['price'] - $item['discount']);
-    ?>
-    <div class="col-6 col-md-4 col-lg-2">
-        <div class="product-card">
-            <div class="product-card-img">
-                <a href="product-details.php?id=<?php echo $item['id']; ?>">
-                    <img src="images/<?php echo $item['image']; ?>" class="w-100" alt="">
-                </a>
-            </div>
-            <div class="product-card-info">
-                <h6 class="product-name">
-                    <a href="product-details.php?id=<?php echo $item['id']; ?>">
-                        <?php echo $item['name']; ?>
-                    </a>
-                </h6>
-                <p class="pro-price">
-                    <span><?php echo number_format($finalPrice); ?>đ</span>
-                    <del class="compare-price"><?php echo number_format($item['price']); ?>đ</del>
-                </p>
-            </div>
-        </div>
-    </div>
-    <?php
+function getProductsWithDiscount($limit = 5, $offset = 0, $orderBy = 'RAND()') {
+    $sql = "
+        SELECT p.*, c.name AS category_name,
+               d.discount_type, d.value,
+               CASE
+                   WHEN d.discount_type = 'percent' THEN ROUND(p.price * (1 - d.value / 100), 0)
+                   WHEN d.discount_type = 'amount' THEN GREATEST(p.price - d.value, 0)
+                   ELSE p.price
+               END AS discounted_price
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.id
+        LEFT JOIN product_discount d ON p.id = d.product_id 
+            AND NOW() BETWEEN d.start_date AND d.end_date
+        WHERE p.deleted = 0
+        ORDER BY $orderBy
+        LIMIT $limit OFFSET $offset
+    ";
+    return executeResult($sql);
 }
+
+$hotdealItems      = getProductsWithDiscount(5);
+$hotdealItems_1    = getProductsWithDiscount(5);
+
+$bestsellerItems   = getProductsWithDiscount(5);
+$bestsellerItems_1 = getProductsWithDiscount(5);
+
+$lastestItems      = getProductsWithDiscount(5, 0, 'p.updated_at ASC');
+$lastestItems_2    = getProductsWithDiscount(5, 5, 'p.updated_at ASC');
 ?>
 
-                    </div>
-                </li>
-            <?php } ?>
-        </ul>
+<!-- BANNER -->
+<div id="demo" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active"><img class="img-banner" src="https://file.hstatic.net/200000037626/file/2banner-trang-chu_1920x890.png"></div>
+        <div class="carousel-item"><img class="img-banner" src="https://file.hstatic.net/200000037626/file/banner-san-pham_1440x400.png"></div>
+        <div class="carousel-item"><img class="img-banner" src="../assets/images/banner-1.png"></div>
     </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev"><span class="carousel-control-prev-icon"></span></a>
+    <a class="carousel-control-next" href="#demo" data-slide="next"><span class="carousel-control-next-icon"></span></a>
+</div>
 
-    <!-- --BEST SELLER-- -->
-    <div class="top-title">
-        <h2 class="title-section"><span>BEST SELLER</span></h2>
-        <p></p>
-    </div>
-    <div id="wrapper">
-        <ul class="products">
-            <?php foreach ($bestsellerItems as $item) { ?>
-                <li>
-                    <div class="product-item">
-                        <div class="product-top">
-                            <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-thumb">
-                                <img class="dt-width-100" src="../<?php echo $item['thumbnail']; ?>" alt="" width="260" height="260">
-                                <img class="dt-width-100 img-hover" src="../<?php echo $item['thumbnail_2']; ?>" alt="" width="260" height="260">
-                            </a>
-                            <a class="buy-now">
-                                <div class="product-icon-add">
-                                    <button onclick="addCart(<?php echo $item['id']; ?>,1)">Thêm vào giỏ</button>
-                                </div>
-                                <div class="product-icon-watch">
-                                    <button>Xem nhanh</button>
-                                </div>
-                            </a>
-                            <div class="product-wishlist">
-                                <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0">
-                                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-infor">
-                            <h3 class="pro-name">
-                                <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-name"><?php echo $item['title']; ?></a>
-                            </h3>
-                            <div class="product-price">
-                                <p class="pro-price">
-                                    <span><?php echo number_format($item['discount']); ?>đ</span>
-                                    <del class="compare-price"><?php echo number_format($item['price']); ?>đ</del>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            <?php } ?>
-        </ul>
-        <ul class="products">
-            <?php foreach ($bestsellerItems_1 as $item) { ?>
-                <li>
-                    <div class="product-item">
-                        <div class="product-top">
-                            <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-thumb">
-                                <img class="dt-width-100" src="../<?php echo $item['thumbnail']; ?>" alt="" width="260" height="260">
-                                <img class="dt-width-100 img-hover" src="../<?php echo $item['thumbnail_2']; ?>" alt="" width="260" height="260">
-                            </a>
-                            <a class="buy-now">
-                                <div class="product-icon-add">
-                                    <button onclick="addCart(<?php echo $item['id']; ?>,1)">Thêm vào giỏ</button>
-                                </div>
-                                <div class="product-icon-watch">
-                                    <button>Xem nhanh</button>
-                                </div>
-                            </a>
-                            <div class="product-wishlist">
-                                <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0">
-                                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-infor">
-                            <h3 class="pro-name">
-                                <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-name"><?php echo $item['title']; ?></a>
-                            </h3>
-                            <div class="product-price">
-                                <p class="pro-price">
-                                    <span><?php echo number_format($item['discount']); ?>đ</span>
-                                    <del class="compare-price"><?php echo number_format($item['price']); ?>đ</del>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            <?php } ?>
-        </ul>
-    </div>
+<!-- HOT DEAL -->
+<div class="top-title"><h2 class="title-section"><span>HOT DEAL &amp; SALE</span></h2></div>
+<div id="wrapper">
+    <ul class="products">
+        <?php foreach ($hotdealItems as $item): ?>
+            <?=renderProductItem($item, true)?>
+        <?php endforeach ?>
+    </ul>
+    <ul class="products">
+        <?php foreach ($hotdealItems_1 as $item): ?>
+            <?=renderProductItem($item, true)?>
+        <?php endforeach ?>
+    </ul>
+</div>
 
-    <!-- --NEW ARRIVAL-- -->
-    <div class="top-title">
-        <h2 class="title-section"><span>NEW ARRIVAL</span></h2>
-        <p></p>
-    </div>
-    <div id="wrapper">
-        <ul class="products">
-            <?php foreach ($lastestItems as $item) { ?>
-                <li>
-                    <div class="product-item">
-                        <div class="product-top">
-                            <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-thumb">
-                                <img class="dt-width-100" src="../<?php echo $item['thumbnail']; ?>" alt="" width="260" height="260">
-                                <img class="dt-width-100 img-hover" src="../<?php echo $item['thumbnail_2']; ?>" alt="" width="260" height="260">
-                            </a>
-                            <a class="buy-now">
-                                <div class="product-icon-add">
-                                    <button onclick="addCart(<?php echo $item['id']; ?>,1)">Thêm vào giỏ</button>
-                                </div>
-                                <div class="product-icon-watch">
-                                    <button>Xem nhanh</button>
-                                </div>
-                            </a>
-                            <div class="product-sale"><span>-40%</span></div>
-                            <div class="product-wishlist">
-                                <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0">
-                                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-infor">
-                            <h3 class="pro-name">
-                                <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-name"><?php echo $item['title']; ?></a>
-                            </h3>
-                            <div class="product-price">
-                                <p class="pro-price">
-                                    <span><?php echo number_format($item['discount']); ?>đ</span>
-                                    <del class="compare-price"><?php echo number_format($item['price']); ?>đ</del>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            <?php } ?>
-        </ul>
-        <ul class="products">
-            <?php foreach ($lastestItems_2 as $item) { ?>
-                <li>
-                    <div class="product-item">
-                        <div class="product-top">
-                            <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-thumb">
-                                <img class="dt-width-100" src="../<?php echo $item['thumbnail']; ?>" alt="" width="260" height="260">
-                                <img class="dt-width-100 img-hover" src="../<?php echo $item['thumbnail_2']; ?>" alt="" width="260" height="260">
-                            </a>
-                            <a class="buy-now">
-                                <div class="product-icon-add">
-                                    <button onclick="addCart(<?php echo $item['id']; ?>,1)">Thêm vào giỏ</button>
-                                </div>
-                                <div class="product-icon-watch">
-                                    <button>Xem nhanh</button>
-                                </div>
-                            </a>
-                            <div class="product-sale"><span>-40%</span></div>
-                            <div class="product-wishlist">
-                                <button data-original-title="Yêu thích" class="wishlist-loop" data-handle="peak-basketball-sonic-boom-e39001a-rose-pink" data-toggle="tooltip" tabindex="0">
-                                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích"> Yêu thích
-                                </button>
-                            </div>
-                        </div>
-                        <div class="product-infor">
-                            <h3 class="pro-name">
-                                <a href="detail.php?id=<?php echo $item['id']; ?>" class="product-name"><?php echo $item['title']; ?></a>
-                            </h3>
-                            <div class="product-price">
-                                <p class="pro-price">
-                                    <span><?php echo number_format($item['discount']); ?>đ</span>
-                                    <del class="compare-price"><?php echo number_format($item['price']); ?>đ</del>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            <?php } ?>
-        </ul>
-    </div>
+<!-- BEST SELLER -->
+<div class="top-title"><h2 class="title-section"><span>BEST SELLER</span></h2></div>
+<div id="wrapper">
+    <ul class="products">
+        <?php foreach ($bestsellerItems as $item): ?>
+            <?=renderProductItem($item, true)?>
+        <?php endforeach ?>
+    </ul>
+    <ul class="products">
+        <?php foreach ($bestsellerItems_1 as $item): ?>
+            <?=renderProductItem($item, true)?>
+        <?php endforeach ?>
+    </ul>
+</div>
 
-    <!-- --INSTAGRAM-- -->
-    <section id="section-instagram" class="pd-top-30" data-include="section-instagram">
-        <div class="top-title-instar">
-            <h2 class="title-section d-flex-center js-center d-flex">
-                <span>FOLLOW US ON INSTAGRAM @hudoshop.vn</span>
-            </h2>
-        </div>
-        <div class="box-img">   
-            <div class="img-bottom">
-                <img src="../assets/images/bongro-4.png" width="300px" height="300px">
-            </div>
-            <div class="img-bottom">
-                <img src="../assets/images/bongro-1.png" width="300px" height="300px">
-            </div>
-            <div class="img-bottom">
-                <img src="../assets/images/bongro-2.png" width="300px" height="300px">
-            </div>
-            <div class="img-bottom">
-                <img src="../assets/images/bongro-1.png" width="300px" height="300px">
-            </div>  
-            <div class="img-bottom">
-                <img src="../assets/images/bongro-3.png" width="300px" height="300px">
-            </div>
-            <div class="img-bottom">
-                <img src="../assets/images/bongro-4.png" width="300px" height="300px">
-            </div>
-        </div>
-    </section>
+<!-- NEW ARRIVAL -->
+<div class="top-title"><h2 class="title-section"><span>NEW ARRIVAL</span></h2></div>
+<div id="wrapper">
+    <ul class="products">
+        <?php foreach ($lastestItems as $item): ?>
+            <?=renderProductItem($item, true)?>
+        <?php endforeach ?>
+    </ul>
+    <ul class="products">
+        <?php foreach ($lastestItems_2 as $item): ?>
+            <?=renderProductItem($item, true)?>
+        <?php endforeach ?>
+    </ul>
+</div>
 
-    <?php require_once('../layout/footer.php'); ?>
+<!-- INSTAGRAM -->
+<section id="section-instagram" class="pd-top-30">
+    <div class="top-title-instar">
+        <h2 class="title-section d-flex-center js-center d-flex"><span>FOLLOW US ON INSTAGRAM @hudoshop.vn</span></h2>
+    </div>
+    <div class="box-img">
+        <div class="img-bottom"><img src="../assets/images/bongro-4.png" width="300" height="300"></div>
+        <div class="img-bottom"><img src="../assets/images/bongro-1.png" width="300" height="300"></div>
+        <div class="img-bottom"><img src="../assets/images/bongro-2.png" width="300" height="300"></div>
+        <div class="img-bottom"><img src="../assets/images/bongro-1.png" width="300" height="300"></div>
+        <div class="img-bottom"><img src="../assets/images/bongro-3.png" width="300" height="300"></div>
+        <div class="img-bottom"><img src="../assets/images/bongro-4.png" width="300" height="300"></div>
+    </div>
+</section>
+
+<?php require_once('../layout/footer.php'); ?>
 </body>
 </html>
+
+<?php
+
+function renderProductItem($item, $showSaleTag = false) {
+    $originalPrice = $item['price'];
+    $discountedPrice = $item['discounted_price'] ?? $originalPrice;
+    $discountPercent = ($originalPrice > 0 && $discountedPrice < $originalPrice)
+        ? round(100 - ($discountedPrice / $originalPrice * 100)) : 0;
+
+    ob_start(); ?>
+    <li>
+        <div class="product-item">
+            <div class="product-top">
+                <a href="detail.php?id=<?=$item['id']?>" class="product-thumb">
+                    <img class="dt-width-100" src="../<?=$item['thumbnail']?>" alt="" width="260" height="260">
+                    <img class="dt-width-100 img-hover" src="../<?=$item['thumbnail_2']?>" alt="" width="260" height="260">
+                </a>
+                <a class="buy-now">
+                    <div class="product-icon-add"><button onclick="location.href='detail.php?id=<?= $item['id'] ?>'">Thêm vào giỏ</button></div>
+                    <div class="product-icon-watch"><button onclick="location.href='detail.php?id=<?= $item['id'] ?>'"> Xem nhanh</button></div>
+                </a>
+                <?php if ($showSaleTag && $discountPercent > 0): ?>
+                    <div class="product-sale"><span>-<?=$discountPercent?>%</span></div>
+                <?php endif ?>
+                <div class="product-wishlist">
+                    <button class="wishlist-loop" data-toggle="tooltip" title="Yêu thích">
+                        <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Yêu thích">
+                    </button>
+                </div>
+            </div>
+            <div class="product-infor">
+                <h3 class="pro-name">
+                    <a href="detail.php?id=<?=$item['id']?>" class="product-name"><?=$item['title']?></a>
+                </h3>
+                <div class="product-price">
+                    <p class="pro-price">
+                        <span><?=number_format($discountedPrice)?>đ</span>
+                        <?php if ($discountedPrice < $originalPrice): ?>
+                            <del class="compare-price"><?=number_format($originalPrice)?>đ</del>
+                        <?php endif ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </li>
+    <?php return ob_get_clean();
+}
+
+?>

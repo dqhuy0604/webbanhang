@@ -63,6 +63,7 @@
         }
         return null;
     }
+    
    function moveFile($key, $rootPath = "../../") {
     if (!isset($_FILES[$key]) || !isset($_FILES[$key]['name']) || $_FILES[$key]['name'] == '') {
         return '';
@@ -108,6 +109,49 @@
         }
     }
     return $price;
+}
+    function renderProductItem_1($item) {
+    $price = number_format($item['price']) . 'đ';
+    $discounted = number_format($item['discounted_price']) . 'đ';
+    $hasDiscount = $item['discounted_price'] < $item['price'];
+    $discountPercent = 0;
+
+    if ($item['discount_type'] == 'percent') {
+        $discountPercent = (int)$item['value'];
+    } elseif ($item['discount_type'] == 'amount') {
+        $discountPercent = round(($item['value'] / $item['price']) * 100);
+    }
+
+    return '
+    <div class="collection-box">
+        <div class="product-item-collection">
+            <div class="product-top">
+                <a href="detail.php?id='.$item['id'].'" class="product-thumb">
+                    <img class="dt-width-100" src="../'.$item['thumbnail'].'" alt="">
+                    <img class="dt-width-100 img-hover" src="../'.$item['thumbnail_2'].'" alt="">
+                </a>
+                <a class="buy-now">
+                    <div class="product-icon-add">
+                    <div class="product-icon-add"><button onclick="location.href=\'detail.php?id='.$item['id'] . '\'">Thêm vào giỏ</button></div>
+                    </div>
+                    <div class="product-icon-watch">
+                            <div class="product-icon-watch">
+                                <button onclick="location.href=\'detail.php?id=' . $item['id'] . '\'">Xem nhanh</button>
+                            </div>
+                    </div>
+                </a>
+                '.($hasDiscount ? '<div class="product-sale"><span>-'.$discountPercent.'%</span></div>' : '').'
+            </div>
+            <div class="product-infor">
+                <a href="detail.php?id='.$item['id'].'" class="product-name-collection">'.$item['title'].'</a>
+                <div class="product-price">
+                    <p class="pro-price">
+                        <span>'.$discounted.'</span>'.($hasDiscount ? '<del class="compare-price">'.$price.'</del>' : '').'
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>';
 }
 
 
