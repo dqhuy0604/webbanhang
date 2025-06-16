@@ -15,7 +15,8 @@ $sql = "SELECT o.*,
         LEFT JOIN order_status st ON o.status_id = st.id
         ORDER BY o.order_date DESC";
 
-$data = executeResult($sql);
+
+$data = executeResult($sql);    
 ?>
 
 <div class="row" style="margin-top: 20px;">
@@ -44,7 +45,7 @@ $data = executeResult($sql);
                     echo '<tr>
                             <td>' . (++$index) . '</td>
                             <td>#' . $item['id'] . '</td>
-                            <td>' . $item['customer_name'] . '</td>
+                            <td>' . $item['fullname'] . '</td>
                             <td>' . date('d/m/Y H:i', strtotime($item['order_date'])) . '</td>
                             <td>' . $item['payment_method'] . '</td>
                             <td>' . $item['shipping_method'] . '</td>

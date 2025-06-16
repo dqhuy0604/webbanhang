@@ -12,21 +12,257 @@ $menuItems = executeResult($sql);
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=fallback" as="style" type="text/css" rel="preload stylesheet">
     <link href="//theme.hstatic.net/200000037626/1000890916/14/plugin-style.css?v=147" rel="preload stylesheet" as="style" type="text/css">
     <link href="//theme.hstatic.net/200000037626/1000890916/14/styles-new.scss.css?v=147" rel="preload stylesheet" as="style" type="text/css">
-    <!-- <link rel="preload" as="image" href="//theme.hstatic.net/200000037626/1000890916/14/logo.png?v=147"> -->
     <link href="//theme.hstatic.net/200000037626/1000890916/14/styles-index.scss.css?v=147" rel="preload stylesheet" as="style" type="text/css">
     <link rel="preload" as="image" href="//theme.hstatic.net/200000037626/1000890916/14/slideshow_1_mob_large.jpg?v=147" media="(max-width: 480px)">
-    <!-- <link href="//theme.hstatic.net/200000037626/1000890916/14/jquery-script.js?v=147" rel="preload" as="script" type="text/javascript"> -->
-    <!-- <link href="//theme.hstatic.net/200000037626/1000890916/14/main-scripts.js?v=147" rel="preload" as="script" type="text/javascript"> -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <!-- boxicons css -->
-
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
+        .container-02 {
+            width: 970px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            position: relative;
+            margin-top: 150px;
+        }
+
+        #product-template .product-content h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000;
+            text-transform: capitalize;
+        }
+
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .product-info .title {
+            font-weight: bold;
+        }
+
+        .product-info .line-info {
+            margin: 0 10px;
+        }
+
+        .product-info {
+            margin-bottom: 10px;
+            line-height: 20px;
+        }
+
+        .d-flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .row-flex {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+        }
+
+        .add-to-cart-style {
+            background: var(--bgshop);
+            color: #fff;
+            height: 45px;
+            width: calc(50% - 15px);
+            flex: 0 0 calc(50% - 15px);
+            margin-right: 15px;
+            display: block;
+            border: 1px solid var(--bgshop);
+            max-width: 250px;
+        }
+
+        .buynow-style:hover {
+            background: var(--bgshop);
+            color: #fff;
+        }
+
+        .button_detail {
+            text-align: center;
+            width: 100%;
+            margin: 10px auto;
+            height: 60px;
+            background-color: #000000;
+            color: white;
+        }
+
+        .button_detail span {
+            font-weight: bold;
+            letter-spacing: .5px;
+        }
+
+        .button_detail:hover {
+            text-align: center;
+            width: 100%;
+            margin: 10px auto;
+            height: 60px;
+            background-color: white;
+            color: black;
+        }
+
+        #pro-price .price-now {
+            font-size: 22px;
+            color: #ff0000;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        #pro-price .price-compare del {
+            font-size: 16px;
+            color: #919191;
+            font-weight: 500;
+        }
+
+        .available-pro {
+            font-size: 16px;
+        }
+
+        #pro-price {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .available-pro .title {
+            font-weight: bold;
+        }
+
+        .available-pro .status {
+            color: #ff9ad3;
+        }
+
+        .available-pro {
+            margin-left: 10px;
+        }
+
+        .container-02 {
+            width: 970px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            position: relative;
+            margin-top: 150px;
+        }
+
+        #product-template .product-content h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000;
+            text-transform: capitalize;
+        }
+
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .product-info .title {
+            font-weight: bold;
+        }
+
+        .product-info .line-info {
+            margin: 0 10px;
+        }
+
+        .product-info {
+            margin-bottom: 10px;
+            line-height: 20px;
+        }
+
+        .d-flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .row-flex {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+        }
+
+        .add-to-cart-style {
+            background: var(--bgshop);
+            color: #fff;
+            height: 45px;
+            width: calc(50% - 15px);
+            flex: 0 0 calc(50% - 15px);
+            margin-right: 15px;
+            display: block;
+            border: 1px solid var(--bgshop);
+            max-width: 250px;
+        }
+
+        .buynow-style:hover {
+            background: var(--bgshop);
+            color: #fff;
+        }
+
+        .button_detail {
+            text-align: center;
+            width: 100%;
+            margin: 10px auto;
+            height: 60px;
+            background-color: #000000;
+            color: white;
+        }
+
+        .button_detail span {
+            font-weight: bold;
+            letter-spacing: .5px;
+        }
+
+        .button_detail:hover {
+            text-align: center;
+            width: 100%;
+            margin: 10px auto;
+            height: 60px;
+            background-color: white;
+            color: black;
+        }
+
+        #pro-price .price-now {
+            font-size: 22px;
+            color: #ff0000;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        #pro-price .price-compare del {
+            font-size: 16px;
+            color: #919191;
+            font-weight: 500;
+        }
+
+        .available-pro {
+            font-size: 16px;
+        }
+
+        #pro-price {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .available-pro .title {
+            font-weight: bold;
+        }
+
+        .available-pro .status {
+            color: #ff9ad3;
+        }
+
+        .available-pro {
+            margin-left: 10px;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -206,6 +442,24 @@ $menuItems = executeResult($sql);
             overflow: hidden;
         }
 
+        .product-sale span,
+        .pro-sale-qv span,
+        .pro-sale-detail span {
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            font-size: 12px;
+            position: relative;
+            background: #ff0000;
+            width: 36px;
+            height: 27px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-left: 00px;
+        }
+
         ul.products li .product-top {
             position: relative;
             overflow: hidden;
@@ -216,6 +470,24 @@ $menuItems = executeResult($sql);
             display: block;
         }
 
+        .product-item {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-price .pro-price {
+            font-weight: bold;
+            color: #d0021b;
+        }
+
+        .product-price .compare-price {
+            color: #aaa;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
         .product-item .product-top .product-thumb>a img {
             left: 20;
             top: 0;
@@ -224,6 +496,19 @@ $menuItems = executeResult($sql);
             object-position: top;
             display: block;
             z-index: 8;
+        }
+
+        select.form-control {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            height: 40px;
+            line-height: 1.5;
+            appearance: auto;
+            -webkit-appearance: auto;
+            -moz-appearance: auto;
         }
 
         ul.products li .product-top .buy-now {
@@ -315,78 +600,83 @@ $menuItems = executeResult($sql);
             display: flex;
             flex-direction: row;
         }
-        .nav-item  {
+
+        .nav-item {
             position: relative;
-          
+
         }
-/* Định dạng cho nav-item */
-.nav-item {
-    position: relative;
-}
 
-/* Định dạng submenu */
-.sub-menu-box {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    min-width: 200px;
-    z-index: 1000;
-    opacity: 0; 
-    visibility: hidden; 
-    transform: translateY(10px); 
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-}
+        /* Định dạng cho nav-item */
+        .nav-item {
+            position: relative;
+        }
+
+        /* Định dạng submenu */
+        .sub-menu-box {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
 
 
-.nav-item:hover .sub-menu-box,
-.sub-menu-box:hover {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    transition-delay: 0.2s; 
-}
-.sub-menu-box::before{
-    content: '';
-    position: absolute;
-    top: -10px; 
-    left: 20px; 
-    border: 5px solid transparent;
-    border-bottom-color: black; 
-}
+        .nav-item:hover .sub-menu-box,
+        .sub-menu-box:hover {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
 
-/* Giữ submenu hiển thị thêm một khoảng thời gian khi rời chuột */
-.nav-item .sub-menu-box {
-    transition-delay: 0s, 0s, 0s, 2s; /* Độ trễ 0.5s khi ẩn */
-}
+        .sub-menu-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            border: 5px solid transparent;
+            border-bottom-color: black;
+        }
 
-/* Định dạng các mục trong submenu */
-.sub-menu-box li {
-    list-style: none;
-    margin: 5px 0;
-}
+        /* Giữ submenu hiển thị thêm một khoảng thời gian khi rời chuột */
+        .nav-item .sub-menu-box {
+            transition-delay: 0s, 0s, 0s, 2s;
+            /* Độ trễ 0.5s khi ẩn */
+        }
 
-.sub-menu-box li a {
-    display: block;
-    width: 100%;
-    padding: 8px 10px;
-    color: #333;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
+        /* Định dạng các mục trong submenu */
+        .sub-menu-box li {
+            list-style: none;
+            margin: 5px 0;
+        }
 
-.sub-menu-box li a:hover {
-   
-    background-color: black;
-    border-radius: 5px;
-    
-}
+        .sub-menu-box li a {
+            display: block;
+            width: 100%;
+            padding: 8px 10px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-menu-box li a:hover {
+
+            background-color: black;
+            border-radius: 5px;
+
+        }
+
         .nav .nav-item {
             text-transform: uppercase;
             color: black;
@@ -996,12 +1286,12 @@ $menuItems = executeResult($sql);
         .search-box.active {
             display: block;
         }
+
         .custom-nav-link {
             margin-left: -10px;
 
-     
-        }
 
+        }
     </style>
 
 
@@ -1019,7 +1309,7 @@ $menuItems = executeResult($sql);
                 <li class="nav-item">
                     <a class="nav-link" href="index.php">Trang chủ</a>
                 </li>
-            
+
                 <?php
                 // Note: Khởi tạo session giỏ hàng (giữ nguyên)
                 if (!isset($_SESSION['cart'])) {
@@ -1039,10 +1329,10 @@ $menuItems = executeResult($sql);
                 <li class="nav-item">
                     <a class="nav-link" href="#">Thương hiệu
                         <br>
-                    <i class="fa-chevron-down custom-nav-link " aria-hidden="true"></i>
+                        <i class="fa-chevron-down custom-nav-link " aria-hidden="true"></i>
                     </a>
                     <!-- Note: Thêm submenu cho thương hiệu, hiển thị danh sách từ bảng brand -->
-                    <ul  class="sub-menu sub-menu-box"  style="margin-top:13px">
+                    <ul class="sub-menu sub-menu-box" style="margin-top:13px">
                         <?php
                         foreach ($brands as $brand) {
                             echo '<li><a href="../utils/brand.php?id=' . $brand['id'] . '">' . $brand['name'] . '</a></li>';
@@ -1050,11 +1340,11 @@ $menuItems = executeResult($sql);
                         ?>
                     </ul>
                 </li>
-                <li class="nav-item">   
-                    
+                <li class="nav-item">
+
                     <a class="nav-link" href="#">Sản phẩm
-                            <br>
-                    <i class="fa-chevron-down custom-nav-link " aria-hidden="true"></i>
+                        <br>
+                        <i class="fa-chevron-down custom-nav-link " aria-hidden="true"></i>
                     </a>
                     <!-- Note: Thêm submenu cho sản phẩm, hiển thị danh sách từ bảng Category (menuItems) -->
                     <ul class="sub-menu sub-menu-box" style="margin-top:13px">
@@ -1065,12 +1355,12 @@ $menuItems = executeResult($sql);
                         ?>
                     </ul>
                 </li>
-                    <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="gioithieu.php">Giới thiệu</a>
                 </li>
 
 
-        
+
                 <!-- search -->
                 <li class="nav-item ">
                     <a href="../utils/search.php" class="search-icon">
@@ -1114,8 +1404,9 @@ $menuItems = executeResult($sql);
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../admin/authen/logout.php">
+                    <a href="../utils/wishlist.php">
                         <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Danh sách yêu thích">
+                        <span id="wishlist-count" style="color:red;">0</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -1221,93 +1512,174 @@ $menuItems = executeResult($sql);
             return true;
         }
     </script>
-    <script >
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchIcon = document.querySelector(".search-icon");
+            const searchBox = document.getElementById("searchBox");
 
-        document.addEventListener("DOMContentLoaded", function () {
-  const searchIcon = document.querySelector(".search-icon");
-  const searchBox = document.getElementById("searchBox");
-
-  searchIcon.addEventListener("click", function (e) {
-    e.preventDefault();
-    searchBox.classList.toggle("active");
-  });
-});
-// xử lý tìm kiểm
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('.wanda-mxm-search');
-  const inputQ = form.querySelector('input[name="q"]');
-  const inputType = form.querySelector('input[name="type"]');
-  const resultsContainer = document.querySelector('.results-seach');
-
-  let debounceTimeout;
-
-  function fetchSearchResults(q, type) {
-    const url = `http://localhost/webbanhang/webbanhang/utils/search.php?q=${encodeURIComponent(q)}&type=${encodeURIComponent(type)}`;
-  return fetch(url)
-  .then(res => {
-    if (!res.ok) throw new Error('Lỗi mạng khi gọi API');
-    return res.text(); // Đọc phản hồi dạng text trước
-  })
-  .then(text => {
-    try {
-      return JSON.parse(text); // Chuyển text sang JSON nếu hợp lệ
-    } catch (e) {
-      throw new Error('Phản hồi không phải JSON hợp lệ'); // Nếu lỗi, ném lỗi để catch xử lý
-    }
-  });
-
-  }
-
-  inputQ.addEventListener('input', function () {
-    clearTimeout(debounceTimeout);
-
-    debounceTimeout = setTimeout(() => {
-      const q = inputQ.value.trim();
-      const type = inputType.value.trim();
-
-      if (q === '') {
-        resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Vui lòng nhập từ khóa tìm kiếm</p>';
-        resultsContainer.style.display = 'block';
-        return;
-      }
-
-      // Hiển thị loading
-      resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Đang tìm kiếm...</p>';
-      resultsContainer.style.display = 'block';
-
-      fetchSearchResults(q, type)
-        .then(data => displayResults(data))
-        .catch(err => {
-          resultsContainer.innerHTML = `<p style="text-align:center; padding: 20px 0;">Lỗi khi tải dữ liệu: ${err.message}</p>`;
-          resultsContainer.style.display = 'block';
+            searchIcon.addEventListener("click", function(e) {
+                e.preventDefault();
+                searchBox.classList.toggle("active");
+            });
         });
-    }, 300);
-  });
+        // xử lý tìm kiểm
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.wanda-mxm-search');
+            const inputQ = form.querySelector('input[name="q"]');
+            const inputType = form.querySelector('input[name="type"]');
+            const resultsContainer = document.querySelector('.results-seach');
 
-  function displayResults(data) {
-    if (!data.products || data.products.length === 0) {
-      resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Không tìm thấy sản phẩm phù hợp</p>';
-      resultsContainer.style.display = 'block';
-      return;
-    }
+            let debounceTimeout;
 
-    let html = '<ul class="search-results-list" style="padding-left: 0; margin: 0;">';
+            // Cache để lưu trạng thái ảnh đã kiểm tra
+            const imageCache = {
+                valid: new Set(),
+                invalid: new Set()
+            };
 
-    data.products.forEach(product => {
-      let thumbnailPath = product.thumbnail;
+            function fetchSearchResults(q, type) {
+                const url = `http://localhost/webbanhang/webbanhang/utils/search.php?q=${encodeURIComponent(q)}&type=${encodeURIComponent(type)}`;
+                return fetch(url)
+                    .then(res => {
+                        if (!res.ok) throw new Error('Lỗi mạng khi gọi API');
+                        return res.text();
+                    })
+                    .then(text => {
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            throw new Error('Phản hồi không phải JSON hợp lệ');
+                        }
+                    });
+            }
 
-      if (thumbnailPath.startsWith('assets/images/')) {
-        thumbnailPath = thumbnailPath.substring('assets/images/'.length);
-      }
+            // Hàm kiểm tra ảnh có tồn tại không
+            function checkImageExists(imageSrc) {
+                return new Promise((resolve) => {
+                    // Kiểm tra cache trước
+                    if (imageCache.valid.has(imageSrc)) {
+                        resolve(true);
+                        return;
+                    }
+                    if (imageCache.invalid.has(imageSrc)) {
+                        resolve(false);
+                        return;
+                    }
 
-      thumbnailPath = thumbnailPath.replace(/^\/+/, '');
-      thumbnailPath = `/webbanhang/assets/images/${thumbnailPath}`;
+                    const img = new Image();
+                    img.onload = () => {
+                        imageCache.valid.add(imageSrc);
+                        resolve(true);
+                    };
+                    img.onerror = () => {
+                        imageCache.invalid.add(imageSrc);
+                        resolve(false);
+                    };
+                    img.src = imageSrc;
+                });
+            }
 
-      const priceNumber = Number(product.price);
+            // Filter products có ảnh hợp lệ
+            async function filterValidProducts(products) {
+                const validProducts = [];
 
-      html += `
+                // Sử dụng Promise.allSettled để kiểm tra tất cả ảnh song song
+                const imageChecks = products.map(async (product) => {
+                    let thumbnailPath = product.thumbnail;
+
+                    // Xử lý đường dẫn ảnh bị lỗi từ database
+                    if (thumbnailPath) {
+                        thumbnailPath = thumbnailPath.replace(/^0+/, '');
+                        thumbnailPath = thumbnailPath.replace(/^assets\/images/, '');
+                        thumbnailPath = thumbnailPath.replace(/^images/, '');
+                        thumbnailPath = `/webbanhang/webbanhang/assets/images${thumbnailPath}`;
+                    } else {
+                        thumbnailPath = '/webbanhang/webbanhang/assets/images/default.jpg';
+                    }
+
+                    const imageExists = await checkImageExists(thumbnailPath);
+
+                    return {
+                        product: {
+                            ...product,
+                            processedThumbnail: thumbnailPath
+                        },
+                        valid: imageExists
+                    };
+                });
+
+                const results = await Promise.allSettled(imageChecks);
+
+                results.forEach(result => {
+                    if (result.status === 'fulfilled' && result.value.valid) {
+                        validProducts.push(result.value.product);
+                    }
+                });
+
+                return validProducts;
+            }
+
+            inputQ.addEventListener('input', function() {
+                clearTimeout(debounceTimeout);
+
+                debounceTimeout = setTimeout(() => {
+                    const q = inputQ.value.trim();
+                    const type = inputType.value.trim();
+
+                    if (q === '') {
+                        resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Vui lòng nhập từ khóa tìm kiếm</p>';
+                        resultsContainer.style.display = 'block';
+                        return;
+                    }
+
+                    // Hiển thị loading
+                    resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Đang tìm kiếm...</p>';
+                    resultsContainer.style.display = 'block';
+
+                    fetchSearchResults(q, type)
+                        .then(async (data) => {
+                            if (!data.products || data.products.length === 0) {
+                                resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Không tìm thấy sản phẩm phù hợp</p>';
+                                resultsContainer.style.display = 'block';
+                                return;
+                            }
+
+                            // Hiển thị loading trong khi filter ảnh
+                            resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Đang kiểm tra ảnh...</p>';
+
+                            // Filter products có ảnh hợp lệ
+                            const validProducts = await filterValidProducts(data.products);
+
+                            displayResults({
+                                products: validProducts
+                            });
+                        })
+                        .catch(err => {
+                            resultsContainer.innerHTML = `<p style="text-align:center; padding: 20px 0;">Lỗi khi tải dữ liệu: ${err.message}</p>`;
+                            resultsContainer.style.display = 'block';
+                        });
+                }, 300);
+            });
+
+            function displayResults(data) {
+                if (!data.products || data.products.length === 0) {
+                    resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Không tìm thấy sản phẩm có ảnh hợp lệ</p>';
+                    resultsContainer.style.display = 'block';
+                    return;
+                }
+
+                let html = '<ul class="search-results-list" style="padding-left: 0; margin: 0;">';
+
+                data.products.forEach(product => {
+                    const priceNumber = Number(product.price);
+                    const thumbnailPath = product.processedThumbnail; // Sử dụng đường dẫn đã xử lý
+
+                    html += `
 <li class="search-result-item" style="margin-bottom: 15px; list-style: none; display: flex; align-items: center; font-size: 14px;">
-  <img src="${thumbnailPath}" alt="${product.title}" style="width: 50px; height: 50px; object-fit: contain; margin-right: 10px;">
+  <img src="${thumbnailPath}" 
+       alt="${product.title}" 
+       style="width: 50px; height: 50px; object-fit: contain; margin-right: 10px;"
+       loading="lazy">
   <div style="display: flex; flex-direction: column; justify-content: center; max-width: 280px;">
     <span style="font-size: 13px; font-weight: 600; color: #000; line-height: 1.2; text-align: left; word-wrap: break-word;">
       ${product.title}
@@ -1318,17 +1690,48 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </li>
             `;
-    });
+                });
 
-    html += '</ul>';
+                html += '</ul>';
+                resultsContainer.innerHTML = html;
+                resultsContainer.style.display = 'block';
+            }
 
-    resultsContainer.innerHTML = html;
-    resultsContainer.style.display = 'block';
-  }
-});
+            // Optional: Clear cache khi cần thiết
+            window.clearImageCache = function() {
+                imageCache.valid.clear();
+                imageCache.invalid.clear();
+                console.log('Image cache cleared');
+            };
+        });
 
-window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             header.classList.toggle('scrolled', window.scrollY > 50);
         });
+    </script>
+
+    <script>
+        function addCart(productId, num, variantId) {
+            $.post('../api/ajax_request.php', {
+                'action': 'cart',
+                'id': productId,
+                'num': num,
+                "variant_id": variantId
+            }, function(data) {
+                location.reload();
+
+            })
+        }
+
+        function buyNow(productId, num, variantId) {
+            $.post('../api/ajax_request.php', {
+                'action': 'cart',
+                'id': productId,
+                'num': num,
+                'variant_id': variantId
+            }, function(data) {
+                window.location.href = '../utils/checkout.php';
+            });
+        }
     </script>

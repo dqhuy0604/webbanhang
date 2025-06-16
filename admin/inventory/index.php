@@ -32,11 +32,7 @@ $data = executeResult($sql);
     <div class="col-md-12">
         <h3 style="margin-top:50px;font-weight:bold;">Quản lý số lượng và giảm giá</h3>
 
-        <!-- Bộ lọc tìm kiếm -->
-        <form method="GET" class="form-inline mb-3">
-            <input type="text" name="keyword" class="form-control mr-2" placeholder="Tìm theo tên sản phẩm" value="<?=getGet('keyword')?>">
-            <button class="btn btn-primary">Tìm</button>
-        </form>
+        <input type="text" id="searchInput" placeholder="Tìm theo tên sản phẩm..." class="form-control" style="margin-bottom: 20px; width: 300px; margin-top:20px;" />
 
         <table class="table table-bordered table-hover">
             <thead>
@@ -103,6 +99,20 @@ function deleteInventory(id) {
         location.reload();
     });
 }
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const filter = this.value.toLowerCase().trim();
+    const rows = document.querySelectorAll('table tbody tr');
+
+    rows.forEach(row => {
+        const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+        if (productName.includes(filter)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
 </script>
 
 <?php 

@@ -90,6 +90,13 @@ if ($userId) {
             border-radius: 5px;
             text-align: center;
         }
+        .status-fail {
+            background-color: red;
+            color: white;
+            padding: 4px 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
         tr{
             width:30px;
         }
@@ -158,22 +165,26 @@ if ($userId) {
 
                                 $statusText = '';
                                 $statusClass = '';
-                                switch ($order['status']) {
-                                    case 0:
+                                switch ($order['status_id']) {
+                                    case 1:
                                         $statusText = 'Đang chờ xác nhận';
                                         $statusClass = 'status-waiting';
                                         break;
-                                    case 1:
-                                        $statusText = 'Xác nhận';
+                                    case 2:
+                                        $statusText = 'Đang chuẩn bị hàng';
                                         $statusClass = 'status-confirmed';
                                         break;
-                                    case 2:
+                                    case 3:
                                         $statusText = 'Đang giao';
                                         $statusClass = 'status-shipping';
                                         break;
-                                    case 3:
+                                    case 4:
                                         $statusText = 'Đã giao thành công';
                                         $statusClass = 'status-completed';
+                                        break;
+                                    case 5:
+                                        $statusText = 'Đã hủy';
+                                        $statusClass = 'status-fail';
                                         break;
                                 }
                                 echo '<tr>';
@@ -186,10 +197,10 @@ if ($userId) {
                                 echo '<td>' . $order['order_date'] . '</td>';
                                 echo '<td style="width:200px;"><span class="' . $statusClass . '">' . $statusText . '</span></td>';
                                 echo '<td style="font-weight:bold;">' . number_format($order['total_money']) . '₫</td>';
-                                echo '<td  style="width:300px;"><a href="history_detail.php?order_id=' . $order['id'] . '" class="show-details-button">Hiển thị chi tiết sản phẩm</a></td>';
+                                echo '<td ><button onclick="location.href=\'history_detail.php?order_id=' . $order['id'] . '\'" class="show-details-button" ><span>Chi tiết đơn hàng</span></button></td>';
                                 echo '</tr>';
                             } ?>
-                        </tbody>
+                        </tbody>                                                                
                     </table>
                 <?php } else { ?>
                     <p style="font-weight:bold;">Không tìm thấy đơn hàng nào với số điện thoại: <?php echo $phoneNumber; ?></p>

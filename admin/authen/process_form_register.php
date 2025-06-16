@@ -20,7 +20,7 @@ if(!empty($_POST)){
                     role_id, created_at, updated_at, deleted) values('$fullname' , '$email', '$pwd',
                     2, '$created_at', '$updated_at', 0)";
             execute($sql);
-            header('Location: login.php');
+            header('Location:index.php');
             die();
         }
     }
