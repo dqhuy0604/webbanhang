@@ -1,4 +1,6 @@
 <?php
+$wishlist_count = isset($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 0;
+
 $sql = "select * from Category";
 $menuItems = executeResult($sql);
 ?>
@@ -1406,7 +1408,7 @@ $menuItems = executeResult($sql);
                 <li class="nav-item">
                     <a href="../utils/wishlist.php">
                         <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Danh sách yêu thích">
-                        <span id="wishlist-count" style="color:red;">0</span>
+                        <span id="wishlist-count" class="cart-item"><?= $wishlist_count ?></span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -1735,3 +1737,26 @@ $menuItems = executeResult($sql);
             });
         }
     </script>
+    <script>
+// Thêm script để cập nhật số lượng wishlist realtime
+function updateWishlistCount() {
+    fetch('../api/ajax_request.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ action: 'get_wishlist_count' })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const countElement = document.getElementById('wishlist-count');
+        if (countElement) {
+            countElement.textContent = data.count;
+        }
+    })
+    .catch(error => console.error('Error updating wishlist count:', error));
+}
+
+// Gọi hàm này sau khi thêm/xóa wishlist
+function refreshWishlistCount() {
+    updateWishlistCount();
+}
+</script>
