@@ -23,6 +23,10 @@ require_once('../database/dbhelper.php');
         .item-img img { width: 100%; height: auto; object-fit: cover; }
         .item-title { flex-grow: 1; }
         .item-title a { font-size: 16px; color: #333; font-weight: 500; text-decoration: none; display: block; margin-bottom: 5px; }
+        .item-title a:hover { text-decoration: none; color:pink;}
+        .item-title a:visited { text-decoration: none; }
+        .item-title a:active { text-decoration: none; }
+        .item-title a:focus { text-decoration: none; outline: none; }
         .item-price .money { font-size: 18px; font-weight: bold; color: #000; }
         .item-price del { font-size: 14px; color: #999; margin-left: 10px; }
         .item-actions { display: flex; gap: 10px; align-items: center; }
@@ -34,7 +38,10 @@ require_once('../database/dbhelper.php');
         .empty-wishlist { text-align: center; padding: 50px 0; }
         .empty-wishlist img { width: 100px; height: 100px; opacity: 0.5; margin-bottom: 20px; }
         .empty-wishlist p { font-size: 18px; color: #666; margin-bottom: 20px; }
-        .btn-continue-shopping { background-color: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 16px; }
+        .btn-continue-shopping { background-color: #000; color: #fff; padding: 12px 24px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; text-decoration: none; }
+        .btn-continue-shopping:hover { background-color: #333; }
+        .navigation-buttons { text-align: center; margin-top: 30px; }
+        .navigation-buttons button { margin-right: 15px; }
     </style>
 </head>
 <body>
@@ -51,10 +58,11 @@ require_once('../database/dbhelper.php');
      
         <?php
             if (!isset($_SESSION['wishlist']) || count($_SESSION['wishlist']) == 0) {
-                echo '<div class="empty-wishlist">
+                echo '
+                <div class="empty-wishlist">
                         <img src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Empty wishlist">
                         <p>Danh sách yêu thích của bạn đang trống.</p>
-                        <a href="../index.php" class="btn-continue-shopping">Tiếp tục mua sắm</a>
+                        <button class="btn-continue-shopping" onclick="location.href=\'../index.php\'">Tiếp tục mua sắm</button>
                       </div>';
             } else {
                 foreach ($_SESSION['wishlist'] as $item) {
@@ -62,12 +70,12 @@ require_once('../database/dbhelper.php');
                             <ul class="wishlist-wrap" data-id="' . $item['id'] . '">
                                 <li class="item-info">
                                     <div class="item-img">
-                                        <a href="../product/detail.php?id=' . $item['id'] . '">
+                                        <a href="../utils/detail.php?id=' . $item['id'] . '">
                                             <img src="../' . $item['thumbnail'] . '" alt="' . $item['title'] . '">
                                         </a>
                                     </div>
                                     <div class="item-title">
-                                        <a href="../product/detail.php?id=' . $item['id'] . '">' . $item['title'] . '</a>
+                                        <a href="../utils/detail.php?id=' . $item['id'] . '">' . $item['title'] . '</a>
                                         <span class="item-price">
                                             <span class="money">' . number_format($item['discount']) . 'đ</span>';
                     
@@ -90,9 +98,9 @@ require_once('../database/dbhelper.php');
                         </div>';
                 }
             ?>
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="../utils/cart.php" class="btn-continue-shopping" style="margin-right: 15px;">Xem giỏ hàng</a>
-                <a href="../utils/index.php" class="btn-continue-shopping">Tiếp tục mua sắm</a>
+            <div class="navigation-buttons">
+                <button class="btn-continue-shopping" onclick="location.href='../utils/cart.php'">Xem giỏ hàng</button>
+                <button class="btn-continue-shopping" onclick="location.href='../utils/index.php'">Tiếp tục mua sắm</button>
             </div>
             <?php } ?>
         </div>
