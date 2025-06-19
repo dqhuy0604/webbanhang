@@ -56,7 +56,8 @@ foreach ($products as $product) {
     // Format giá theo định dạng Việt Nam
     $formattedPrice = number_format($price, 0, ',', '.') . ' đ';
     
-    $html .= '
+    $html .= ' 
+<a href="detail.php?id=' . $id . '" style="text-decoration: none; color: inherit;">
 <div class="search-result-item" style="
     display: grid; 
     grid-template-columns: 60px 1fr; 
@@ -76,27 +77,27 @@ foreach ($products as $product) {
              onerror="this.src=\'/webbanhang/webbanhang/assets/images/default.jpg\'; this.onerror=null;">
     </div>
     <div class="product-info" style="display: flex; flex-direction: column; justify-content: center; min-width: 0;">
-        <a href="detail.php?id=' . $id . '" style="text-decoration: none; margin-bottom: 5px;">
-            <span style="
-                font-size: 13px; 
-                font-weight: 600; 
-                color: #000; 
-                line-height: 1.3; 
-                display: -webkit-box; 
-                -webkit-line-clamp: 2; 
-                -webkit-box-orient: vertical; 
-                overflow: hidden; 
-                text-overflow: ellipsis;
-                word-break: break-word;
-            ">
-                ' . $title . '
-            </span>
-        </a>
+        <span style="
+            font-size: 13px; 
+            font-weight: 600; 
+            color: #000; 
+            line-height: 1.3; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+            text-overflow: ellipsis;
+            word-break: break-word;
+        ">
+            ' . $title . '
+        </span>
         <span style="color: #e91e63; font-weight: 700; font-size: 14px; line-height: 1.2;">
             ' . $formattedPrice . '
         </span>
     </div>
-</div>';
+</div>
+</a>';
+
 }
 
 $html .= '</div>';

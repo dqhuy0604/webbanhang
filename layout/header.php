@@ -601,28 +601,27 @@ $menuItems = executeResult($sql);
         
 
             /* Định dạng cho nav-item */
-            .nav-item {
-                position: relative;
-            }
+          .nav-wrapper {
+  position: relative;
+}
 
-            /* Định dạng submenu */
-            .sub-menu-box {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background-color: white;
-                border: 1px solid black;
-                border-radius: 6px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 10px;
-                min-width: 200px;
-                z-index: 1000;
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(10px);
-                transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-            }
+.sub-menu-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  z-index: 1000;
+}
+
+.nav-wrapper:hover .sub-menu-box {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
 
 
             .nav-item:hover .sub-menu-box,
@@ -643,12 +642,7 @@ $menuItems = executeResult($sql);
                 border-bottom-color: black;
             }
 
-            /* Giữ submenu hiển thị thêm một khoảng thời gian khi rời chuột */
-            .nav-item .sub-menu-box {
-                transition-delay: 0s, 0s, 0s, 2s;
-                /* Độ trễ 0.5s khi ẩn */
-            }
-
+            
             /* Định dạng các mục trong submenu */
             .sub-menu-box li {
                 list-style: none;
