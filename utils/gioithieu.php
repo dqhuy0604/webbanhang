@@ -14,13 +14,11 @@
     ?>
 </head>
 <body>
-    <div class="main">
+    <div class="main" >
         <?php
         require_once('../layout/header.php');
         ?>
-        <div class="container-01">
-            <div class="banner-collection">
-            </div>
+        <div class="container-01" >
                 <div class="col-75">  
                     <div class="content-product-list">
                             <div class="heading-page clearfix">

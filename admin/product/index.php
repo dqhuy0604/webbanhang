@@ -23,7 +23,7 @@
             <h3 style="margin-top:50px;font-weight:bold;">Quản Lý Sản Phẩm </h3>
             
            <a href="editor.php"> <button class="btn btn-success">Thêm Sản Phẩm</button></a>
-           <!-- <input type="text" id="searchInput" placeholder="Tìm theo tên sản phẩm..." style="margin-bottom: 20px;" /> -->
+            <input type="text" id="searchInput" placeholder="Tìm theo tên sản phẩm..." class="form-control" style="margin-bottom: 20px; width: 300px; margin-top:20px;" />
             <table class="table table-bordered table-hover " style="margin-top :20px;">
                 <thead>
                     <tr>
@@ -96,18 +96,20 @@
         })
 
     }
-    //   document.getElementById('searchInput').addEventListener('keyup', function() {
-    //     let filter = this.value.toLowerCase();
-    //     let rows = document.querySelectorAll('table tbody tr');
-    //     rows.forEach(row => {
-    //         let productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-    //         if(productName.indexOf(filter) > -1){
-    //             row.style.display = '';
-    //         } else {
-    //             row.style.display = 'none';
-    //         }
-    //     });
-    // });
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+    const filter = this.value.toLowerCase().trim();
+    const rows = document.querySelectorAll('table tbody tr');
+
+    rows.forEach(row => {
+        const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+        if (productName.includes(filter)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
 
 </script>
 
