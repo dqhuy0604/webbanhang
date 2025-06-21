@@ -13,8 +13,9 @@ if ($keyword === '') {
     exit;
 }
 
-// Thực hiện truy vấn (cho học tập nên vẫn nối chuỗi trực tiếp)
-$sql = "SELECT title, price, thumbnail FROM product WHERE title LIKE '%$keyword%'";
+
+$sql = "SELECT id, title, price, thumbnail FROM product WHERE title LIKE '%$keyword%'";
+
 
 // Dùng try-catch nhẹ để tránh phản hồi sai định dạng JSON
 try {
