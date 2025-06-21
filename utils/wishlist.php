@@ -30,9 +30,9 @@ require_once('../database/dbhelper.php');
         .item-price .money { font-size: 18px; font-weight: bold; color: #000; }
         .item-price del { font-size: 14px; color: #999; margin-left: 10px; }
         .item-actions { display: flex; gap: 10px; align-items: center; }
-        .btn-add-cart, .btn-remove { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; text-decoration: none; text-align: center; }
-        .btn-add-cart { background-color: #007bff; color: white; }
-        .btn-add-cart:hover { background-color: #0056b3; }
+        .btn-view-detail, .btn-remove { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; text-decoration: none; text-align: center; }
+        .btn-view-detail { background-color: #007bff; color: white; }
+        .btn-view-detail:hover { background-color: #0056b3; }
         .btn-remove { background-color: #dc3545; color: white; }
         .btn-remove:hover { background-color: #c82333; }
         .empty-wishlist { text-align: center; padding: 50px 0; }
@@ -87,8 +87,8 @@ require_once('../database/dbhelper.php');
                                     </div>
                                 </li>
                                 <li class="item-actions">
-                                    <button class="btn-add-cart" onclick="addToCartFromWishlist(' . $item['id'] . ')">
-                                        Thêm vào giỏ hàng
+                                    <button class="btn-view-detail" onclick="location.href=\'../utils/detail.php?id=' . $item['id'] . '\'">
+                                        Xem chi tiết
                                     </button>
                                     <button class="btn-remove" onclick="removeFromWishlist(' . $item['id'] . ')">
                                         Xóa
@@ -130,29 +130,6 @@ require_once('../database/dbhelper.php');
                 // Bỏ alert thông báo lỗi
                 console.error('Error:', data.message);
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Bỏ alert thông báo lỗi
-        });
-    }
-
-    function addToCartFromWishlist(productId) {
-        // Giả sử thêm variant_id mặc định = 1, bạn có thể điều chỉnh theo logic của mình
-        fetch('../api/ajax_request.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ 
-                action: 'cart', 
-                id: productId,
-                num: 1,
-                variant_id: 1  // Cần điều chỉnh theo logic variant
-            })
-        })
-        .then(() => {
-            // Bỏ alert thông báo thành công
-            // Cập nhật số lượng cart nếu cần
-            location.reload();
         })
         .catch(error => {
             console.error('Error:', error);
