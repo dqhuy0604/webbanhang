@@ -88,7 +88,7 @@ require_once('../database/dbhelper.php');
                                 </li>
                                 <li class="item-actions">
                                     <button class="btn-view-detail" onclick="location.href=\'../utils/detail.php?id=' . $item['id'] . '\'">
-                                        Xem chi tiết
+                                        Thêm vào giỏ hàng
                                     </button>
                                     <button class="btn-remove" onclick="removeFromWishlist(' . $item['id'] . ')">
                                         Xóa

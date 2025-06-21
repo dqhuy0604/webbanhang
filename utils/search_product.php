@@ -143,8 +143,8 @@
             $categoryName = htmlspecialchars($product['category_name'] ?? '');
             $availableSizes = htmlspecialchars($product['available_sizes'] ?? '');
 
-            $html = '<div class="exact-product-result" style="padding: 15px; background: #f8f9fa; border: 2px solid #28a745; border-radius: 10px; margin-bottom: 15px;">
-                <div style="color: #28a745; font-weight: 600; margin-bottom: 10px; font-size: 14px;">
+            $html = '<div class="exact-product-result" style="padding: 15px; background: #f8f9fa; ; border-radius: 10px; margin-bottom: 15px;">
+                <div style="color:black; font-weight: 600; margin-bottom: 10px; font-size: 14px;">
                      ' . $exactSearch['message'] . '
                 </div>
                 <a href="detail.php?id=' . $id . '" style="text-decoration: none; color: inherit;">

@@ -526,100 +526,260 @@ $lastestItems_2    = getProductsWithDiscount(5, 5, 'p.updated_at ASC');
 </script>
 <script>
     // Hàm bỏ dấu tiếng Việt
-    function removeVietnameseAccents(str) {
-        return str
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/đ/g, 'd')
-            .replace(/Đ/g, 'D');
-    }
+function removeVietnameseAccents(str) {
+    return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'D');
+}
 
-    // Định nghĩa keywords sản phẩm với phân loại
-    const productKeywords = {
-        brands: {
-            nike: ['nike', 'jordan', 'air jordan', 'air max', 'air force'],
-            adidas: ['adidas', 'yeezy', 'ultraboost', 'stan smith'],
-            puma: ['puma', 'suede', 'rs-x'],
-            lining: ['li-ning', 'lining', 'li ning', 'way of wade']
-        },
-        types: {
-            shoes: ['giay', 'giày', 'giay dep', 'giày đẹp', 'sneaker', 'giay the thao', 'giày thể thao', 'giay nike', 'giay adidas'],
-            clothing: ['ao', 'áo', 'ao bong da', 'áo bóng đá', 'ao thun', 'áo thun', 'quan', 'quần', 'shorts'],
-            accessories: ['balo', 'ba lo', 'tui', 'túi', 'mu', 'mũ', 'tat', 'tất'],
-            sports: ['bong', 'bóng', 'bong da', 'bóng đá', 'bong ro', 'bóng rổ', 'tennis']
-        }
+// Định nghĩa keywords sản phẩm với phân loại
+const productKeywords = {
+    brands: {
+        nike: ['nike', 'jordan', 'air jordan', 'air max', 'air force'],
+        adidas: ['adidas', 'yeezy', 'ultraboost', 'stan smith'],
+        puma: ['puma', 'suede', 'rs-x'],
+        lining: ['li-ning', 'lining', 'li ning', 'way of wade']
+    },
+    types: {
+        shoes: ['giay', 'giày', 'giay dep', 'giày đẹp', 'sneaker', 'giay the thao', 'giày thể thao', 'giay nike', 'giay adidas'],
+        clothing: ['ao', 'áo', 'ao bong da', 'áo bóng đá', 'ao thun', 'áo thun', 'quan', 'quần', 'shorts'],
+        accessories: ['balo', 'ba lo', 'tui', 'túi', 'mu', 'mũ', 'tat', 'tất'],
+        sports: ['bong', 'bóng', 'bong da', 'bóng đá', 'bong ro', 'bóng rổ', 'tennis']
+    }
+};
+
+// Hàm phân loại sản phẩm (TRƯỜNG HỢP 1: Tìm theo keyword/category)
+function classifyProduct(message) {
+    const messageNormalized = removeVietnameseAccents(message.toLowerCase());
+    
+    let result = {
+        brand: null,
+        type: null,
+        category: null,
+        matchedKeywords: [],
+        searchKeyword: null
     };
+    
+    // Tìm brand
+    for (const [brand, keywords] of Object.entries(productKeywords.brands)) {
+        const matchedBrand = keywords.find(kw => {
+            const kwNormalized = removeVietnameseAccents(kw.toLowerCase());
+            return messageNormalized.includes(kwNormalized);
+        });
+        if (matchedBrand) {
+            result.brand = brand;
+            result.matchedKeywords.push(matchedBrand);
+            result.searchKeyword = matchedBrand; // Dùng keyword gốc để search
+            break;
+        }
+    }
+    
+    // Tìm type
+    for (const [type, keywords] of Object.entries(productKeywords.types)) {
+        const matchedType = keywords.find(kw => {
+            const kwNormalized = removeVietnameseAccents(kw.toLowerCase());
+            return messageNormalized.includes(kwNormalized);
+        });
+        if (matchedType) {
+            result.type = type;
+            result.matchedKeywords.push(matchedType);
+            // Nếu chưa có searchKeyword từ brand, dùng type
+            if (!result.searchKeyword) {
+                result.searchKeyword = matchedType;
+            }
+            break;
+        }
+    }
+    
+    // Xác định category
+    if (result.brand && result.type) {
+        result.category = `${result.brand}_${result.type}`;
+    } else if (result.brand) {
+        result.category = result.brand;
+    } else if (result.type) {
+        result.category = result.type;
+    }
+    
+    return result;
+}
 
-    // Hàm phân loại sản phẩm
-    function classifyProduct(message) {
-        const messageNormalized = removeVietnameseAccents(message.toLowerCase());
-        
-        let result = {
-            brand: null,
-            type: null,
-            category: null,
-            matchedKeywords: [],
-            searchKeyword: null
-        };
-        
-        // Tìm brand
-        for (const [brand, keywords] of Object.entries(productKeywords.brands)) {
-            const matchedBrand = keywords.find(kw => {
-                const kwNormalized = removeVietnameseAccents(kw.toLowerCase());
-                return messageNormalized.includes(kwNormalized);
-            });
-            if (matchedBrand) {
-                result.brand = brand;
-                result.matchedKeywords.push(matchedBrand);
-                result.searchKeyword = matchedBrand; // Dùng keyword gốc để search
-                break;
+// HÀM MỚI: Xử lý tìm kiếm theo tên cụ thể (TRƯỜNG HỢP 2)
+function checkSpecificProductQuery(message) {
+    const specificPatterns = [
+        // Hỏi có bán không
+        /(?:có|co)\s*(?:bán|ban)?\s*(.+?)\s*(?:không|khong|\?)/i,
+        // Hỏi về giá
+        /(?:giá|gia)\s*(?:của|cua)?\s*(.+?)(?:\s*(?:là|la)\s*(?:bao|bao nhieu|bao nhiêu|gi|gì))?[\?\s]*$/i,
+        // Tìm kiếm trực tiếp
+        /(?:tìm|tim)\s*(?:kiếm|kiem)?\s*(.+)/i,
+        // Hỏi về thông tin
+        /(?:cho|cho tôi|cho toi)\s*(?:biết|biet)\s*(?:về|ve)?\s*(.+)/i,
+        /(?:thông tin|thong tin)\s*(?:về|ve)\s*(.+)/i,
+        // Câu hỏi đảo ngược
+        /(.+?)\s*(?:có|co)\s*(?:bán|ban)?\s*(?:không|khong|\?)/i,
+        // Hỏi trực tiếp tên sản phẩm
+        /^(.+?)\s*[\?\s]*$/i
+    ];
+    
+    // Loại bỏ các từ chung chung không phải tên sản phẩm
+    const excludePatterns = [
+        /^(?:xin chào|chào|hello|hi|cảm ơn|cam on|thanks|bye|tạm biệt|tam biet)$/i,
+        /^(?:bạn|ban)\s+(?:có thể|co the|làm|lam|giúp|giup)/i,
+        /^(?:làm|lam)\s+(?:sao|thế nào|the nao)/i
+    ];
+    
+    const messageNormalized = removeVietnameseAccents(message.toLowerCase().trim());
+    
+    // Kiểm tra xem có phải câu chào hỏi hay câu hỏi chung không
+    for (let exclude of excludePatterns) {
+        if (exclude.test(messageNormalized)) {
+            return { isSpecific: false };
+        }
+    }
+    
+    for (let pattern of specificPatterns) {
+        const match = message.match(pattern);
+        if (match && match[1]) {
+            let productName = match[1].trim();
+            
+            // Loại bỏ các từ không cần thiết
+            productName = productName.replace(/^(?:về|ve|của|cua|sản phẩm|san pham)\s*/i, '');
+            productName = productName.replace(/\s*(?:này|nay|đó|do|kia)$/i, '');
+            
+            // Kiểm tra độ dài tên sản phẩm (tránh query quá ngắn)
+            if (productName.length >= 2) {
+                return {
+                    isSpecific: true,
+                    productName: productName
+                };
             }
         }
-        
-        // Tìm type
-        for (const [type, keywords] of Object.entries(productKeywords.types)) {
-            const matchedType = keywords.find(kw => {
-                const kwNormalized = removeVietnameseAccents(kw.toLowerCase());
-                return messageNormalized.includes(kwNormalized);
-            });
-            if (matchedType) {
-                result.type = type;
-                result.matchedKeywords.push(matchedType);
-                // Nếu chưa có searchKeyword từ brand, dùng type
-                if (!result.searchKeyword) {
-                    result.searchKeyword = matchedType;
-                }
-                break;
-            }
+    }
+    
+    return { isSpecific: false };
+}
+
+// HÀM MỚI: Xử lý response cho tìm kiếm cụ thể
+async function handleSpecificProductSearch(productName, chatBox) {
+    try {
+        const data = await fetch(`../utils/search_product.php?keyword=${encodeURIComponent(productName)}`)
+            .then(res => res.json());
+
+        const botMessage = document.createElement('div');
+        botMessage.className = 'bot-message';
+
+        if (data.exact_product) {
+            // Tìm thấy sản phẩm chính xác
+            botMessage.innerHTML = `Tìm thấy sản phẩm: ${productName}<br>${data.html}`;
+        } else if (data.exact_product_not_found) {
+            // Không tìm thấy sản phẩm chính xác
+            botMessage.textContent = `Bot: Không tìm thấy sản phẩm "${productName}".`;
+        } else if (data.html && data.html.trim()) {
+            // Tìm thấy sản phẩm tương tự
+            botMessage.innerHTML = `Không tìm thấy chính xác "${productName}", nhưng có những sản phẩm tương tự:<br>${data.html}`;
+        } else {
+            // Không tìm thấy gì
+            botMessage.textContent = `Bot: Không tìm thấy sản phẩm "${productName}".`;
         }
+
+        chatBox.appendChild(botMessage);
+        return true;
+    } catch (error) {
+        console.error("Lỗi tìm kiếm sản phẩm cụ thể:", error);
         
-        // Xác định category
-        if (result.brand && result.type) {
-            result.category = `${result.brand}_${result.type}`;
-        } else if (result.brand) {
-            result.category = result.brand;
-        } else if (result.type) {
-            result.category = result.type;
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'bot-message';
+        errorMessage.textContent = `Bot: Đã xảy ra lỗi khi tìm kiếm sản phẩm "${productName}". Vui lòng thử lại sau.`;
+        chatBox.appendChild(errorMessage);
+        return false;
+    }
+}
+
+async function sendMessage() {
+    const userInput = document.getElementById('user-input').value.trim();
+    if (!userInput) return;
+
+    const chatBox = document.getElementById('chat-box');
+
+    // Hiển thị tin nhắn người dùng
+    const userMessage = document.createElement('div');
+    userMessage.className = 'user-message';
+    userMessage.textContent = userInput;
+    chatBox.appendChild(userMessage);
+
+    // Kiểm tra intent tuỳ chỉnh
+    try {
+        const intentRes = await fetch("../utils/check_intent.php", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: userInput
+            })
+        }).then(res => res.json());
+
+        if (intentRes.response) {
+            const botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            botMessage.textContent = `Bot: ${intentRes.response}`;
+            chatBox.appendChild(botMessage);
+            document.getElementById('user-input').value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return;
         }
-        
-        return result;
+    } catch (error) {
+        console.error("Lỗi kiểm tra intent:", error);
     }
 
-    async function sendMessage() {
-        const userInput = document.getElementById('user-input').value.trim();
-        if (!userInput) return;
+    // TRƯỜNG HỢP 2: Kiểm tra tìm kiếm theo tên cụ thể
+    const specificQuery = checkSpecificProductQuery(userInput);
+    
+    if (specificQuery.isSpecific) {
+        console.log('Tìm kiếm sản phẩm cụ thể:', specificQuery.productName);
+        
+        const success = await handleSpecificProductSearch(specificQuery.productName, chatBox);
+        
+        if (success) {
+            document.getElementById('user-input').value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return;
+        }
+    }
 
-        const chatBox = document.getElementById('chat-box');
+    // TRƯỜNG HỢP 1: Kiểm tra keyword sản phẩm với phân loại (logic cũ)
+    const classification = classifyProduct(userInput);
 
-        // Hiển thị tin nhắn người dùng
-        const userMessage = document.createElement('div');
-        userMessage.className = 'user-message';
-        userMessage.textContent = userInput;
-        chatBox.appendChild(userMessage);
+    try {
+        let data;
 
-        // Kiểm tra intent tuỳ chỉnh
-        try {
-            const intentRes = await fetch("../utils/check_intent.php", {
+        if (classification.category) {
+            // Có tìm thấy sản phẩm theo keyword/category
+            console.log('Phân loại sản phẩm:', classification);
+            
+            data = await fetch(`../utils/search_product.php?keyword=${encodeURIComponent(classification.searchKeyword)}`)
+                .then(res => res.json());
+
+            const botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            
+            // Tạo message phù hợp với phân loại
+            let responseText = "Dưới đây là những sản phẩm phù hợp:";
+            if (classification.brand && classification.type) {
+                responseText = `Tìm thấy ${classification.type} của thương hiệu ${classification.brand.toUpperCase()}:`;
+            } else if (classification.brand) {
+                responseText = `Tìm thấy sản phẩm ${classification.brand.toUpperCase()}:`;
+            } else if (classification.type) {
+                responseText = `Tìm thấy ${classification.type}:`;
+            }
+            
+            botMessage.innerHTML = `${responseText}<br>${data.html}`;
+            chatBox.appendChild(botMessage);
+        } else {
+            // Không có gì khớp gọi chatbot AI
+            data = await fetch("../utils/chatbot.php", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -629,74 +789,21 @@ $lastestItems_2    = getProductsWithDiscount(5, 5, 'p.updated_at ASC');
                 })
             }).then(res => res.json());
 
-            if (intentRes.response) {
-                const botMessage = document.createElement('div');
-                botMessage.className = 'bot-message';
-                botMessage.textContent = `Bot: ${intentRes.response}`;
-                chatBox.appendChild(botMessage);
-                document.getElementById('user-input').value = "";
-                chatBox.scrollTop = chatBox.scrollHeight;
-                return;
-            }
-        } catch (error) {
-            console.error("Lỗi kiểm tra intent:", error);
+            const botMessage = document.createElement('div');
+            botMessage.className = 'bot-message';
+            botMessage.textContent = `Bot: ${data.response || data.error || "Không có phản hồi"}`;
+            chatBox.appendChild(botMessage);
         }
-
-        // Kiểm tra keyword sản phẩm với phân loại
-        const classification = classifyProduct(userInput);
-
-        try {
-            let data;
-
-            if (classification.category) {
-                // Có tìm thấy sản phẩm
-                console.log('Phân loại sản phẩm:', classification);
-                
-                data = await fetch(`../utils/search_product.php?keyword=${encodeURIComponent(classification.searchKeyword)}`)
-                    .then(res => res.json());
-
-                const botMessage = document.createElement('div');
-                botMessage.className = 'bot-message';
-                
-                // Tạo message phù hợp với phân loại
-                let responseText = "Dưới đây là những sản phẩm phù hợp:";
-                if (classification.brand && classification.type) {
-                    responseText = `Tìm thấy ${classification.type} của thương hiệu ${classification.brand.toUpperCase()}:`;
-                } else if (classification.brand) {
-                    responseText = `Tìm thấy sản phẩm ${classification.brand.toUpperCase()}:`;
-                } else if (classification.type) {
-                    responseText = `Tìm thấy ${classification.type}:`;
-                }
-                
-                botMessage.innerHTML = `${responseText}<br>${data.html}`;
-                chatBox.appendChild(botMessage);
-            } else {
-                // Không có gì khớp gọi chatbot AI
-                data = await fetch("../utils/chatbot.php", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: userInput
-                    })
-                }).then(res => res.json());
-
-                const botMessage = document.createElement('div');
-                botMessage.className = 'bot-message';
-                botMessage.textContent = `Bot: ${data.response || data.error || "Không có phản hồi"}`;
-                chatBox.appendChild(botMessage);
-            }
-        } catch (error) {
-            const errorMessage = document.createElement('div');
-            errorMessage.className = 'bot-message';
-            errorMessage.textContent = `Bot: Đã xảy ra lỗi, vui lòng thử lại sau.`;
-            chatBox.appendChild(errorMessage);
-        }
-
-        document.getElementById('user-input').value = "";
-        chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (error) {
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'bot-message';
+        errorMessage.textContent = `Bot: Đã xảy ra lỗi, vui lòng thử lại sau.`;
+        chatBox.appendChild(errorMessage);
     }
+
+    document.getElementById('user-input').value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
 </script>
 <!-- INSTAGRAM -->
 <section id="section-instagram" class="pd-top-30">
