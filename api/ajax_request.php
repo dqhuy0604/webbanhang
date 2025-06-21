@@ -91,7 +91,9 @@
         echo json_encode(['count' => $count]);
     }
 
-    // Các function cart giữ nguyên từ code cũ
+    
+
+    //cart
     function checkout(){
         if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
             return;
@@ -196,4 +198,5 @@
             $_SESSION['cart'][] = $product;
         }
     }
+
 ?>

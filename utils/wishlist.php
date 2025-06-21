@@ -110,10 +110,7 @@ require_once('../database/dbhelper.php');
 
 <script type="text/javascript">
     function removeFromWishlist(productId) {
-        if (!confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách yêu thích?')) {
-            return;
-        }
-        
+        // Bỏ phần confirm - xóa trực tiếp
         fetch('../api/ajax_request.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -130,12 +127,13 @@ require_once('../database/dbhelper.php');
                 // Reload trang để cập nhật danh sách
                 location.reload();
             } else {
-                alert(data.message);
+                // Bỏ alert thông báo lỗi
+                console.error('Error:', data.message);
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra, vui lòng thử lại!');
+            // Bỏ alert thông báo lỗi
         });
     }
 
@@ -152,13 +150,13 @@ require_once('../database/dbhelper.php');
             })
         })
         .then(() => {
-            alert('Đã thêm sản phẩm vào giỏ hàng!');
+            // Bỏ alert thông báo thành công
             // Cập nhật số lượng cart nếu cần
             location.reload();
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Có lỗi xảy ra, vui lòng thử lại!');
+            // Bỏ alert thông báo lỗi
         });
     }
 

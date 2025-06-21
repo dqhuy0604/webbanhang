@@ -6,8 +6,6 @@ $message = strtolower(trim($input['message'] ?? ''));
 
 $intents = require("../utils/intents.php"); // File này chỉ chứa mảng trả về
 
-// Ghi log để kiểm tra
-file_put_contents(__DIR__ . "/intent_log.txt", "Tin nhắn: $message\n", FILE_APPEND);
 
 
 foreach ($intents as $intent) {
