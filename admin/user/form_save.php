@@ -27,7 +27,7 @@ if(!empty($_POST)){
                         ,address = '$address',updated_at = '$updated_at',role_id =$role_id where id=$id";
             }
             execute($sql);
-            header('Location: index.php');
+            header('Location:index.php');
             die();
         }
        
@@ -39,12 +39,14 @@ if(!empty($_POST)){
             $sql = "insert into User (fullname,email, phone_number, address ,password,role_id, created_at, updated_at, deleted)
                     values('$fullname','$email','$phone_number','$address','$password','$role_id','$created_at','$updated_at',0)";
             execute($sql);
-            header('Location: index.php');
+            header('Location:index.php');
             die();
     
         }else{
             $msg = 'Email đã được đăng ký, vui lòng kiểm tra lại!!!';
         }
     }
+    header('Location:index.php');
+    die();
    
 }

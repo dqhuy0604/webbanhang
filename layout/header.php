@@ -601,27 +601,28 @@ $menuItems = executeResult($sql);
         
 
             /* Định dạng cho nav-item */
-          .nav-wrapper {
-  position: relative;
-}
+            .nav-item {
+                position: relative;
+            }
 
-.sub-menu-box {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-  z-index: 1000;
-}
-
-.nav-wrapper:hover .sub-menu-box {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.3s ease;
-}
-
+            /* Định dạng submenu */
+            .sub-menu-box {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: white;
+                border: 1px solid black;
+                border-radius: 6px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                min-width: 200px;
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(10px);
+                transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            }
 
 
             .nav-item:hover .sub-menu-box,
@@ -642,7 +643,12 @@ $menuItems = executeResult($sql);
                 border-bottom-color: black;
             }
 
-            
+            /* Giữ submenu hiển thị thêm một khoảng thời gian khi rời chuột */
+            .nav-item .sub-menu-box {
+                transition-delay: 0s, 0s, 0s, 2s;
+                /* Độ trễ 0.5s khi ẩn */
+            }
+
             /* Định dạng các mục trong submenu */
             .sub-menu-box li {
                 list-style: none;
@@ -669,7 +675,7 @@ $menuItems = executeResult($sql);
                 text-transform: uppercase;
                 color: black;
                 margin-top: 10px;
-                margin-left: 20px;
+                margin-left:5px;
                 position: relative;
 
             }
@@ -1307,51 +1313,37 @@ $menuItems = executeResult($sql);
                 foreach ($_SESSION['cart'] as $item) {
                     $count += $item['num'];
                 }
-
-                // Note: Truy vấn danh sách thương hiệu từ bảng brand (giả sử bảng tên là 'brand')
                 $sql_brands = "SELECT * FROM brand";
                 $brands = executeResult($sql_brands);
 
-                // Note: Danh sách 5 mục cố định
+                $sql_category = "SELECT * FROM category LIMIT 5";
+                $categorys=executeResult($sql_category);
+
                 ?>
                 <li class="nav-item">
-    <div class="nav-wrapper">
-        <a class="nav-link" href="#">Thương hiệu
-            <br>
-            <i class="fa-chevron-down custom-nav-link" aria-hidden="true"></i>
-        </a>
-        <ul class="sub-menu sub-menu-box" style="margin-top:13px">
-            <?php
-            foreach ($brands as $brand) {
-                echo '<li><a href="../utils/brand.php?id=' . $brand['id'] . '">' . $brand['name'] . '</a></li>';
-            }
-            ?>
-        </ul>
-    </div>
-</li>
-
-<li class="nav-item">
-    <div class="nav-wrapper">
-        <a class="nav-link" href="#">Thương hiệu
-            <br>
-            <i class="fa-chevron-down custom-nav-link" aria-hidden="true"></i>
-        </a>
-        <ul class="sub-menu sub-menu-box" style="margin-top:13px">
-            <?php
-            foreach ($brands as $brand) {
-                echo '<li><a href="../utils/brand.php?id=' . $brand['id'] . '">' . $brand['name'] . '</a></li>';
-            }
-            ?>
-        </ul>
-    </div>
-</li>
-
+                <div class="nav-wrapper">
+                    <a class="nav-link">Thương hiệu
+                        <br>
+                        <i class="fa-chevron-down custom-nav-link" aria-hidden="true"></i>
+                    </a>
+                    <ul class="sub-menu sub-menu-box" style="margin-top:0px">
+                        <?php
+                        foreach ($brands as $brand) {
+                            echo '<li><a href="../utils/brand.php?id=' . $brand['id'] . '">' . $brand['name'] . '</a></li>';
+                        }
+                        ?>
+                    </ul>
+                </div>
+                    </li>
+                    <?php
+                        foreach ($categorys as $category) {
+                            echo '<li class="nav-item"><a class="nav-link" href="../utils/category.php?id=' . $category['id'] . '">' . $category['name'] . '</a></li>';
+                        }
+                        ?>
                 <li class="nav-item">
                     <a class="nav-link" href="gioithieu.php">Giới thiệu</a>
                 </li>
-
-
-
+                
                 <!-- search -->
                 <li class="nav-item ">
                     <a href="../utils/search.php" class="search-icon">
@@ -1623,7 +1615,6 @@ $menuItems = executeResult($sql);
                         return;
                     }
 
-                    // Hiển thị loading
                     resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Đang tìm kiếm...</p>';
                     resultsContainer.style.display = 'block';
 
@@ -1635,10 +1626,10 @@ $menuItems = executeResult($sql);
                                 return;
                             }
 
-                            // Hiển thị loading trong khi filter ảnh
+                
                             resultsContainer.innerHTML = '<p style="text-align:center; padding: 20px 0;">Đang kiểm tra ảnh...</p>';
 
-                            // Filter products có ảnh hợp lệ
+                
                             const validProducts = await filterValidProducts(data.products);
 
                             displayResults({
