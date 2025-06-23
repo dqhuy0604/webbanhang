@@ -1,14 +1,9 @@
-<?php
-$wishlist_count = isset($_SESSION['wishlist']) ? count($_SESSION['wishlist']) : 0;
-
-$sql = "select * from Category";
-$menuItems = executeResult($sql);
-?>
+<?php require_once('header_logic.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8    ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=fallback" as="style" type="text/css" rel="preload stylesheet">
@@ -369,7 +364,13 @@ $menuItems = executeResult($sql);
                 background-color: #333;
             }
 
+            .div-register-link{
+                margin-right: 140px;
+                margin-left :140px;
+            }
+
             .register-link {
+                width:30;
                 display: block;
                 text-align: center;
                 margin: 10px 0;
@@ -725,7 +726,7 @@ $menuItems = executeResult($sql);
             }
 
             .carousel-inner .img-banner {
-                margin-top: 40px;
+                margin-top: 0px;
                 height: 700px;
                 width: 100%;
 
@@ -1305,7 +1306,6 @@ $menuItems = executeResult($sql);
                 </li>
 
                 <?php
-                // Note: Khởi tạo session giỏ hàng (giữ nguyên)
                 if (!isset($_SESSION['cart'])) {
                     $_SESSION['cart'] = [];
                 }
@@ -1413,7 +1413,7 @@ $menuItems = executeResult($sql);
                 <div class="form-group">
                     <input required type="password" class="form-control" id="pwd" name="password" placeholder="Mật khẩu">
                 </div>
-                <a href="register.php" class="register-link" id="registerNavItem">Đăng ký</a>
+                <div class="div-register-link"><a href="register.php" class="register-link" id="registerNavItem">Đăng ký</a></div>
                 <button type="submit" class="btn-login">Đăng nhập</button>
             </form>
         </div>
@@ -1436,7 +1436,7 @@ $menuItems = executeResult($sql);
                     <input required type="password" class="form-control" id="confirmation_pwd" placeholder="Xác minh mật khẩu">
                 </div>
                 <p>
-                    <a href="" class="login-link">Đã có tài khoản</a>
+                    <a href="" class="login-link" id="loginNavItem" >Đã có tài khoản</a>
                 </p>
                 <button type="submit" class="btn-register">Đăng kí</button>
             </form>
