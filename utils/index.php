@@ -608,12 +608,24 @@ function classifyProduct(message) {
 // HÀM MỚI: Xử lý tìm kiếm theo tên cụ thể (TRƯỜNG HỢP 2)
 function checkSpecificProductQuery(message) {
     const specificPatterns = [
-        // Hỏi có bán không
+      // Hỏi có bán không
         /(?:có|co)\s*(?:bán|ban)?\s*(.+?)\s*(?:không|khong|\?)/i,
+        // Có bán + tên sản phẩm + này không
+        /(?:có|co)\s*(?:bán|ban)\s*(.+?)\s*(?:này|nay)\s*(?:không|khong|\?)/i,
+        // Có bán + tên sản phẩm (không có "không")
+        /(?:có|co)\s*(?:bán|ban)\s*(.+?)(?:\s*[\?\s]*)?$/i,
+        // Có bản (lỗi chính tả của "bán")
+        /(?:có|co)\s*(?:bản|ban)\s*(.+?)\s*(?:không|khong|\?)/i,
         // Hỏi về giá
         /(?:giá|gia)\s*(?:của|cua)?\s*(.+?)(?:\s*(?:là|la)\s*(?:bao|bao nhieu|bao nhiêu|gi|gì))?[\?\s]*$/i,
         // Tìm kiếm trực tiếp
         /(?:tìm|tim)\s*(?:kiếm|kiem)?\s*(.+)/i,
+        // Tìm cho tôi
+        /(?:tìm|tim)\s*(?:cho|cho tôi|cho toi)\s*(.+)/i,
+        // Tôi muốn mua
+        /(?:tôi|toi)\s*(?:muốn|muon)\s*(?:mua|mua)\s*(.+)/i,
+        // Tôi muốn tìm
+        /(?:tôi|toi)\s*(?:muốn|muon)\s*(?:tìm|tim)\s*(.+)/i,
         // Hỏi về thông tin
         /(?:cho|cho tôi|cho toi)\s*(?:biết|biet)\s*(?:về|ve)?\s*(.+)/i,
         /(?:thông tin|thong tin)\s*(?:về|ve)\s*(.+)/i,
