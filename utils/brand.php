@@ -161,7 +161,6 @@ $products = executeResult($sql);
     </div>
 
 <?php
-// Hàm hiện sản phẩm (giữ nguyên từ category.php)
 function renderProductItem($item) {
     $originalPrice = $item['price'];
     $discountedPrice = $originalPrice;
