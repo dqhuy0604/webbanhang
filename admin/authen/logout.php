@@ -5,3 +5,5 @@ require_once('../../database/dbhelper.php');
 $token = getCookie('token');
 setcookie('token','',time()-100,'/');
 session_destroy();
+header('Location: /webbanhang/utils/index.php');
+die();

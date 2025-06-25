@@ -1380,24 +1380,43 @@
                         </div>
                     </div>
                 </li>
-                <!-- end -->
+                            <!-- end -->
+                    <?php
+                    require_once('../utils/utility.php');
+                    $user = getUserToken(); 
+                    ?>
+
+                        <?php if ($user == null) : ?>
                 <li class="nav-item" id="loginNavItem">
-                    <a href="#">
+                    <a style="cursor:pointer;">
+                        <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản">
+                    </a>
+                </li>
+            <?php else : ?>
+                <li class="nav-item">
+                    <a href="<?= $user['role_id'] == 1 ? '../admin/authen/order/index.php' : '../utils/index.php' ?>">
                         <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản">
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../utils/wishlist.php">
-                        <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Danh sách yêu thích">
-                        <span id="wishlist-count" class="cart-item"><?= $wishlist_count ?></span>
+                    <a href="../admin/authen/logout.php">
+                        <img width="20" height="20" src="https://cdn-icons-png.flaticon.com/512/126/126467.png" width="20" height="20" alt="Đăng xuất">
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="../utils/cart.php">
-                        <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/shopping-cart.svg?v=147" alt="Giỏ hàng">
-                        <span class="cart-item"><?= $count ?></span>
-                    </a>
-                </li>
+            <?php endif; ?>
+            <li class="nav-item">
+                <a href="../utils/wishlist.php">
+                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/heart.svg?v=147" alt="Danh sách yêu thích">
+                    <span id="wishlist-count" class="cart-item"><?= $wishlist_count ?></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../utils/cart.php">
+                    <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/shopping-cart.svg?v=147" alt="Giỏ hàng">
+                    <span class="cart-item"><?= $count ?></span>
+                </a>
+            </li>
+
             </ul>
     </div>
     </div>
@@ -1444,27 +1463,44 @@
     </div>
 
     <?php
-    require_once('../admin/authen/process_form_register.php')
+    require_once('../admin/authen/process_form_register.php');
+    $redirectUrl = '';
+    if (isset($_SESSION['user'])) {
+        $role = $_SESSION['user']['role_id'];
+        if ($role == 1) {
+            $redirectUrl = '../admin/authen/order/index.php';
+        } else {
+            $redirectUrl = '../utils/index.php';
+        }
+    }
     ?>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('loginModal');
+    document.addEventListener('DOMContentLoaded', () => {
+            const loginModal = document.getElementById('loginModal');
             const closeSpan = document.querySelector('.close');
             const navItem = document.getElementById('loginNavItem');
+
             navItem.addEventListener('click', (event) => {
                 event.preventDefault();
-                modal.style.display = 'block';
+
+                const redirectUrl = <?= $redirectUrl ? "'" . $redirectUrl . "'" : "null" ?>;
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else {
+                    loginModal.style.display = 'block';
+                }
             });
+
             closeSpan.addEventListener('click', () => {
-                modal.style.display = 'none';
+                loginModal.style.display = 'none';
             });
+
             window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
                 }
             });
         });
-
         function openRegisterModal() {
             document.getElementById('registerModal').style.display = 'block';
         }

@@ -11,7 +11,7 @@ if ($user != null) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html> 
 
 <head>
 	<title>Đăng nhập</title>
