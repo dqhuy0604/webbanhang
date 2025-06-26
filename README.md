@@ -2,6 +2,11 @@
   <img src="assets/images/logo_hudo.png" alt="Logo Hudo" width="200"/>
 </p>
 
+## 🔖 Ghi chú tham khảo
+Dự án này được phát triển dựa trên ý tưởng và giao diện của website [Tên Website] với mục đích học tập và thực hành.  
+Mọi tài nguyên và mã nguồn đều được viết lại, chỉnh sửa và tối ưu hoá theo hướng cá nhân hoá và phù hợp với xu hướng năm 2025.
+
+
 # 🛍️ Web Bán Hàng Hudo
 
 
@@ -43,7 +48,4 @@ webbanhang/
 ├── /user                    # Giao diện người dùng
 └── README.md                # Mô tả dự án
 
-## 🔖 Ghi chú tham khảo
-Dự án này được phát triển dựa trên ý tưởng và giao diện của website [Tên Website] với mục đích học tập và thực hành.  
-Mọi tài nguyên và mã nguồn đều được viết lại, chỉnh sửa và tối ưu hoá theo hướng cá nhân hoá và phù hợp với xu hướng năm 2025.
 
