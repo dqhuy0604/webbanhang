@@ -6,6 +6,15 @@
 Dự án này được phát triển dựa trên ý tưởng và giao diện của website https://rainbushop.vn/ với mục đích học tập và thực hành.  
 Mọi tài nguyên và mã nguồn đều được viết lại, chỉnh sửa và tối ưu hoá theo hướng cá nhân hoá và phù hợp với xu hướng năm 2025.
 
+## 🌍 Demo Online
+
+Dự án đã được triển khai trên hosting miễn phí:
+🔗 https://webcuaban.epizy.com
+
+**Hosting:** [InfinityFree.net](https://infinityfree.net)  
+**Tình trạng:** Hoạt động ổn định - đang hoàn thiện 80%
+
+
 
 # 🛍️ Web Bán Hàng Hudo
 
