@@ -20,7 +20,7 @@ if(!empty($_POST)){
 
         $user_id = $userExist['id'];
         $sql ="insert into Tokens (user_id, token , created_at) 
-            values('$userId','$token','$created_at')";
+            values('$user_id','$token','$created_at')";
         execute($sql);
         $role_id= $userExist['role_id'];
         if($role_id == 1){
