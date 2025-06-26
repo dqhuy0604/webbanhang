@@ -1,4 +1,10 @@
-![Mô tả ảnh](assets/images/banner.png)
+<p align="center">
+  <img src="assets/images/logo_hudo.png" alt="Logo Hudo" width="200"/>
+</p>
+
+# 🛍️ Web Bán Hàng Hudo
+
+
 # 🛒 Web Bán Hàng - Dự Án Nhóm (PHP, HTML, CSS, JS, MySQL)
 
 Chào mừng đến với dự án **Web Bán Hàng**, một hệ thống thương mại điện tử đơn giản được phát triển bởi nhóm sinh viên nhằm thực hành và áp dụng kiến thức lập trình web full-stack. Dự án được xây dựng dựa trên công nghệ phổ biến và tối ưu cho trải nghiệm người dùng hiện đại theo xu hướng năm 2025.
