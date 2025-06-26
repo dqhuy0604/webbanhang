@@ -154,7 +154,7 @@
                                 alt="' . $title . '" 
                                 style="width: 70px; height: 70px; object-fit: contain; border-radius: 6px;"
                                 loading="lazy"
-                                onerror="this.src=\'/webbanhang/webbanhang/assets/images/default.jpg\'; this.onerror=null;">
+                                onerror="this.src=\'/webbanhang/assets/images/default.jpg\'; this.onerror=null;">
                         </div>
                         <div style="display: flex; flex-direction: column; justify-content: center;">
                             <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 600; color: #000; line-height: 1.3;">' . $title . '</h3>
@@ -411,11 +411,11 @@
     }
 
     function processThumbnailPath($thumbnailPath) {
-        if (empty($thumbnailPath)) return '/webbanhang/webbanhang/assets/images/default.jpg';
+        if (empty($thumbnailPath)) return '/webbanhang/assets/images/default.jpg';
         $thumbnailPath = preg_replace('/^0+/', '', $thumbnailPath);
         $thumbnailPath = str_replace(['assets/images', 'images'], '', $thumbnailPath);
         if (strpos($thumbnailPath, '/') !== 0) $thumbnailPath = '/' . $thumbnailPath;
-        return '/webbanhang/webbanhang/assets/images' . $thumbnailPath;
+        return '/webbanhang/assets/images' . $thumbnailPath;
     }
 
     $responseMessage = generateResponseMessage($classification, $keyword, count($products));
@@ -452,7 +452,7 @@
                 alt="' . $title . '" 
                 style="width: 50px; height: 50px; object-fit: contain; border-radius: 4px;"
                 loading="lazy"
-                onerror="this.src=\'/webbanhang/webbanhang/assets/images/default.jpg\'; this.onerror=null;">
+                onerror="this.src=\'/webbanhang/assets/images/default.jpg\'; this.onerror=null;">
         </div>
         <div class="product-info" style="display: flex; flex-direction: column; justify-content: center; min-width: 0;">
             <span style="
