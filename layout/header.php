@@ -1394,7 +1394,7 @@
                 </li>
             <?php else : ?>
                 <li class="nav-item">
-                    <a href="<?= $user['role_id'] == 1 ? '../admin/authen/order/index.php' : '../utils/index.php' ?>">
+                    <a href="<?= $user['role_id'] == 1 ? '../admin/authen/order/index.php' : 'webbanhang/../utils/index.php' ?>">
                         <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản">
                     </a>
                 </li>
