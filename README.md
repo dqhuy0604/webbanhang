@@ -14,6 +14,12 @@ Dự án đã được triển khai trên hosting miễn phí:
 **Hosting:** [InfinityFree.net](https://infinityfree.net)  
 **Tình trạng:** Hoạt động ổn định - đang hoàn thiện 80%
 
+## 🧪 Trạng thái triển khai
+
+Trang web hiện đang được triển khai thử nghiệm lần đầu với mục đích học tập và trải nghiệm quy trình deploy website PHP & MySQL.
+
+**⚠️ Lưu ý:** Dự án chưa hoàn chỉnh 100%, một số chức năng vẫn đang được phát triển.
+
 
 
 # 🛍️ Web Bán Hàng Hudo
