@@ -1369,7 +1369,6 @@
                                         <img style="margin-left: 60px; margin-top: 0px; " width="24" height="24" src="//theme.hstatic.net/200000037626/1000890916/14/searcg-icon.svg?v=170" alt="Tìm kiếm">
                                     </button>
                                 </form>
-                                <!-- phần hiện thông itn sản phẩm tìm đc -->
                                 <div id="wanda-smart-search" class="smart-search-wrapper ajaxSearchResults">
                                     <div class="results-seach">
 
@@ -1394,7 +1393,11 @@
                 </li>
             <?php else : ?>
                 <li class="nav-item">
+<<<<<<< HEAD
                     <a href="<?= $user['role_id'] == 1 ? '../admin/order/index.php' : '../utils/index.php' ?>">
+=======
+                    <a href="<?= $user['role_id'] == 1 ? '../admin/revenue/index.php' : '../utils/index.php' ?>">
+>>>>>>> 107729e0f1852bc2ed9a8d1662050e7a3ca5b795
                         <img width="20" height="20" src="//theme.hstatic.net/200000037626/1000890916/14/user-account.svg?v=147" alt="Tài khoản">
                     </a>
                 </li>
