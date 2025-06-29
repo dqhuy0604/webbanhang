@@ -294,6 +294,18 @@ a{
                                     Dashboard
                                 </a>
                             </li>
+                                <li class="nav-item">
+                                 <a class="nav-link" href="<?=$baseUrl?>order">
+                                <i class="bi bi-minecart"></i>
+                                    Quản Lý Đơn Hàng
+                                </a>
+                            </li>
+                                 <li class="nav-item">
+                                 <a class="nav-link" href="<?=$baseUrl?>user">
+                                <i class="bi bi-people-fill"></i>
+                                    Quản Lý Người dùng
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?=$baseUrl?>category">
                                 <i class="bi bi-folder"></i>
@@ -316,18 +328,6 @@ a{
                                 <a class="nav-link" href="<?=$baseUrl?>inventory">
                                 <i class="bi bi-file-earmark-text"></i>
                                     Số lượng và giảm giá
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                 <a class="nav-link" href="<?=$baseUrl?>order">
-                                <i class="bi bi-minecart"></i>
-                                    Quản Lý Đơn Hàng
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                 <a class="nav-link" href="<?=$baseUrl?>user">
-                                <i class="bi bi-people-fill"></i>
-                                    Quản Lý Người dùng
                                 </a>
                             </li>
                         </ul>
